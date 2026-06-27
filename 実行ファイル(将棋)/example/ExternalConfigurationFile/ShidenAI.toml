@@ -1,0 +1,99 @@
+[SearchConfig]
+TIME_LIMIT_MS = 3000                  # ミリ秒
+MAX_DEPTH = 12                        # 探索深さの最大値
+MAX_QUIESCENCE_DEPTH = 8              # 静止探索の最大深さ
+MAX_MOVES_PER_POSITION = 128          # 1局面あたりの最大候補手数（枝刈りのため）
+FALLBACK_TOP_N = 3                    # 上位3件を再評価
+FALLBACK_DEEP_DEPTH = 3               # AlphaBeta を depth=3
+NULL_MOVE_REDUCTION = 3               # 
+MATE_TRY_DEPTH = 6                    # 詰み探索を試みる深さ
+MATE_SEARCH_DECAY_PER_DEPTH = 4
+MATE_SEARCH_EXTENSION = 3             # 詰み探索時の深さ延長
+MATE_SEARCH_MIN_MOVES = 5             # 詰み探索を開始する最小手数
+
+[System]
+SCORE_INF = 10000000
+REPETITION_DRAW_SCORE = 0
+PERCENT_BASE = 100
+SEE_SCALE = 100
+MIN_HAND_MATERIAL_VALUERATE = 70
+BASE_CAPTURE_SCORE = 2000000
+		
+[Evaluation]
+CHECKMATE_TO_ENEMY_KING = 1500
+BOTTOM_STEP_BONUS = 20
+ROUND_HEADED_PIECE_BONUS = 40
+KING_TRAPPED_PENALTY = 99999999
+DROOPING_STEP_BONUS = 30
+CASTLE_NEAR_KING_BONUS = 450
+ACTIVITY_BONUS = 50
+ADVANCE_BONUS = 15
+KING_SHIELD_BONUS = 300
+DRAGON_HORSE_ACTIVITY_BONUS = 50
+SUPPORT_BONUS = 100
+NO_ENEMY_ATTACK_BONUS = 600
+PROMOTION_ONLY_BONUS = 50
+PROMOTION_BONUS = 200
+PAWN_ADVANCE_BONUS = 20
+PAWN_PHASE_DIVISOR = 18.0
+CAPTURE_BASE_VALUE_FACTOR = 10        # 捕獲基本価値倍率
+CAPTURE_BONUS_MULTIPLIER = 50         # 捕獲ボーナス倍率
+
+[Endgame]
+ENDGAME_PIECE_COUNT_THRESHOLD = 6
+ENDGAME_CENTER_WEIGHT = 30
+ENDGAME_ENEMY_ZONE_BONUS = 40
+ENDGAME_LIBERTY_WEIGHT = 80
+
+[MoveOrdering]
+MOVE_ORDER_KILLER_SCORE = 1500000
+MOVE_ORDER_CAPTURE_SCORE = 2000000
+MOVE_ORDER_TT_SCORE = 3000000
+BECOMING_CAPTURE_BONUS = 500
+POSSIBLE_HAND_BONUSES = 1000
+BECOMING_CAPTURE_3POINTS_BONUS = 3
+PROXIMITY_BONUS_UNIT = 6
+PROXIMITY_BONUS_MAX_DISTANCE = 2
+PROXIMITY_BONUS_MAX = 3
+PROXIMITY_BONUS_BASE = 4
+DROP_BONUS = 20
+
+[PieceValue]
+PAWN = 100                             # 歩
+LANCE = 500                            #香車
+KNIGHT = 550                           #桂馬
+SILVER = 800                           # 銀
+GOLD = 900                             # 金
+BISHOP = 1500                          # 角
+ROOK = 2000                            # 飛車
+KING = 100000                          # 王
+PROMOTION_BONUS = 0                    # 成りのボーナス
+PROMOTED_PAWN = 700                    # と金
+PROMOTED_LANCE = 300                   # 成香
+PROMOTED_KNIGHT = 250                  # 成桂
+PROMOTED_SILVER = 100                  # 成銀
+PROMOTED_BISHOP = 250                  # 馬
+PROMOTED_ROOK = 250                    # 龍
+
+[PieceRisk]
+PAWN = 40                              # 歩
+LANCE = 200                            #香車
+KNIGHT = 220                           #桂馬
+SILVER = 320                           # 銀
+GOLD = 350                             # 金
+BISHOP = 500                           # 角
+ROOK = 700                             # 飛車
+KING = 30000                           # 王
+PROMOTION_BONUS = 300                  # 成りのボーナス
+
+[HandPiece]
+PAWN = 150                             # 歩
+LANCE = 100                            #香車
+KNIGHT = 100                           #桂馬
+SILVER = 100                           # 銀
+GOLD = 100                             # 金
+BISHOP = 90                            # 角
+ROOK = 90                              # 飛車
+KING = 10000                           # 王
+HAND_PIECE_BONUS_PERCENT = 10
+PAWN_HAND_OPENING_EXTRA_PERCENT = 30

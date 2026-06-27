@@ -1,0 +1,34 @@
+[SearchConfig]
+SEARCH_DEPTH = 2                       # AIの探索深さ
+MOVE_RANDOM_RANGE = 1                  # 手のスコアに加えるランダム値の範囲
+
+[Evaluation]
+PROMOTION_BONUS = 5                    #成る手に対するボーナス
+AVOID_BACKTRACK_PENALTY = 500          #直前の位置に戻る手を避けるペナルティ
+KING_PROXIMITY_BONUS = 10              #王への接近に対するボーナス
+DISTANCE_SCALE = 20
+
+[PieceValue]
+PAWN = 1                               # 歩
+LANCE = 3                              #香車
+KNIGHT = 3                             #桂馬
+SILVER = 5                             # 銀
+GOLD = 6                               # 金
+BISHOP = 8                             # 角
+ROOK = 9                               # 飛車
+KING = 1000                            # 王
+PROMOTION_BONUS = 0                    # 成りのボーナス
+PROMOTED_PAWN = 5                      # と金
+PROMOTED_LANCE = 5                     # 成香
+PROMOTED_KNIGHT = 5                    # 成桂
+PROMOTED_SILVER = 5                    # 成銀
+PROMOTED_BISHOP = 9                    # 馬
+PROMOTED_ROOK = 10                     # 龍
+
+[PieceRisk]
+AVOID_MOVING_INTO_DANGER_PENALTY = 30  # 敵の攻撃範囲に入る手を避けるペナルティ
+CAPTURE_BONUS = 15                     # 駒を取る手に対するボーナス
+PIECE_PICKING_BONUS = 5                # 駒取りの期待値を加算
+CHECK_BONUS = 5                        # 王手をかけられているなら加点
+STABILITY_PENALTY = 2                  # 自駒が攻撃される数に対するペナルティ
+KING_IN_DANGER_PENALTY = 500           # 王が危険な時の減点
