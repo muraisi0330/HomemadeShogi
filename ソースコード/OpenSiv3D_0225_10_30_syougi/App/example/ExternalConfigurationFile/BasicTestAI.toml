@@ -1,0 +1,47 @@
+[SearchConfig]
+TIME_LIMIT_MS = 1500
+MAX_DEPTH = 10                         # 最大探索深さ（時間はTIME_LIMITで管理）
+AVOID_MOVING_INTO_DANGER_PENALTY = 5
+
+[System]
+AVOID_BACKTRACK_PENALTY = 5000         # 千日手防止
+CHECKMATE_THRESHOLD = 10000            # 詰みと評価関数の閾値
+INITIAL_CAPTURE_BONUS = 999999         # 初期値は非常に低くしておく
+LOSS_PENALTY = -100000                 # 負け
+		
+[Evaluation]
+KING_PROXIMITY_BONUS = 10              # 王への接近に対するボーナス
+PROMOTION_BONUS = 150                  # 成りボーナス
+CAPTURE_BONUS_SCALE = 10               # 10は調整用定数	
+EDGE_PROXIMITY_PENALTY = 150           # 端にいるほど高評価
+CENTER_PROXIMITY_PENALTY = 100         # 中央は危険
+CENTER_GOLD_SILVER_BONUS = 30          # 中央にいる金銀は少し高評価
+ADVANCEMENT_BONUS = 5                  # 前進も評価
+ADVANCED_PAWN_BONUS = 80               # 3段目/5段目にいる歩は高評価
+GOLD_SILVER_KING_PROXIMITY_BONUS = 80  # 味方の王の近くにいる金銀を評価調整用定数
+DISTANCE_SCALE = 20;
+
+[PieceValue]
+PAWN = 1                               # 歩
+LANCE = 3                              #香車
+KNIGHT = 3                             #桂馬
+SILVER = 5                             # 銀
+GOLD = 6                               # 金
+BISHOP = 8                             # 角
+ROOK = 9                               # 飛車
+KING = 1000                            # 王
+PROMOTION_BONUS = 0                    # 成りのボーナス
+PROMOTED_PAWN = 5                      # と金
+PROMOTED_LANCE = 5                     # 成香
+PROMOTED_KNIGHT = 5                    # 成桂
+PROMOTED_SILVER = 5                    # 成銀
+PROMOTED_BISHOP = 9                    # 馬
+PROMOTED_ROOK = 10                     # 龍
+
+[PieceRisk]
+MOBILITY_BONUS = 10                    # 利きボーナス
+KING_IN_DANGER_PENALTY = 3000          # 王の危険度
+CHECK_BONUS = 1000                     # 王手ボーナス
+
+[HandPiece]
+HAND_PIECE_PENALTY = 5                 # 持ち駒は盤上の駒より価値を下げる（調整用定数）
