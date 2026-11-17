@@ -5,6 +5,12 @@
 class SolidDefenseAI : public IShogiAI {
 public:
 	SolidDefenseAI();
+	virtual ~SolidDefenseAI() {
+		// AIが思考中にオブジェクトが破棄されるのを防ぐ
+		if (aiTask.isValid()) {
+			aiTask.wait();
+		}
+	}
 	void MakeMove(Game& game, Team aiTeam) override;
 	String getName() const override { return U"金剛AI"; }
 private:

@@ -132,6 +132,38 @@ static HashTable<UnitType, UnitInfo> CreateDefaultUnitDB()
 		{ UnitType::Rook1,{U"龍王",1} }
 	};
 }
+// 成り駒かどうかを判定する関数
+constexpr bool IsPromoted(UnitType t) noexcept
+{
+	switch (t)
+	{
+	case UnitType::Pawn1:
+	case UnitType::Lance1:
+	case UnitType::Knight1:
+	case UnitType::Silver1:
+	case UnitType::Bishop1:
+	case UnitType::Rook1:
+		return true;
+	default:
+		return false;
+	}
+}
+// 成り駒かどうかを判定する関数
+constexpr bool IsDemoted(UnitType t) noexcept
+{
+	switch (t)
+	{
+	case UnitType::Pawn:
+	case UnitType::Lance:
+	case UnitType::Knight:
+	case UnitType::Silver:
+	case UnitType::Bishop:
+	case UnitType::Rook:
+		return true;
+	default:
+		return false;
+	}
+}
 
 enum class GameEvent
 {

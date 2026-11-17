@@ -7,13 +7,13 @@
 #include "AI/ShidenAI.h"
 #include "Render/GameRenderer.h"
 #include "Controller/GUIController.h"
-#include "Resource/ResourceManager.h"
 #include "Resource/Sound.h"
 
 enum class SceneState {
 	Start,
 	Settings,
 	Game,
+	Credit,
 };
 enum class Player {
 	Human,
@@ -38,6 +38,8 @@ struct GameData
 	double light = 1.0;// 画面の明るさ調整
 	Player bluePlayerMode = Player::Human;
 	Player redPlayerMode = Player::IterativeDeepening;
+
+	
 };
 // プレイヤーの種類を文字列に変換するヘルパー関数
 inline  String GetPlayerName(Player p) {

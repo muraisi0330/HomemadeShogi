@@ -10,12 +10,15 @@ namespace ResourceManager
 		FontAsset::Register(U"UnitNameFont1", 8, Typeface::Bold);// GUI 用小フォント
 		FontAsset::Register(U"UnitNameFont3", 15, Typeface::Bold);// 駒名表示用フォント
 		FontAsset::Register(U"WinFont", 70, Typeface::Bold);// ウィン画面用フォント
+		FontAsset::Register(U"CreditFont", 40, Typeface::Bold);// クレジット画面用フォント
 
 		// テクスチャ（ファイル名は既存コードに合わせる）
 		TextureAsset::Register(U"将棋台", U"example/ita.png");
 		TextureAsset::Register(U"看板", U"example/ita1.png");
 		TextureAsset::Register(U"掛け軸", U"example/kakeziku.png");// 掛け軸
 		TextureAsset::Register(U"駒", U"example/koma.png");// 駒
+		TextureAsset::Register(U"桜の襖", U"example/Cherry Blossom Sliding Door.png");
+		TextureAsset::Register(U"和紙", U"example/桜と金飾りの和風.png");
 		// 補助：背景やタイトル等があればここに登録（Main.cpp の定義と合わせる）
 		TextureAsset::Register(U"ホーム背景", U"example/sa.png");// タイトル背景
 		TextureAsset::Register(U"タイトル", U"example/asdf.png");

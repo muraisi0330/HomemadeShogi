@@ -3,8 +3,6 @@
 #include "Game/Game.h"
 #include "Board/Bitboard.h"
 #include "Board/SlidingAttacks.h"
-#include <unordered_map>
-#include <memory>
 #include <array>
 
 

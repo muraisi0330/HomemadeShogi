@@ -4,14 +4,20 @@
 //移動範囲オーバーレイの色
 constexpr ColorF DrawMoveRangeColor = ColorF{ 1,0,0,0.4 };
 
-constexpr ColorF SelectedPieceColor = Palette::Red;
+constexpr ColorF SelectedPieceColor = Palette::Red;// 選択中の駒の色
+
+//将棋台の線の色
+constexpr ColorF ShogiTableLineColor = Palette::Black;
 
 // ボタンは色にする
 constexpr ColorF ButtonColor = Palette::Black;
-
+// ホバー時は黄色にする
 constexpr ColorF ButtonHoverColor = Palette::Yellow;
 
 // 駒の	デフォルトの文字色
 constexpr ColorF PieceTextColor = Palette::Black;
 // 成駒は赤
 constexpr ColorF PromotedPieceTextColor = Palette::Red;
+
+//テキストのデフォルトの文字色
+constexpr ColorF DefaultTextColor = Palette::Black;

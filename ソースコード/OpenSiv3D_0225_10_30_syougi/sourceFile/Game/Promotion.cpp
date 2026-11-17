@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Game/Promotion.h"
 
+// 成り駒変換関数
 UnitType ToPromoted(UnitType t) noexcept
 {
     switch (t)
@@ -15,6 +16,7 @@ UnitType ToPromoted(UnitType t) noexcept
     }
 }
 
+// 成り駒を元に戻す関数（表示用）
 UnitType ToDemoted(UnitType t) noexcept
 {
     switch (t)

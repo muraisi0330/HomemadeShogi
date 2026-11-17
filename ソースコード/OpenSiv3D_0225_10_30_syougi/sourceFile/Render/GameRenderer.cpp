@@ -36,7 +36,7 @@ void GameRenderer::DrawButton(RectF Button, const String text) const
 		Cursor::RequestStyle(CursorStyle::Hand);
 	}
 	Button.draw(Palette::Lightgray).drawFrame(FrameThickness, colo);
-	FontAsset(U"UnitNameFont")(text).drawAt(x, y, Palette::Black);
+	FontAsset(U"UnitNameFont")(text).drawAt(x, y, DefaultTextColor);
 }
 
 void GameRenderer::DrawBoard() const
@@ -48,18 +48,18 @@ void GameRenderer::DrawBoard() const
 	
 	TextureAsset(U"将棋台").drawAt(ShogiTableCenterX, ShogiTableCenterY);
 	// 星印の描画
-	Circle{ ShogiTableCenterX + Star, ShogiTableCenterY + Star,Starsize }.draw(Palette::Black);
-	Circle{ ShogiTableCenterX + Star, ShogiTableCenterY - Star,Starsize }.draw(Palette::Black);
-	Circle{ ShogiTableCenterX - Star, ShogiTableCenterY + Star,Starsize }.draw(Palette::Black);
-	Circle{ ShogiTableCenterX - Star, ShogiTableCenterY - Star,Starsize }.draw(Palette::Black);
-
+	Circle{ ShogiTableCenterX + Star, ShogiTableCenterY + Star,Starsize }.draw(ShogiTableLineColor);
+	Circle{ ShogiTableCenterX + Star, ShogiTableCenterY - Star,Starsize }.draw(ShogiTableLineColor);
+	Circle{ ShogiTableCenterX - Star, ShogiTableCenterY + Star,Starsize }.draw(ShogiTableLineColor);
+	Circle{ ShogiTableCenterX - Star, ShogiTableCenterY - Star,Starsize }.draw(ShogiTableLineColor);
+	
 	for (auto y : step(map.height()))
 	{
 		for (auto x : step(map.width()))
 		{
 			ColorF color = ColorF{ 0,0,0,0 };
 			Point pos = GridToScreen(Point(x, y));
-			Rect{ pos.x + offX, pos.y + offY, TileSize }.draw(color).drawFrame(ShogiTableFrameThickness, Palette::Black);
+			Rect{ pos.x + offX, pos.y + offY, TileSize }.draw(color).drawFrame(ShogiTableFrameThickness, ShogiTableLineColor);
 		}
 	}
 }
@@ -117,12 +117,7 @@ void GameRenderer::DrawUnits() const
 		if (u.isOnBoard)
 		{
 			String unitName = unitDB[u.type].name;
-			if (u.type == UnitType::Pawn1 ||
-				u.type == UnitType::Lance1 ||
-				u.type == UnitType::Knight1 ||
-				u.type == UnitType::Silver1 ||
-				u.type == UnitType::Bishop1 ||
-				u.type == UnitType::Rook1)
+			if (IsPromoted(u.type))
 			{
 				color = PromotedPieceTextColor;
 			}
@@ -172,7 +167,7 @@ void GameRenderer::DrawPromotionDialog() const
 	if (!m_game.IsGameActive()) return;
 	// UI 描画：テクスチャと文字
 	TextureAsset(U"掛け軸").scaled(KakejikuScale).drawAt(PromoteDialogX, PromoteDialogY);
-	FontAsset(U"UnitNameFont")(U"成る").drawAt(PromoteDialogX, PromoteDialogFontY, Palette::Black);
+	FontAsset(U"UnitNameFont")(U"成る").drawAt(PromoteDialogX, PromoteDialogFontY, DefaultTextColor);
 	DrawButton(PromoteYesButtonRect, U"はい");
 	DrawButton(PromoteNoButtonRect, U"いいえ");
 }
@@ -183,7 +178,7 @@ void GameRenderer::DrawVictoryScreen() const
 	auto& u = m_game.GetUnitList()[m_game.GetDeathKingIndex()];
 	// 描画
 	Rect{ WinRectX,WinRectY,WinRectW,WinRectH }.draw();
-	FontAsset(U"WinFont")((u.team == Team::Red) ? goteName + U"の勝利" : senteName + U"の勝利").drawAt(WinFontX, WinFontY, Palette::Black);
+	FontAsset(U"WinFont")((u.team == Team::Red) ? goteName + U"の勝利" : senteName + U"の勝利").drawAt(WinFontX, WinFontY, DefaultTextColor);
 	DrawButton(RestartButtonRect, U"再スタート");
 	DrawButton(ReturnToHomeButtonRect, U"ホームに戻る");
 	
@@ -208,9 +203,12 @@ void GameRenderer::HomeScreenDraw() const
 	TextureAsset(U"ホーム背景").scaled(BackgroundAspectCorrection).draw(0, 0);
 	// タイトル
 	TextureAsset(U"タイトル").scaled(TitleScale).drawAt(Title);
-	FontAsset(U"WinFont")(U"将棋").drawAt(Title, Palette::Black);
+	FontAsset(U"WinFont")(U"将棋").drawAt(Title, DefaultTextColor);
 	DrawButton(SceneButtonRect, U"ゲーム開始");
 	DrawButton(SettingsSceneButtonRect, U"設定");
+	DrawButton(ExitButtonRect, U"終了");
+	//ライセンス
+	DrawButton(LicenseButtonRect, U"ライセンス");
 }
 void GameRenderer::SettingsScreenDraw() const
 {
@@ -218,8 +216,52 @@ void GameRenderer::SettingsScreenDraw() const
 	TextureAsset(U"ホーム背景").scaled(BackgroundAspectCorrection).draw(0, 0);
 	// タイトル
 	TextureAsset(U"タイトル").scaled(TitleScale).drawAt(Title);
-	FontAsset(U"WinFont")(U"設定").drawAt(Title, Palette::Black);
+	FontAsset(U"WinFont")(U"設定").drawAt(Title, DefaultTextColor);
 	DrawButton(SceneButtonRect, U"ホームへ戻る");
+}
+
+//クレジット画面描画
+void GameRenderer::CreditScreenDraw() const
+{
+	// 背景
+	TextureAsset(U"ホーム背景").scaled(BackgroundAspectCorrection).draw(0, 0);
+	// タイトル
+	TextureAsset(U"タイトル").scaled(TitleScale).drawAt(Title);
+	FontAsset(U"CreditFont")(U"クレジット").drawAt(Title, DefaultTextColor);
+	DrawButton(SceneButtonRect, U"ホームへ戻る");
+	TextureAsset(U"和紙").scaled(0.2,0.12).drawAt(CreditTextPosition.x, CreditTextPosition.y + CreditTextGap * 1.5);
+	FontAsset(U"UnitNameFont")(U"制作者: 村石　裕音").drawAt(CreditTextPosition, DefaultTextColor);
+	FontAsset(U"UnitNameFont")(U"BGM: 甘茶の音楽工房").drawAt(CreditTextPosition.x, CreditTextPosition.y + CreditTextGap, DefaultTextColor);
+	FontAsset(U"UnitNameFont")(U"SE: 効果音ラボ").drawAt(CreditTextPosition.x, CreditTextPosition.y + CreditTextGap * 2, DefaultTextColor);
+	FontAsset(U"UnitNameFont")(U"使用ライブラリ: Siv3D").drawAt(CreditTextPosition.x, CreditTextPosition.y + CreditTextGap*3, DefaultTextColor);
+	DrawButton(LicenseButtonRect, U"ライセンス: Siv3D");
+}
+
+//フェードイン時の描画処理
+void GameRenderer::DrawFadeIn(double alpha) const
+{
+	double speed = FadeInSpeed *  alpha;
+	double speedZ = (speed < MaxFadeInSpeed) ? 0 : speed - MaxFadeInSpeed;
+
+	//桜の襖が徐々に開く演出
+	TextureAsset(U"桜の襖").draw(FadeInSakuraPositions[1].x - speedZ, 0);
+	TextureAsset(U"桜の襖").mirrored(true).draw(FadeInSakuraPositions[3].x + speedZ, 0);
+	TextureAsset(U"桜の襖").draw(FadeInSakuraPositions[0].x - speed, 0);
+	TextureAsset(U"桜の襖").mirrored(true).draw(FadeInSakuraPositions[2].x + speed, 0);
+	
+}
+//フェードアウト時の描画処理
+void GameRenderer::DrawFadeOut(double alpha) const
+{
+	int speed = FadeOutSpeed *  alpha ;
+	if (speed > MaxFadeOutSpeed)
+	{
+		speed = MaxFadeOutSpeed;
+	}
+	TextureAsset(U"桜の襖").mirrored(true).draw(FadeOutSakuraPositions[0].x - (speed), 0);
+	TextureAsset(U"桜の襖").draw(FadeOutSakuraPositions[2].x + (speed), 0);
+	TextureAsset(U"桜の襖").mirrored(true).draw(FadeOutSakuraPositions[1].x - (speed), 0);
+	TextureAsset(U"桜の襖").draw(FadeOutSakuraPositions[3].x + (speed), 0);
 }
 
 // HUDの更新

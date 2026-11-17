@@ -897,9 +897,6 @@
     <ClInclude Include="headerFile\Constants\ConstantsButton.h">
       <Filter>Header Files\Constants</Filter>
     </ClInclude>
-    <ClInclude Include="headerFile\Constants\ConstantsColor.h">
-      <Filter>Header Files\Constants</Filter>
-    </ClInclude>
     <ClInclude Include="headerFile\Controller\GUIController.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
@@ -935,6 +932,9 @@
     </ClInclude>
     <ClInclude Include="headerFile\stdafx.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFile\Constants\ConstantsColor.h">
+      <Filter>Header Files\Constants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -985,6 +985,9 @@
     </ClCompile>
     <ClCompile Include="sourceFile\stdafx.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFile\Application\CreditScene.cpp">
+      <Filter>Source Files\Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

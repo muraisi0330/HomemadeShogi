@@ -27,6 +27,14 @@
 			SettingsScreen();
 		}
 		
+		if (getData().controller.ExitButton()) {
+			System::Exit();
+		}
+		if (getData().controller.LicenseButton()) {
+			//LicenseManager::ShowInBrowser();
+			changeScene(SceneState::Credit);
+		}
+		
 	}
 
 	void StartScene::draw() const{

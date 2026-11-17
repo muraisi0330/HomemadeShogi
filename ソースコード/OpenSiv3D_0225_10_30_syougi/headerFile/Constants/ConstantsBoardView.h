@@ -52,14 +52,33 @@ constexpr Vec2 KakejikuScale = { 1.3,1 };// 掛け軸テクスチャのスケー
 
 
 
-constexpr Point Title = { 400, 200 };// タイトル座標
+constexpr Point Title = { 400, 150 };// タイトル座標
 constexpr Vec2 TitleScale = { 1,0.8 };// タイトルスケーリング倍率
+
+// クレジットテキスト関連定数
+constexpr Point CreditTextPosition = { 400, 270 };// クレジットテキストの位置
+constexpr int32 CreditTextGap = 25;// クレジットテキスト間隔
 
 //畳 背景タイルの敷き詰め座標
 constexpr std::array<Point, 6> TatamiTilePositions = {{
 	{0, 0}, {400, 0}, {100, 400}, {700, 400}, {200, 200}, {200, 400}
 } };
 constexpr double TatamiTileRotation = 90_deg;// 畳タイルの回転角度
+
+//フェードイン
+constexpr double FadeInSpeed = 600;// フェードイン速度
+constexpr std::array<Point, 4> FadeInSakuraPositions = {{
+	{ 100, 0 }, { -200, 0 }, { 400, 0 }, { 700, 0 }
+}};
+constexpr int MaxFadeInSpeed = 300;
+//フェードアウト
+constexpr double FadeOutSpeed = 600;// フェードアウト速度
+constexpr std::array<Point, 4> FadeOutSakuraPositions = {{
+		{ 800, 0 }, { 1100, 0 }, { -300, 0 }, { -600, 0 }
+} };
+constexpr int MaxFadeOutSpeed = 400;
+
+
 
 
 

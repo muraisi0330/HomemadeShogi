@@ -2,7 +2,6 @@
 #include "Game/Game.h"
 #include "Constants/CommonConstants.h"
 #include "Game/Promotion.h"
-#include <memory>
 #include "Game/Movement.h"
 #include "Game/Drop.h"
 
@@ -140,8 +139,7 @@ bool Game::ApplyAutoPromotion(Unit& u)
 		return true;
 }
 
-// ゲーム状態のリセット（外部から const 環境でも呼べる実装）
-// - 副作用: mutable な DB/リストを書き換える
+// ゲーム状態のリセット
 void Game::ResetState() noexcept
 {
 	// 基本ステートのリセット
@@ -156,12 +154,12 @@ void Game::ResetState() noexcept
 	unitDB = CreateDefaultUnitDB();
 	InvokeEvent(GameEvent::GameStart);
 }
+// 経過時間の更新（GUI 側から呼ばれる想定）
 void Game::ResetTimer() {
 	m_stopwatch.restart();
 }
 
-// ヘルパー: ユニットの位置を変更（Game の内部描画用に const でも使う）
-// - 副作用: 引数の Unit の pos を変更
+// ユニットの位置を変更する補助
 void Game::MoveUnit(Unit& u, int x, int y) const noexcept
 {
 	u.pos.x = x;
@@ -489,8 +487,7 @@ void Game::TurnEndDetermination()
 			gameState.unitSelectionFlag = false;
 }
 
-// 保留中の成り対象（最初に見つかった一件）を返す。
-// - 戻り値: ユニットリストのインデックス、該当なしは -1
+// 保留中の成り対象を返す（最初に見つかったインデックス、該当なしは -1）
 int Game::GetPendingPromotionIndex() const noexcept
 {
 	for (const auto&& [i, u] : IndexedRef(unitList))
@@ -499,13 +496,7 @@ int Game::GetPendingPromotionIndex() const noexcept
 		if (!u.promoteFlag) continue;
 
 		// 成り可能種かどうか
-		bool promotable =
-			(u.type == UnitType::Pawn ||
-			 u.type == UnitType::Lance ||
-			 u.type == UnitType::Knight ||
-			 u.type == UnitType::Silver ||
-			 u.type == UnitType::Bishop ||
-			 u.type == UnitType::Rook);
+		bool promotable = IsDemoted(u.type);
 		if (!promotable) continue;
 
 		// 成りゾーン判定（既存ロジックに合わせる）
@@ -516,8 +507,7 @@ int Game::GetPendingPromotionIndex() const noexcept
 	}
 	return ResetSelectedIndex;
 }
-// 指定インデックスの駒を成る（UI が「はい」を押したときに呼ぶ）
-// - 副作用: unit.type の更新, promoteFlag のクリア, 効果音再生
+// 指定インデックスの成りを適用（UI が「はい」を押したとき）
 void Game::ApplyPromotionByIndex(int index) noexcept
 {
 	if (index < 0 ) return;
@@ -530,7 +520,6 @@ void Game::ApplyPromotionByIndex(int index) noexcept
 }
 
 // 指定インデックスの成り要求をキャンセル（UI が「いいえ」を押したとき）
-// - 副作用: promoteFlag のクリア
 void Game::CancelPromotionByIndex(int index) noexcept
 {
 	if (index < 0 || index >= static_cast<int>(unitList.size())) return;

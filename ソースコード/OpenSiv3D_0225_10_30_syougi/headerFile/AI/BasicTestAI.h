@@ -5,6 +5,12 @@
 class BasicTestAI : public IShogiAI {
 public:
 	BasicTestAI();
+	virtual ~BasicTestAI() {
+		// AIが思考中にオブジェクトが破棄されるのを防ぐ
+		if (aiTask.isValid()) {
+			aiTask.wait();
+		}
+	}
 	void MakeMove(Game& game, Team aiTeam) override;
 	String getName() const override { return U"テストAI"; }
 private:

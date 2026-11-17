@@ -3,47 +3,52 @@
 #include "Logic/MoveStrategy.h"
 #include "Logic/Strategies.h"
 #include "Board/Bitboard.h"
-#include <unordered_map>
 #include <memory>
+#include <array>
+#include <algorithm>
 
 namespace Movement
 {
 	// 対応表（ルックアップテーブル）
-	static std::unordered_map<UnitType, std::unique_ptr<IMoveStrategy>> g_strategies;
+	// unordered_map -> array に変更。UnitTypeArraySize はプロジェクト内で定義済みと仮定。
+	static std::array<std::unique_ptr<IMoveStrategy>, UnitTypeArraySize> g_strategies;
 
 	// 初期化関数（Game起動時に一度だけ呼ぶ、または初回アクセス時に初期化）
 	void InitStrategies()
 	{
-		if (!g_strategies.empty()) return;
+		// array の場合は nullptr チェックで初期化済みか確認
+		bool initialized = false;
+		for (const auto& p : g_strategies) { if (p) { initialized = true; break; } }
+		if (initialized) return;
 
-		
-		g_strategies[UnitType::King] = std::make_unique<KingStrategy>();
-		g_strategies[UnitType::King1] = std::make_unique<KingStrategy>(); // 王も玉も同じ
-		g_strategies[UnitType::Pawn] = std::make_unique<PawnStrategy>();
-		g_strategies[UnitType::Rook] = std::make_unique<RookStrategy>();
-		g_strategies[UnitType::Gold] = std::make_unique<GoldStrategy>();
-		g_strategies[UnitType::Bishop] = std::make_unique<BishopStrategy>();
-		g_strategies[UnitType::Knight] = std::make_unique<KnightStrategy>();
-		g_strategies[UnitType::Lance] = std::make_unique<LanceStrategy>();
-		g_strategies[UnitType::Silver] = std::make_unique<SilverStrategy>();
-		g_strategies[UnitType::Pawn1] = std::make_unique<GoldStrategy>();
-		g_strategies[UnitType::Rook1] = std::make_unique<DragonKingStrategy>();
-		g_strategies[UnitType::Bishop1] = std::make_unique<RyomaStrategy>();
-		g_strategies[UnitType::Knight1] = std::make_unique<GoldStrategy>();
-		g_strategies[UnitType::Lance1] = std::make_unique<GoldStrategy>();
-		g_strategies[UnitType::Silver1] = std::make_unique<GoldStrategy>();
+		g_strategies[static_cast<int>(UnitType::King)] = std::make_unique<KingStrategy>();
+		g_strategies[static_cast<int>(UnitType::King1)] = std::make_unique<KingStrategy>(); // 王も玉も同じ
+		g_strategies[static_cast<int>(UnitType::Pawn)] = std::make_unique<PawnStrategy>();
+		g_strategies[static_cast<int>(UnitType::Rook)] = std::make_unique<RookStrategy>();
+		g_strategies[static_cast<int>(UnitType::Gold)] = std::make_unique<GoldStrategy>();
+		g_strategies[static_cast<int>(UnitType::Bishop)] = std::make_unique<BishopStrategy>();
+		g_strategies[static_cast<int>(UnitType::Knight)] = std::make_unique<KnightStrategy>();
+		g_strategies[static_cast<int>(UnitType::Lance)] = std::make_unique<LanceStrategy>();
+		g_strategies[static_cast<int>(UnitType::Silver)] = std::make_unique<SilverStrategy>();
+		g_strategies[static_cast<int>(UnitType::Pawn1)] = std::make_unique<GoldStrategy>();
+		g_strategies[static_cast<int>(UnitType::Rook1)] = std::make_unique<DragonKingStrategy>();
+		g_strategies[static_cast<int>(UnitType::Bishop1)] = std::make_unique<RyomaStrategy>();
+		g_strategies[static_cast<int>(UnitType::Knight1)] = std::make_unique<GoldStrategy>();
+		g_strategies[static_cast<int>(UnitType::Lance1)] = std::make_unique<GoldStrategy>();
+		g_strategies[static_cast<int>(UnitType::Silver1)] = std::make_unique<GoldStrategy>();
 	}
 
 	// 戦略を取得するヘルパー
 	const IMoveStrategy* GetStrategy(UnitType type)
 	{
-		if (g_strategies.empty()) InitStrategies();
+		// 初期化（必要なら）
+		bool anyInitialized = false;
+		for (const auto& p : g_strategies) { if (p) { anyInitialized = true; break; } }
+		if (!anyInitialized) InitStrategies();
 
-		auto it = g_strategies.find(type);
-		if (it != g_strategies.end()) {
-			return it->second.get();
-		}
-		return nullptr; // 未登録の駒
+		int idx = static_cast<int>(type);
+		if (idx < 0 || idx >= static_cast<int>(g_strategies.size())) return nullptr;
+		return g_strategies[idx].get();
 	}
 
 
@@ -203,6 +208,9 @@ namespace Movement
 		ctx.bitboardsBuilt = true;
 	}
 	void PopulateAIContext(Context& ctx, const Bitboard& occ, const Bitboard teamBB[2], int direction) {
+		// 明示的に pieceBB をクリアして前の状態が残らないようにする
+		for (auto& b : ctx.pieceBB) b.clear();
+
 		ctx.occBB = occ;
 		ctx.teamBB[0] = teamBB[0];
 		ctx.teamBB[1] = teamBB[1];
@@ -220,6 +228,7 @@ namespace Movement
 		}
 		return Bitboard(); // 戦略がない場合は空のビットボードを返す
 	}
+
 	Bitboard BuildAttackersMask(Team side, int tsq, const Bitboard& occMask, const std::array<Bitboard, UnitTypeArraySize>& pieceBB, const Bitboard teamBB[2], const SlidingTable& sliding)
 	{
 		Bitboard attackers; attackers.clear();

@@ -175,25 +175,34 @@ bool GUIController::ReturnToHomeButton() {
 	if (m_game.IsGameActive()) return false;
 	return true;
 }
+bool GUIController::ExitButton() {
+	if (!ExitButtonRect.leftClicked())return false;
+	return true;
+}
+bool GUIController::LicenseButton() {
+	if (!LicenseButtonRect.leftClicked())return false;
+	return true;
+}
+
 
 double GUIController::DrawEffectVolumeControl(double EffectVolume)
 {
 	// 効果音スライダー
 	double vol = EffectVolume;
-	SimpleGUI::Slider(U"効果音 {:.1f}"_fmt(vol), vol, MinimumSliderValue, MaximumSoundEffectValue, Vec2{ SliderX, SliderY + SliderGap }, SliderW, SliderW);
+	SimpleGUI::Slider(U"SE       🔊 {:.1f}"_fmt(vol), vol, MinimumSliderValue, MaximumSoundEffectValue, Vec2{ SliderX, SliderY + SliderGap }, SliderW, SliderW);
 	return vol;
 }
 double GUIController::DrawBgmVolumeControl(double BGMVolume)
 {
 	// BGMスライダー
 	double bgmVol = BGMVolume;
-	SimpleGUI::Slider(U"BGM {:.1f}"_fmt(bgmVol), bgmVol, MinimumSliderValue, MaximumBGMValue, Vec2{ SliderX, SliderY + (SliderGap*2)}, SliderW, SliderW);
+	SimpleGUI::Slider(U"BGM   🔊 {:.1f}"_fmt(bgmVol), bgmVol, MinimumSliderValue, MaximumBGMValue, Vec2{ SliderX, SliderY + (SliderGap*2)}, SliderW, SliderW);
 	return  bgmVol;
 }
 double GUIController::DrawLightControl(double light)
 {
 	// ライトスライダー
 	double Light = light;
-	SimpleGUI::Slider(U"ライト {:.1f}"_fmt(Light), Light, MinimumSliderValue, MaximumLightValue, Vec2{ SliderX, SliderY }, SliderW, SliderW);
+	SimpleGUI::Slider(U"ライト💡 {:.1f}"_fmt(Light), Light, MinimumSliderValue, MaximumLightValue, Vec2{ SliderX, SliderY }, SliderW, SliderW);
 	return Light;
 }

@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <Siv3D.hpp>
 #include "Types/types.h"
 
 //音量バランス調整

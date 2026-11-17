@@ -23,17 +23,18 @@ constexpr Point PromoteButtonSize = { 100 ,40 };// 成りのボタンで決定�
 constexpr RectF PromoteYesButtonRect = RectF(Arg::center(PromoteYesButton), PromoteButtonSize);// 成りのボタンで決定Rect
 constexpr RectF PromoteNoButtonRect = RectF(Arg::center(PromoteYesButton.x, PromoteYesButton.y + PromoteButtonGap), PromoteButtonSize);// 成りのボタンでキャンセルRect
 // シーン移動ボタン
-constexpr Point SceneButton = { 400,470 };// シーン移動ボタンのX座標
+constexpr Point SceneButton = { 400,450 };// シーン移動ボタンのX座標
 constexpr Point SceneButtonSize = { 200,50 };// シーン移動ボタンのサイズ
 constexpr int32 SceneButtonGap = 60;// シーン移動ボタンの間隔
 constexpr RectF SceneButtonRect = RectF(Arg::center(SceneButton), SceneButtonSize);// シーン移動ボタンRect
 constexpr RectF SettingsSceneButtonRect = RectF(Arg::center(SceneButton.x, SceneButton.y + SceneButtonGap), SceneButtonSize);// 設定シーン移動ボタンRect
+const RectF ExitButtonRect(Arg::center(SceneButton.x, SceneButton.y + SceneButtonGap * 2), SceneButtonSize);
 
 //スライダー
 constexpr int32 SliderX = 250;// スライダーのX座標
 constexpr int32 SliderY = 300;// スライダーのY座標
 constexpr int32 SliderW = 150;// スライダーの幅
-constexpr int32 SliderGap = 50;// スライダーの間隔
+constexpr int32 SliderGap = 40;// スライダーの間隔
 
 // プレイヤー設定ボタン
 constexpr Point PlayerSettingsButton = { 300,500 };// シーン移動ボタンのX座標
@@ -41,6 +42,11 @@ constexpr Point PlayerSettingsSize = { 200,40 };// シーン移動ボタンの�
 constexpr int32 PlayerSettingsGap = 50;// シーン移動ボタンの間隔
 const RectF BlueButtonRect(PlayerSettingsButton, PlayerSettingsSize);// シーン移動ボタンRect
 const RectF RedButtonRect(PlayerSettingsButton.x, PlayerSettingsButton.y + PlayerSettingsGap, PlayerSettingsSize);
+
+//ライセンスボタン
+constexpr Point LicenseButton = { 300,370};// ライセンスボタンのX座標
+constexpr Point LicenseButtonSize = { 200, 40 };// ライセンスボタンのサイズ
+const RectF LicenseButtonRect(LicenseButton, LicenseButtonSize);// ライセンスボタンRect
 
 //持ち駒移動ボタン
 constexpr Point CapturedPieceMoveButton = { 400, 300 };// 持ち駒移動ボタンの

@@ -335,7 +335,7 @@
 					   Team aiTeam,
 					   const Point& enemyKing)
 	{
-		int score = Random(-SolidDefenseAIConfig::SearchConfig::MOVE_RANDOM_RANGE, SolidDefenseAIConfig::SearchConfig::MOVE_RANDOM_RANGE);
+		int score = 0;//Random(-SolidDefenseAIConfig::SearchConfig::MOVE_RANDOM_RANGE, SolidDefenseAIConfig::SearchConfig::MOVE_RANDOM_RANGE);
 
 		Point myKing = FindMyKing(units, aiTeam);
 
@@ -505,8 +505,6 @@
 		std::vector<Candidate> candidates;
 		candidates.reserve(256);
 
-		// 古い出力を消去
-		ClearPrint();
 
 		// 候補生成
 		GeneratePieceCandidates(candidates, units, map, chipDB, unitDB, aiTeam, g_enemyAttackMap);

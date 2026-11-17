@@ -31,6 +31,8 @@ public:
 	bool StartSceneMoveButton();// ホームシーン移動ボタン
 	bool ButtonToSwitch(RectF button);
 	bool ReturnToHomeButton();
+	bool ExitButton();
+	bool LicenseButton();
 
 	// GUI（スライダー・ダイアログ表示など）を描画
 	double DrawEffectVolumeControl(double EffectVolume);// 効果音スライダー等

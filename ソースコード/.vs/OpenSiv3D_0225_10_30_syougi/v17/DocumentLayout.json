@@ -1,74 +1,190 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\",
+  "WorkspaceRootPath": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42A86A8E-23E4-4967-B917-7FA75FBF606A}|OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi.vcxproj|solutionrelative:OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,228 +194,560 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MoveStrategy.h",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvykAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-24T12:28:28.628Z",
-              "EditorCaption": ""
+              "DocumentIndex": 7,
+              "Title": "GameScene.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:35:34.024Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Promotion.h",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Title": "Sound.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\Sound.h",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-24T12:28:23.437Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Movement.h",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-24T12:28:21.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T09:09:43.017Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Game.h",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-24T12:28:19.638Z",
+              "Title": "ResourceManager.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\ResourceManager.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:36:21.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Promotion.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:36:15.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Sound.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Resource\\Sound.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACMAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-11-05T08:27:50.502Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Drop.h",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-06-24T12:28:18.953Z",
-              "EditorCaption": ""
+              "Title": "GameRenderer.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Render\\GameRenderer.cpp",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAqwPMAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:36:18.811Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Promotion.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Promotion.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
+              "ViewState": "AgIAACICAAAAAAAAAAAAAEMCAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:28:11.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T12:36:09.529Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Movement.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAD0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:27:16.918Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Game.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Game.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:27:16.138Z",
-              "EditorCaption": ""
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Game.h",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAGUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:35.378Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "Drop.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
-              "ViewState": "AgIAAOQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:27:06.867Z",
-              "EditorCaption": ""
+              "Title": "Drop.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Drop.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:34.767Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "stdafx.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
+              "Title": "stdafx.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\stdafx.h",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:27:04.24Z",
-              "EditorCaption": ""
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T12:50:50.729Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "GUIController.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:27:00.959Z",
-              "EditorCaption": ""
+              "Title": "types.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Types\\types.h",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAAAKcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:44.303Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "StartScene.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:57.586Z",
-              "EditorCaption": ""
+              "Title": "Strategies.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\Strategies.h",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAAABkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:39.497Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "SettingsScene.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:56.063Z",
-              "EditorCaption": ""
+              "Title": "GameRenderer.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Render\\GameRenderer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvyEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:40.855Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "Main.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
+              "Title": "ResourceManager.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Resource\\ResourceManager.h",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:54.18Z",
-              "EditorCaption": ""
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:42.317Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "GameScene.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\GameScene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Title": "Movement.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Movement.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADgBAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:51.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T12:36:12.483Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "ShidenAI.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Title": "Drop.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Game\\Drop.cpp",
+              "ViewState": "AgIAABEBAAAAAAAAAAAAABEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:44.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T12:36:05.473Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "BasicTestAI.cpp",
-              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
-              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
-              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u63D0\u51FA\u4F5C\u54C1\u4FDD\u7BA1\u30D5\u30A1\u30A4\u30EB\\\u5C06\u68CB\\\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9_\u6751\u77F3\u88D5\u97F3\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
-              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Title": "StartScene.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\StartScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-24T12:26:42.012Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T12:35:52.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "SettingsScene.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\SettingsScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:34:58.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:35:38.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GUIController.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Controller\\GUIController.cpp",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAAAL8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:35:57.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CreditScene.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\Application\\CreditScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-10-07T06:40:22.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "GUIController.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Controller\\GUIController.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvyEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:32.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ShidenAI.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\ShidenAI.cpp",
+              "ViewState": "AgIAABcNAAAAAAAAAAAqwDENAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:35:25.05Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "SolidDefenseAI.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\SolidDefenseAI.cpp",
+              "ViewState": "AgIAAJoBAAAAAAAAAAAowK8BAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:35:30.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AIData.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AIData.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:17.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AI.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\AI.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:16.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ShidenAI.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\ShidenAI.h",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAcwKoAAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:18.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "StartScene.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\StartScene.h",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAFYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:21.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SceneData.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Application\\SceneData.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:21.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "SlidingAttacks.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\SlidingAttacks.h",
+              "ViewState": "AgIAAF4AAAAAAAAAAADwv28AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:25.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ConstantsBoardView.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoardView.h",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAwEkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:28.962Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ConstantsBoard.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsBoard.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:28.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CommonConstants.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\CommonConstants.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:27.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "BasicTestAI.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\AI\\BasicTestAI.cpp",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAADEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:34:59.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "BasicTestAI.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\BasicTestAI.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:17.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "MoveStrategy.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Logic\\MoveStrategy.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:38.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "stdafx.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\sourceFile\\stdafx.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-17T12:54:24.502Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Promotion.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Promotion.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:36.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Movement.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Game\\Movement.h",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAACkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:36.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ConstantsColor.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsColor.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:30.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ConstantsButton.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Constants\\ConstantsButton.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:29.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "BitboardTables.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\BitboardTables.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:24.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "MoveGenBitboard.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\MoveGenBitboard.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:25.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "SolidDefenseAI.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\AI\\SolidDefenseAI.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:19.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "CreditScene.cpp",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\CreditScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-10-03T07:58:29.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Bitboard.h",
+              "DocumentMoniker": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h",
+              "RelativeDocumentMoniker": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h",
+              "ToolTip": "C:\\Users\\\u88D5\u97F3\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\OpenSiv3D_0225_10_30_syougi\\OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h",
+              "RelativeToolTip": "OpenSiv3D_0225_10_30_syougi\\headerFile\\Board\\Bitboard.h",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAkwA8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-17T09:09:23.785Z"
             }
           ]
         }

@@ -7,6 +7,12 @@
 class ShidenAI : public IShogiAI {
 public:
 	ShidenAI();
+	virtual ~ShidenAI() {
+		// AIが思考中にオブジェクトが破棄されるのを防ぐ
+		if (aiTask.isValid()) {
+			aiTask.wait();
+		}
+	}
 	void MakeMove(Game& game, Team aiTeam) override;
 	void ExecuteCandidate(Game& game, const Candidate& cand);
 	String getName() const override { return U"紫電AI"; }
@@ -19,6 +25,7 @@ private:
 		const HashTable<int32, ChipInfo>* chipDBRef;
 		const HashTable<UnitType, UnitInfo>* unitDBRef;
 
+		
 
 		// 持ち駒カウント [type][teamIdx]
 		int handCount[UnitTypeArraySize][TEAM_COUNT];
@@ -99,8 +106,12 @@ private:
 	SlidingTable g_slidingTable;
 	bool g_slidingTableBuilt = false;
 
+	// --- 追加: デバッグ用文字列化 ---
+	Array<String> forDebugging;
+
 	int historyTable[TEAM_COUNT][UnitTypeArraySize][NumTiles];
 	std::chrono::steady_clock::time_point startTime;
+	std::chrono::steady_clock::time_point mateStartTime;
 	bool timeUp = false;
 	Array<uint64> searchStack;
 	AsyncTask<Candidate> aiTask;
@@ -108,11 +119,13 @@ private:
 	// --- 追加メンバ: 移動候補プール ---
 	std::vector<std::vector<Candidate>> movePool; // 深さごとに再利用するバッファ群
 
+
 	// プール取得ヘルパ（実装は cpp 側）
 	std::vector<Candidate>& GetMoveListForDepth(int depth, bool quies = false);
 
 	void TickNode();
 	bool IsEndgame(const FastBoard& board) const;// 終盤判定
+
 	int GetDynamicKingPST(const FastBoard& board, Team team, int y, int x, AttackMap& enemyAttackMap);// 動的王位置点を取得
 	Point FindKing(const Array<Unit>& units, Team team);// 王の位置を見つける
 	void InitZobrist();// Zobristハッシュ初期化
@@ -120,7 +133,6 @@ private:
 	int DistanceScore(const Point& a, const Point& b);
 	int GetUnitIndexAt(const FastBoard& board, int x, int y);
 	int GetMultiplierPercent(UnitType t, const FastBoard& board);
-	bool IsSquareOccupied(const Array<Unit>& units, int x, int y);
 
 	void ComputePinnedPieces(const FastBoard& board, Array<int>& outPinnedIndices, Array<Point>& outAttackerPos);// 鋭角に並んでいるか
 	bool IsOnSameLine(const Point& a, const Point& b, const Point& p) const;// 3点が一直線上にあるか
@@ -139,8 +151,9 @@ private:
 	bool IsSquareAttacked(FastBoard& board, Point p, Team enemyTeam);// 指定マスが攻撃されているか
 	int CountEnemyAttacksAroundKing(FastBoard& board, Team myTeam, Point myKingPos);// 王の周囲の敵の攻撃数を数える
 	int CountKingLiberty(Point kingPos, const AttackMap& enemyAttacks);// 王の逃げ道を数える
+	int CountSafeKingLiberties(const FastBoard& board, Point kingPos, Team kingTeam);//
 	int EvaluateDetailed(FastBoard& board, Team rootAI, bool heavy);// 詳細評価関数
-	int FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap attacBkyMyself, AttackMap enemyByAttack);
+	int FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap& attacBkyMyself, AttackMap& enemyByAttack);
 	int FindLeastValuableAttacker(const FastBoard& board, int tx, int ty, Team attackerTeam);
 	void ExecuteMoveLocal(FastBoard& board, const Candidate& cand);// ローカル盤面で手を実行
 
@@ -155,7 +168,7 @@ private:
 	TTEntry* LookupTT(uint64 hash);// トランスポジションテーブルの検索
 
 
-	bool GivesCheckAfterMove(ShidenAI& ai, ShidenAI::FastBoard board, const Candidate& cand, Team mover);// 手を指した後にチェックを与えるか
+	bool GivesCheckAfterMove(ShidenAI& ai, FastBoard& board, const Candidate& cand, Team mover);// 手を指した後にチェックを与えるか
 	bool MateDFS(ShidenAI& ai, ShidenAI::FastBoard& board, Team sideToMove, Team attacker, int depth);// 深さ優先探索で詰みを探す
 	bool FindMateAtRoot(ShidenAI& ai, ShidenAI::FastBoard& root, Team aiTeam, int maxDepth, Candidate& outMove);// ルートで詰みを探す
 

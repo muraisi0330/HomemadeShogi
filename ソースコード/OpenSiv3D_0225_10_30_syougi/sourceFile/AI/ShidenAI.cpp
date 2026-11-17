@@ -1,13 +1,11 @@
 ﻿#include "stdafx.h"
 #include "AI/ShidenAI.h"
 #include "Game/Promotion.h"
-#include "Logic/MoveStrategy.h" // 追加: 駒戦略インターフェースを利用するため
 #include <vector>
 #include <limits>
 #include <cmath>
 #include <algorithm>
 #include <chrono>
-#include <unordered_map>
 #include <random>
 
 
@@ -15,8 +13,9 @@ namespace ShidenAIConfig {
 	namespace SearchConfig {
 
 		inline  int TIME_LIMIT_MS = 3000;// ミリ秒
+		inline  int MATE_TIME_LIMIT_MS = 500;// 詰み探索の時間制限（ミリ秒）
 		inline  int MAX_DEPTH = 12;// 探索深さの最大値
-		inline  int MAX_QUIESCENCE_DEPTH = 8;// 静止探索の最大深さ
+		inline  int MAX_QUIESCENCE_DEPTH = 4;// 静止探索の最大深さ
 		inline  int MAX_MOVES_PER_POSITION = 128;// 1局面あたりの最大候補手数（枝刈りのため）
 
 		inline  int FALLBACK_TOP_N = 3;     // デフォルト: 上位3件を再評価
@@ -26,21 +25,23 @@ namespace ShidenAIConfig {
 		inline  int NULL_MOVE_REDUCTION = 3;// デフォルト: 3
 
 		
-		inline  int MATE_TRY_DEPTH = 6;// 詰み探索を試みる深さ
+		inline  int MATE_TRY_DEPTH = 3;// 詰み探索を試みる深さ
 	
-		inline  int MATE_SEARCH_DECAY_PER_DEPTH = 4;
-
+		inline  int MATE_SEARCH_DECAY_PER_DEPTH = 4;// 詰み探索の深さごとの減衰値
+		
 		inline  int MATE_SEARCH_EXTENSION = 3;// 詰み探索時の深さ延長
 		inline  int MATE_SEARCH_MIN_MOVES = 5;// 詰み探索を開始する最小手数
+
+		
 	};
 	namespace System {
 
 		constexpr  int UNIT_TYPE_MAX = UnitTypeArraySize;
 		constexpr  int BOARD_SQUARES = NumTiles;
 
-		inline  int SCORE_INF = 10000000;// 無限大スコア（十分大きい値）
+		inline  int SCORE_INF = 2000000;// 無限大スコア（十分大きい値）
 
-		inline  int REPETITION_DRAW_SCORE = 0;// 千日手の引き分けスコア
+		inline  int REPETITION_DRAW_SCORE = 50000;// 千日手の引き分けスコア
 
 		inline  int PERCENT_BASE = 100;// パーセント表記の基数（100で100%を表す）
 
@@ -52,72 +53,105 @@ namespace ShidenAIConfig {
 
 		inline  int NODES_PER_TIME_CHECK = 4096u;
 
-		inline  int BASE_CAPTURE_SCORE = 2000000;
+		inline  int BASE_CAPTURE_SCORE = 1000000;
 
 	}
 	namespace TTConfig {
 		constexpr size_t TT_SIZE = 1 << 20;// 1Mエントリ
 		constexpr size_t TT_MASK = TT_SIZE - 1;// マスク値
 	};
+	// 盤面評価の定数
 	namespace Evaluation {
-
-		inline  int CHECKMATE_TO_ENEMY_KING = 1500;// 敵王に詰みをかける手の評価値
-		inline  int BOTTOM_STEP_BONUS = 20;// 盤面の底に近いほど高評価
+		inline  int CHECKMATE_TO_ENEMY_KING = 200000;// 敵王に詰みをかける手の評価値
+		inline  int BOTTOM_STEP_BONUS = 30;// 盤面の底に近いほど高評価
 		inline  int ROUND_HEADED_PIECE_BONUS = 40;// 盤面の中心に近いほど高評価
-		inline  int KING_TRAPPED_PENALTY = 99999999;
+		inline  int KING_TRAPPED_PENALTY = 1500000;// 王が逃げ場のない状態にある場合のペナルティ
+
 
 		inline  int DROOPING_STEP_BONUS = 30;// 盤面の端に近いほど高評価
-		inline  int CASTLE_NEAR_KING_BONUS = 600;// 王の近くにいる駒を評価
+		inline  int CASTLE_NEAR_KING_BONUS = 150;// 王の近くにいる駒を評価
 		inline  int ACTIVITY_BONUS = 50;// 駒の活動度に対するボーナス
 
-		inline  int ADVANCE_BONUS = 15;// 前進に対するボーナス
-		inline  int KING_SHIELD_BONUS = 300;// 王の前にいる駒を評価
 
-		inline  int DRAGON_HORSE_ACTIVITY_BONUS = 50;// 馬の活動度に対するボーナス
+		inline  int KING_PROXIMITY_BONUS = 50000;// 王との近接ボーナス
+		inline  int ENEMY_ZONE_DROP_BONUS = 30000;// 敵陣に打つ駒のボーナス
 
-		inline  int SUPPORT_BONUS = 100;// 駒を支えている駒がある場合のボーナス
-		inline  int NO_ENEMY_ATTACK_BONUS = 600;// 敵の攻撃がない駒に対するボーナス
 
-		inline  int PROMOTION_ONLY_BONUS = 50;// 成る手であること自体のボーナス
-		inline  int PROMOTION_BONUS = 200;// 成りのボーナス（駒の価値に対して相対的なもの）
+		inline  int ADVANCE_BONUS = 10;// 前進に対するボーナス
+		inline  int KING_SHIELD_BONUS = 150;// 王の前にいる駒を評価
 
-		inline  int PAWN_ADVANCE_BONUS = 20;// 歩の前進に対するボーナス
+		inline  int DRAGON_HORSE_ACTIVITY_BONUS = 100;// 馬の活動度に対するボーナス
+
+		inline  int SUPPORT_BONUS = 150;// 駒を支えている駒がある場合のボーナス
+		inline  int NO_ENEMY_ATTACK_BONUS = 200;// 敵の攻撃がない駒に対するボーナス
+
+		inline  int PROMOTION_ONLY_BONUS = 100;// 成る手であること自体のボーナス
+		inline  int PROMOTION_BONUS = 300;// 成りのボーナス（駒の価値に対して相対的なもの）
+
+		inline  int PAWN_ADVANCE_BONUS = 10;// 歩の前進に対するボーナス
 		inline  double PAWN_PHASE_DIVISOR = 18.0;// 歩の前進ボーナスの段階的減衰のための除数
 
 		inline  int CAPTURE_BASE_VALUE_FACTOR = 10;// 捕獲基本価値倍率
 		inline  int CAPTURE_BONUS_MULTIPLIER = 50;// 捕獲ボーナス倍率
+		//ダイナミック・チェック・ボーナス
+		//打ち手による王手
 
+		inline  int DYNAMIC_CHECK_BONUS[] =
+		{
+			50000,
+			50000,
+			200000,
+			500000,
+			900000 };
+		
+		inline  int DYNAMIC_MOVE_BONUS[] =
+		{
+			1000,
+			2000,
+			15000,
+			80000,
+			250000 };
+
+	
+		inline  int
+			DYNAMIC_DEFENSE_BONUS[] =
+		{
+			300,
+			200,
+			100,
+			0 };
 	}
+	// 終盤評価の定数
 	namespace Endgame {
 
 		inline  int ENDGAME_PIECE_COUNT_THRESHOLD = 6;// 終盤とみなす駒の総数の閾値
 
 		inline  int ENDGAME_CENTER_WEIGHT = 30;// 盤面の中心にいる駒の評価を上げるための重み
 		inline  int ENDGAME_ENEMY_ZONE_BONUS = 40;// 敵陣にいる駒の評価を上げるためのボーナス
-		inline  int ENDGAME_LIBERTY_WEIGHT = 80;// 駒の自由度（逃げ道）の重み
+		inline  int ENDGAME_LIBERTY_WEIGHT = 50;// 駒の自由度（逃げ道）の重み
 
 	}
 	// 駒の価値や評価関数の定数
 	namespace MoveOrdering {
 
-		inline  int MOVE_ORDER_KILLER_SCORE = 1500000;
-		inline  int MOVE_ORDER_CAPTURE_SCORE = 2000000;
-		inline  int MOVE_ORDER_TT_SCORE = 3000000;
+		inline  int MOVE_ORDER_KILLER_SCORE = 2000000;// キラー手の評価値
+		inline  int MOVE_ORDER_CAPTURE_SCORE = 5000000;// 捕獲手の評価値
+		inline  int MOVE_ORDER_TT_SCORE = 10000000;// トランスポジションテーブルの評価値
 
-		inline  int BECOMING_CAPTURE_BONUS = 500;// 成る手で相手の駒を取る手に対するボーナス
-		inline  int POSSIBLE_HAND_BONUSES = 1000;// 持ち駒にできる手に対するボーナス
+		inline  int BECOMING_CAPTURE_BONUS = 500000;// 成る手で相手の駒を取る手に対するボーナス
+		inline  int POSSIBLE_HAND_BONUSES = 100000;// 持ち駒にできる手に対するボーナス
 
 		inline  int BECOMING_CAPTURE_3POINTS_BONUS =
-			MOVE_ORDER_CAPTURE_SCORE / 3;
+			MOVE_ORDER_CAPTURE_SCORE / 3;// 成る手で相手の駒を取る手に対するボーナス（3ポイント）
 
 		inline  int PROXIMITY_BONUS_UNIT =
-			MOVE_ORDER_CAPTURE_SCORE / 6;
+			MOVE_ORDER_CAPTURE_SCORE / 6;// 王に近いほど高いボーナスの単位値
 
-		inline  int PROXIMITY_BONUS_MAX_DISTANCE = 2;
+		inline  int PROXIMITY_BONUS_MAX_DISTANCE = 2;// 王に近いほど高いボーナスの最大距離
 		inline  int PROXIMITY_BONUS_MAX = 3;// 王に近いほど高いボーナスの最大値
 
 		inline  int PROXIMITY_BONUS_BASE =
-			MOVE_ORDER_TT_SCORE / 4;
+			MOVE_ORDER_TT_SCORE / 4;// 王に近いほど高いボーナスの基本値
 		inline  int DROP_BONUS = 20;// 持ち駒を打つ手に対するボーナス
 
 	}
@@ -165,16 +199,16 @@ namespace ShidenAIConfig {
 		//狙われている駒の価値
 		inline  PIECE_VALUE UNDER_ATTACK_PENALTY
 			= {
-				40,// 歩
-				200,// 香
-				220,// 桂
-				320,// 銀
-				350,// 金
-				500,// 角
-				700,// 飛
-				30000,// 王
-				300// 成りのボーナス
-		};
+				30,     // 歩
+				150,    // 香
+				160,    // 桂
+				240,    // 銀
+				270,    // 金
+				400,    // 角
+				600,    // 飛
+				50000,  // 王
+				200
+			};
 		inline  TotalPieceValue TOTAL_UNDER_ATTACK_PENALTY = {
 			UNDER_ATTACK_PENALTY.PAWN,
 			UNDER_ATTACK_PENALTY.LANCE,
@@ -220,12 +254,12 @@ namespace ShidenAIConfig {
 		// 歩のテーブル (先手用)
 		// 敵陣（上部）に行くほど高く、中央ほど高い
 		constexpr Table PAWN = { {
-			{  0,   0,   0,   0,   0,   0,   0,   0,   0}, // 1段目(成)
-			{ 50,  60,  70,  80,  90,  80,  70,  60,  50}, // 2段目
-			{ 40,  50,  60,  70,  80,  70,  60,  50,  40}, // 3段目
+			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
+			{ 30,  40,  50,  60,  70,  60,  50,  40,  30},
 			{ 20,  30,  40,  50,  60,  50,  40,  30,  20},
-			{ 10,  15,  20,  25,  30,  25,  20,  15,  10},
-			{  5,  10,  10,  10,  10,  10,  10,  10,   5},
+			{ 10,  20,  30,  40,  50,  40,  30,  20,  10},
+			{  5,  10,  15,  20,  25,  20,  15,  10,   5},
+			{  2,   5,   5,   5,   5,   5,   5,   5,   2},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0}
@@ -233,51 +267,51 @@ namespace ShidenAIConfig {
 
 		// 玉のテーブル (先手用: 左側への囲いを推奨する例)
 		constexpr Table KING = { {
-		{-150, -150, -150, -150, -150, -150, -150, -150, -150},
-		{-120, -120, -120, -120, -120, -120, -120, -120, -120},
-		{-100, -100, -100, -100, -100, -100, -100, -100, -100},
-		{ -80,  -80,  -80,  -80,  -80,  -80,  -80,  -80,  -80},
-		{ -50,  -50,  -80, -150, -150, -150,  -80,  -50,  -50}, // 5段目：中央への進出を拒否
-		{ -20,  -20,  -50, -200, -250, -200,  -50,  -20,  -20}, // 6段目：同上
-		{  20,   20,    0, -250, -300, -250,    0,   20,   20}, // 7段目：同上
-		{  80,  120,   50, -300, -400, -300,   50,  120,   80}, // 8段目：中央3列を「地獄」化
-		{ 150,  250,  100, -400, -600, -400,  100,  250,  150}  // 9段目：隅(0,1,7,8列)を「聖域」化
+			{-100,-100,-100,-100,-100,-100,-100,-100,-100},
+			{ -80, -80, -80, -80, -80, -80, -80, -80, -80},
+			{ -50, -50, -50, -50, -50, -50, -50, -50, -50},
+			{ -20, -20, -30, -50, -50, -50, -30, -20, -20},
+			{   0,   0, -20, -80, -80, -80, -20,   0,   0},
+			{  20,  20,   0, -50, -80, -50,   0,  20,  20},
+			{  50,  50,  20, -20, -50, -20,  20,  50,  50},
+			{  80, 100,  50,   0, -20,   0,  50, 100,  80},
+			{ 100, 150,  80, -20, -50, -20,  80, 150,  100}
 	} };
 
 		// 桂馬：中央への跳ね出しを高く、1〜2段目（行き止まり）と端を極端に低く
 		constexpr Table KNIGHT = { {
-		   {-100, -80, -70, -70, -70, -70, -70, -80,-100}, // 1段目(詰み)
-		   {-50, -20,   0,   0,   0,   0,   0, -20, -50}, // 2段目(ほぼ詰み)
-		   { 10,  40,  60,  60,  60,  60,  60,  40,  10}, // 3段目(攻めの拠点)
-		   {  0,  20,  30,  40,  50,  40,  30,  20,   0},
-		   {  0,  10,  20,  25,  30,  25,  20,  10,   0},
-		   {  0,   0,   0,   0,   0,   0,   0,   0,   0},
-		   {  0,   0,   0,   0,   0,   0,   0,   0,   0},
-		   {  0,   0,   0,   0,   0,   0,   0,   0,   0},
-		   {  0,   0,   0,   0,   0,   0,   0,   0,   0}
+			{ -50, -40, -30, -30, -30, -30, -30, -40, -50},
+			{ -30, -10,   0,   0,   0,   0,   0, -10, -30},
+			{   0,  20,  30,  30,  30,  30,  30,  20,   0},
+			{   0,  10,  20,  25,  30,  25,  20,  10,   0},
+			{   0,   5,  10,  15,  20,  15,  10,   5,   0},
+			{   0,   0,   0,   0,   0,   0,   0,   0,   0},
+			{   0,   0,   0,   0,   0,   0,   0,   0,   0},
+			{   0,   0,   0,   0,   0,   0,   0,   0,   0},
+			{   0,   0,   0,   0,   0,   0,   0,   0,   0}
 		} };
 
 		// 金・成駒：玉の周辺と中央を高く。守備力を数値化
 		constexpr Table GOLD = { {
-			{  0,  10,  20,  30,  30,  30,  20,  10,   0}, // 敵陣
-			{ 10,  20,  30,  40,  40,  40,  30,  20,  10},
-			{ 15,  25,  35,  45,  50,  45,  35,  25,  15},
-			{ 10,  20,  30,  40,  45,  40,  30,  20,  10},
-			{  0,  10,  20,  30,  35,  30,  20,  10,   0},
-			{  0,   5,  15,  20,  25,  20,  15,   5,   0},
-			{ 10,  20,  30,  20,  10,  20,  30,  20,  10}, // 自陣：守備
-			{ 30,  50,  60,  40,  20,  40,  60,  50,  30}, // 玉の囲い想定位置を高く
-			{ 20,  40,  50,  30,  10,  30,  50,  40,  20}
+			{  0,   5,  10,  15,  15,  15,  10,   5,   0},
+			{  5,  10,  15,  20,  20,  20,  15,  10,   5},
+			{ 10,  15,  20,  25,  30,  25,  20,  15,  10},
+			{  5,  10,  15,  20,  25,  20,  15,  10,   5},
+			{  0,   5,  10,  15,  20,  15,  10,   5,   0},
+			{  0,   2,   8,  10,  15,  10,   8,   2,   0},
+			{  5,  10,  15,  10,   5,  10,  15,  10,   5},
+			{ 15,  25,  30,  20,  10,  20,  30,  25,  15},
+			{ 10,  20,  25,  15,   5,  15,  25,  20,  10}
 		} };
 
 		// 飛車：2段目（龍の横利き）と、中央の縦ラインを重視
 		constexpr Table ROOK = { {
-			{ 20,  20,  20,  20,  20,  20,  20,  20,  20},
-			{ 50,  50,  60,  80,  90,  80,  60,  50,  50}, // 2段目(龍)
-			{ 20,  30,  40,  50,  60,  50,  40,  30,  20},
-			{  0,  10,  20,  30,  40,  30,  20,  10,   0},
-			{  0,  10,  20,  30,  40,  30,  20,  10,   0},
-			{  0,   0,  10,  20,  20,  20,  10,   0,   0},
+			{ 10,  10,  10,  10,  10,  10,  10,  10,  10},
+			{ 20,  20,  30,  40,  50,  40,  30,  20,  20},
+			{ 10,  15,  20,  25,  30,  25,  20,  15,  10},
+			{  0,   5,  10,  15,  20,  15,  10,   5,   0},
+			{  0,   5,  10,  15,  20,  15,  10,   5,   0},
+			{  0,   0,   5,  10,  10,  10,   5,   0,   0},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
 			{  0,   0,   0,   0,   0,   0,   0,   0,   0}
@@ -285,43 +319,43 @@ namespace ShidenAIConfig {
 		// --- 銀将 (SILVER) ---
 	  // 中央への進出と、2段目での攻守の切り替えを評価
 		constexpr Table SILVER = { {
-			{ 0, 10, 15, 20, 20, 20, 15, 10,  0}, // 敵陣深く
-			{10, 30, 40, 50, 60, 50, 40, 30, 10}, // 攻めの拠点
-			{ 5, 20, 35, 45, 50, 45, 35, 20,  5},
-			{ 0, 10, 25, 35, 40, 35, 25, 10,  0},
-			{ 0,  5, 15, 25, 30, 25, 15,  5,  0},
-			{ 0,  0, 10, 15, 20, 15, 10,  0,  0},
-			{ 5, 15, 15,  5,  0,  5, 15, 15,  5}, // 自陣：守備
-			{15, 35, 25, 15,  0, 15, 25, 35, 15}, // 囲いの横
-			{ 0, 10, 10,  0,  0,  0, 10, 10,  0}
+			{  0,   5,  10,  15,  15,  15,  10,   5,   0},
+			{  5,  15,  20,  25,  30,  25,  20,  15,   5},
+			{  2,  10,  18,  22,  25,  22,  18,  10,   2},
+			{  0,   5,  12,  18,  20,  18,  12,   5,   0},
+			{  0,   2,   8,  12,  15,  12,   8,   2,   0},
+			{  0,   0,   5,   8,  10,   8,   5,   0,   0},
+			{  2,   8,   8,   2,   0,   2,   8,   8,   2},
+			{  8,  18,  12,   8,   0,   8,  12,  18,   8},
+			{  0,   5,   5,   0,   0,   0,   5,   5,   0}
 		} };
-
+		
 		// --- 香車 (LANCE) ---
 		// 前方への利きを重視。1段目は成らなければ動けないため評価を下げ、2~3段目を高く
 		constexpr Table LANCE = { {
-			{ 0,  0,  0,  0,  0,  0,  0,  0,  0}, // 1段目（強制成りのためPSTは0）
-			{40, 50, 60, 60, 60, 60, 60, 50, 40}, // 2段目（最強）
-			{30, 40, 45, 45, 45, 45, 45, 40, 30},
-			{20, 30, 35, 35, 35, 35, 35, 30, 20},
-			{10, 20, 25, 25, 25, 25, 25, 20, 10},
-			{ 5, 10, 15, 15, 15, 15, 15, 10,  5},
-			{ 0,  5, 10, 10, 10, 10, 10,  5,  0},
-			{ 0,  0,  5,  5,  5,  5,  5,  0,  0},
-			{ 0,  0,  0,  0,  0,  0,  0,  0,  0}
+			{  0,   0,   0,   0,   0,   0,   0,   0,   0},
+			{ 20,  25,  30,  30,  30,  30,  30,  25,  20},
+			{ 15,  20,  22,  22,  22,  22,  22,  20,  15},
+			{ 10,  15,  18,  18,  18,  18,  18,  15,  10},
+			{  5,  10,  12,  12,  12,  12,  12,  10,   5},
+			{  2,   5,   8,   8,   8,   8,   8,   5,   2},
+			{  0,   2,   5,   5,   5,   5,   5,   2,   0},
+			{  0,   0,   2,   2,   2,   2,   2,   0,   0},
+			{  0,   0,   0,   0,   0,   0,   0,   0,   0}
 		} };
 
 		// --- 角行 (BISHOP) ---
 		// 盤面中央付近にいるほど、斜めの利きが最大化されるため高く評価
 		constexpr Table BISHOP = { {
-			{ 0, 15, 15, 15, 15, 15, 15, 15,  0},
-			{15, 30, 30, 30, 30, 30, 30, 30, 15},
-			{15, 30, 50, 55, 55, 55, 50, 30, 15},
-			{15, 30, 55, 75, 80, 75, 55, 30, 15},
-			{15, 30, 55, 80, 100, 80, 55, 30, 15}, // 中央(55)が最強
-			{15, 30, 55, 75, 80, 75, 55, 30, 15},
-			{15, 30, 50, 55, 55, 55, 50, 30, 15},
-			{10, 20, 20, 20, 20, 20, 20, 20, 10},
-			{ 0,  0,  0,  0,  0,  0,  0,  0,  0}
+			{  0,  10,  10,  10,  10,  10,  10,  10,   0},
+			{ 10,  20,  20,  20,  20,  20,  20,  20,  10},
+			{ 10,  20,  35,  40,  40,  40,  35,  20,  10},
+			{ 10,  20,  40,  50,  55,  50,  40,  20,  10},
+			{ 10,  20,  40,  55,  60,  55,  40,  20,  10},
+			{ 10,  20,  40,  50,  55,  50,  40,  20,  10},
+			{ 10,  20,  35,  40,  40,  40,  35,  20,  10},
+			{  5,  10,  10,  10,  10,  10,  10,  10,   5},
+			{  0,   0,   0,   0,   0,   0,   0,   0,   0}
 		} };
 
 	};
@@ -333,6 +367,7 @@ namespace ShidenAIConfig {
 		}
 
 		SearchConfig::TIME_LIMIT_MS = toml[U"SearchConfig.TIME_LIMIT_MS"].get<int>();
+		SearchConfig::MATE_TIME_LIMIT_MS = toml[U"SearchConfig.MATE_TIME_LIMIT_MS"].get<int>();
 		SearchConfig::MAX_DEPTH = toml[U"SearchConfig.MAX_DEPTH"].get<int>();
 		SearchConfig::MAX_QUIESCENCE_DEPTH = toml[U"SearchConfig.MAX_QUIESCENCE_DEPTH"].get<int>();
 		SearchConfig::MAX_MOVES_PER_POSITION = toml[U"SearchConfig.MAX_MOVES_PER_POSITION"].get<int>();
@@ -358,6 +393,8 @@ namespace ShidenAIConfig {
 		Evaluation::DROOPING_STEP_BONUS = toml[U"Evaluation.DROOPING_STEP_BONUS"].get<int>();
 		Evaluation::CASTLE_NEAR_KING_BONUS = toml[U"Evaluation.CASTLE_NEAR_KING_BONUS"].get<int>();
 		Evaluation::ACTIVITY_BONUS = toml[U"Evaluation.ACTIVITY_BONUS"].get<int>();
+		Evaluation::KING_PROXIMITY_BONUS = toml[U"Evaluation.KING_PROXIMITY_BONUS"].get<int>();
+		Evaluation::ENEMY_ZONE_DROP_BONUS = toml[U"Evaluation.ENEMY_ZONE_DROP_BONUS"].get<int>();
 		Evaluation::ADVANCE_BONUS = toml[U"Evaluation.ADVANCE_BONUS"].get<int>();
 		Evaluation::KING_SHIELD_BONUS = toml[U"Evaluation.KING_SHIELD_BONUS"].get<int>();
 		Evaluation::DRAGON_HORSE_ACTIVITY_BONUS = toml[U"Evaluation.DRAGON_HORSE_ACTIVITY_BONUS"].get<int>();
@@ -369,6 +406,20 @@ namespace ShidenAIConfig {
 		Evaluation::PAWN_PHASE_DIVISOR = toml[U"Evaluation.PAWN_PHASE_DIVISOR"].get<double>();
 		Evaluation::CAPTURE_BASE_VALUE_FACTOR = toml[U"Evaluation.CAPTURE_BASE_VALUE_FACTOR"].get<int>();
 		Evaluation::CAPTURE_BONUS_MULTIPLIER = toml[U"Evaluation.CAPTURE_BONUS_MULTIPLIER"].get<int>();
+		Evaluation::DYNAMIC_CHECK_BONUS[0] = toml[U"Evaluation.DYNAMIC_CHECK_BONUS"].get<int>();
+		Evaluation::DYNAMIC_CHECK_BONUS[1] = toml[U"Evaluation.DYNAMIC_CHECK_BONUS1"].get<int>();
+		Evaluation::DYNAMIC_CHECK_BONUS[2] = toml[U"Evaluation.DYNAMIC_CHECK_BONUS2"].get<int>();
+		Evaluation::DYNAMIC_CHECK_BONUS[3] = toml[U"Evaluation.DYNAMIC_CHECK_BONUS3"].get<int>();
+		Evaluation::DYNAMIC_CHECK_BONUS[4] = toml[U"Evaluation.DYNAMIC_CHECK_BONUS4"].get<int>();
+		Evaluation::DYNAMIC_MOVE_BONUS[0] = toml[U"Evaluation.DYNAMIC_MOVE_BONUS"].get<int>();
+		Evaluation::DYNAMIC_MOVE_BONUS[1] = toml[U"Evaluation.DYNAMIC_MOVE_BONUS1"].get<int>();
+		Evaluation::DYNAMIC_MOVE_BONUS[2] = toml[U"Evaluation.DYNAMIC_MOVE_BONUS2"].get<int>();
+		Evaluation::DYNAMIC_MOVE_BONUS[3] = toml[U"Evaluation.DYNAMIC_MOVE_BONUS3"].get<int>();
+		Evaluation::DYNAMIC_MOVE_BONUS[4] = toml[U"Evaluation.DYNAMIC_MOVE_BONUS4"].get<int>();
+		Evaluation::DYNAMIC_DEFENSE_BONUS[0] = toml[U"Evaluation.DYNAMIC_DEFENSE_BONUS"].get<int>();
+		Evaluation::DYNAMIC_DEFENSE_BONUS[1] = toml[U"Evaluation.DYNAMIC_DEFENSE_BONUS1"].get<int>();
+		Evaluation::DYNAMIC_DEFENSE_BONUS[2] = toml[U"Evaluation.DYNAMIC_DEFENSE_BONUS2"].get<int>();
+		Evaluation::DYNAMIC_DEFENSE_BONUS[3] = toml[U"Evaluation.DYNAMIC_DEFENSE_BONUS3"].get<int>();
 
 		Endgame::ENDGAME_PIECE_COUNT_THRESHOLD = toml[U"Endgame.ENDGAME_PIECE_COUNT_THRESHOLD"].get<int>();
 		Endgame::ENDGAME_CENTER_WEIGHT = toml[U"Endgame.ENDGAME_CENTER_WEIGHT"].get<int>();
@@ -394,8 +445,8 @@ namespace ShidenAIConfig {
 
 		int proximityBonusBaseDivisor = toml[U"MoveOrdering.PROXIMITY_BONUS_BASE"].get<int>();
 		MoveOrdering::PROXIMITY_BONUS_BASE =
-			MoveOrdering::MOVE_ORDER_CAPTURE_SCORE / proximityBonusBaseDivisor;
-	
+			MoveOrdering::MOVE_ORDER_TT_SCORE / proximityBonusBaseDivisor;
+		
 
 		PieceValue::VAL.PAWN = toml[U"PieceValue.PAWN"].get<int>();
 		PieceValue::VAL.LANCE = toml[U"PieceValue.LANCE"].get<int>();
@@ -468,8 +519,7 @@ namespace ShidenAIConfig {
 		HandPiece::HAND_MULT.BISHOP = toml[U"HandPiece.BISHOP"].get<int>();
 		HandPiece::HAND_MULT.ROOK = toml[U"HandPiece.ROOK"].get<int>();
 		HandPiece::HAND_MULT.KING = toml[U"HandPiece.KING"].get<int>();
-		HandPiece::HAND_MULT.PROMOTION_BONUS = toml[U"HandPiece.PROMOTION_BONUS"].get<int>();
-
+		
 		HandPiece::HAND_PIECE_BONUS_PERCENT = toml[U"HandPiece.HAND_PIECE_BONUS_PERCENT"].get<int>();
 		HandPiece::PAWN_HAND_OPENING_EXTRA_PERCENT = toml[U"HandPiece.PAWN_HAND_OPENING_EXTRA_PERCENT"].get<int>();
 		
@@ -508,15 +558,9 @@ static inline int GetHandMultiplierPercent(UnitType t) {
 int ShidenAI::GetMultiplierPercent(UnitType t, const FastBoard& board) {
 	int base = GetHandMultiplierPercent(t);
 
-	// 盤上駒数（玉以外）を数える（フェーズ計算用）
-	int pieceCount = 0;
-	for (const auto& u : board.units) {
-		if (!u.isOnBoard) continue;
-		if (u.type == UnitType::King || u.type == UnitType::King1) continue;
-		++pieceCount;
-	}
+
 	// フェーズ: 1.0 = 序盤/中盤（駒が多い）、0.0 = 終盤（駒が少ない）
-	double phase = static_cast<double>(pieceCount) / ShidenAIConfig::Evaluation::PAWN_PHASE_DIVISOR;
+	double phase = static_cast<double>(board.pieceCount) / ShidenAIConfig::Evaluation::PAWN_PHASE_DIVISOR;
 	if (phase < 0.0) phase = 0.0;
 	if (phase > 1.0) phase = 1.0;
 
@@ -531,16 +575,8 @@ int ShidenAI::GetMultiplierPercent(UnitType t, const FastBoard& board) {
 		return base;
 	}
 
-	// 終盤：既存ロジック（減衰）
-	// 盤上駒数（玉以外）を数える（末尾ロジックの互換性保持）
-	int pc = 0;
-	for (const auto& u : board.units) {
-		if (!u.isOnBoard) continue;
-		if (u.type == UnitType::King || u.type == UnitType::King1) continue;
-		++pc;
-	}
 	const int threshold = ShidenAIConfig::Endgame::ENDGAME_PIECE_COUNT_THRESHOLD;
-	int depth = std::max(0, threshold - pc);
+	int depth = std::max(0, threshold - board.pieceCount);
 	const int reduceUnit = ShidenAIConfig::SearchConfig::MATE_SEARCH_DECAY_PER_DEPTH;
 	int reducePercent = depth * reduceUnit;
 	int minPercent = (base * ShidenAIConfig::System::MIN_HAND_MATERIAL_VALUERATE) / ShidenAIConfig::System::PERCENT_BASE;
@@ -643,23 +679,23 @@ ShidenAI::FastBoard::FastBoard(const Game& game, ShidenAI& ai)
 	pieceCount = 0;
 	for (const auto& u : units) {
 
-		int teamIdx = (u.team == Team::Blue) ? 0 : 1;
-		Point myKing = kingPos[teamIdx];
-		Point enKing = kingPos[1 - teamIdx];
-		if (u.isOnBoard){
-			materialScore[teamIdx] += PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
-			materialScore[teamIdx] += ai.EvalUnitIndividual(u, u.team, myKing, enKing, units);
-			pieceCount++;
-			if (u.type == UnitType::King || u.type == UnitType::King1) {
+		int uTeamIdx = (u.team == Team::Blue) ? 0 : (u.team == Team::Red ? 1 : -1);
+		if (uTeamIdx < 0) continue; 
 
+		Point myKing = kingPos[uTeamIdx];
+		Point enKing = kingPos[1 - uTeamIdx];
+
+		if (u.isOnBoard) {
+			materialScore[uTeamIdx] += PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+			materialScore[uTeamIdx] += ai.EvalUnitIndividual(u, u.team, myKing, enKing, units);
+			pieceCount++;
+
+			if (!(u.type == UnitType::King || u.type == UnitType::King1)) {
+				pstScore[uTeamIdx] += ai.GetPSTValue(u.type, u.pos.y, u.pos.x, u.team);
 			}
-			else {
-				pstScore[teamIdx] += ai.GetPSTValue(u.type, u.pos.y, u.pos.x, u.team);
-			}
-	     }
-		else
-		{
-			handScore[teamIdx] += (PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL) * ai.GetMultiplierPercent(u.type, *this)) / ShidenAIConfig::System::PERCENT_BASE;
+		}
+		else {
+			handScore[uTeamIdx] += (PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL) * ai.GetMultiplierPercent(u.type, *this)) / ShidenAIConfig::System::PERCENT_BASE;
 		}
 	}
 	
@@ -853,17 +889,9 @@ void ShidenAI::FastBoard::RecountHand() {
 	}
 }
 
-// ヘルパ: ビットボードから square index を安全に計算
-static inline int PosToSqSafe(const Point& p) {
-	if (p.x < 0 || p.y < 0 || p.x >= BoardSize || p.y >= BoardSize) return -1;
-	return p.y * BoardSize + p.x;
-}
-
-
-
 void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 {
-	// 既存の先頭処理（状態保存）はそのまま
+	// 既存の先頭処理（状態保存）
 	info.unitIdx = cand.unitIndex;
 	info.from = cand.from;
 	info.to = cand.target;
@@ -886,7 +914,10 @@ void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 	Point myKing = board.kingPos[teamIdx];
 	Point enKing = board.kingPos[oppTeamIdx];
 
-	board.materialScore[teamIdx] -= EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
+	// 移動前の個別位置ボーナスを減算
+	if (u.isOnBoard) {
+		board.materialScore[teamIdx] -= EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
+	}
 
 	// --- PST 差分: 移動対象（と捕獲対象）の PST を事前に計算 ---
 	int pstBeforeMover = 0;
@@ -894,20 +925,19 @@ void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 	int pstBeforeVictim = 0;
 	int victimIndex = -1;
 	if (!cand.isDrop) {
-		for (int i = 0; i < static_cast<int>(board.units.size()); ++i) {
-			const Unit& target = board.units[i];
-			if (target.isOnBoard && target.pos == cand.target && target.team != board.currentTeam) {
-				victimIndex = i;
+		int occIdx = board.occ[cand.target.y][cand.target.x];
+		if (occIdx != -1) {
+			const Unit& target = board.units[occIdx];
+			if (target.team != board.currentTeam) {
+				victimIndex = occIdx;
 				pstBeforeVictim = ComputeUnitPST(board, target);
-				break;
 			}
 		}
 	}
 
-	// 1) 移動駒の現在位置ハッシュを除去（盤上なら位置、手駒なら手駒カウントを減らす）
+	// 1) 移動元からの除去（盤上ならマスから、手駒なら手駒から）
 	if (u.isOnBoard) {
 		XORPieceHash(board, cand.unitIndex);
-		// occ は差分でクリア
 		if (u.pos.x >= 0 && u.pos.x < BoardSize && u.pos.y >= 0 && u.pos.y < BoardSize) {
 			int sq = u.pos.y * BoardSize + u.pos.x;
 			board.occ[u.pos.y][u.pos.x] = -1;
@@ -920,36 +950,34 @@ void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 		}
 	}
 	else {
+		// 手駒から減らす
 		UpdateHandHash(board, u.type, teamIdx, -1);
 		board.handScore[teamIdx] -= (PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL) * GetMultiplierPercent(u.type, board)) / ShidenAIConfig::System::PERCENT_BASE;
 	}
 
-	// 2) 捕獲処理（存在すれば）
+	// 2) 捕獲処理（相手の駒を取る場合）
 	if (!cand.isDrop) {
-		for (int i = 0; i < static_cast<int>(board.units.size()); ++i) {
-			Unit& target = board.units[i];
+		int targetVictimIdx = board.occ[cand.target.y][cand.target.x];
+		if (targetVictimIdx != -1) {
+			Unit& target = board.units[targetVictimIdx];
 			if (target.isOnBoard && target.pos == cand.target && target.team != board.currentTeam) {
-				// 情報保存（Undo 用）
 				info.captured = true;
-				info.capturedIndex = i;
+				info.capturedIndex = targetVictimIdx;
 				info.capturedBefore = target;
 				info.capturedType = target.type;
 
-				// 捕獲駒の位置ハッシュを除去
-				XORPieceHash(board, i);
+				XORPieceHash(board, targetVictimIdx);
 
-				board.handScore[teamIdx] += (PieceValue(target.type, ShidenAIConfig::PieceValue::TOTAL_VAL) * GetMultiplierPercent(target.type, board)) / ShidenAIConfig::System::PERCENT_BASE;
-				board.pieceCount--; // 盤上駒が減る
-				board.materialScore[teamIdx] += PieceValue(target.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+				UnitType demoted = ToDemoted(target.type);
+				board.handScore[teamIdx] += (PieceValue(demoted, ShidenAIConfig::PieceValue::TOTAL_VAL) * GetMultiplierPercent(demoted, board)) / ShidenAIConfig::System::PERCENT_BASE;
+				board.pieceCount--;
+
+				// 相手の盤上からは、成駒であれば成駒の価値分を減らす
 				board.materialScore[oppTeamIdx] -= PieceValue(target.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
 
-				// 捕獲駒は非成に戻して持ち駒へ
-				UnitType demoted = ToDemoted(target.type);
 				UpdateHandHash(board, demoted, teamIdx, +1);
 
-				// 盤上から取り除く
 				target.isOnBoard = false;
-				// ビットボード差分
 				if (target.pos.x >= 0 && target.pos.x < BoardSize && target.pos.y >= 0 && target.pos.y < BoardSize) {
 					int tsq = target.pos.y * BoardSize + target.pos.x;
 					if (tsq >= 0 && tsq < NumTiles) {
@@ -962,24 +990,33 @@ void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 					board.occ[target.pos.y][target.pos.x] = -1;
 				}
 
-				// 捕獲駒のチーム/タイプを書き換え（持ち駒化）
 				target.team = board.currentTeam;
 				target.type = demoted;
-				break;
 			}
 		}
 	}
 
-	// 3) 駒を配置
+	// 3) 駒を盤面に配置
 	if (cand.isDrop) {
 		u.isOnBoard = true;
 		u.pos = cand.target;
+		board.pieceCount++; // ★ 盤上に駒が1つ増える
+
+		
+		// 手駒から引かれた駒本体の価値を、盤上マテリアルスコアに加算する
+		board.materialScore[teamIdx] += PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
 	}
 	else {
 		u.pos = cand.target;
-		if (cand.promoteDecision) u.type = ToPromoted(u.type);
+		if (cand.promoteDecision) {
+			UnitType promotedType = ToPromoted(u.type);
+			int promoBonus = PieceValue(promotedType, ShidenAIConfig::PieceValue::TOTAL_VAL) - PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+			board.materialScore[teamIdx] += promoBonus;
+			u.type = promotedType;
+		}
 	}
-	// occ 到着地をセット
+
+	// occ（盤面占有）配列・ビットボードの更新
 	if (u.pos.x >= 0 && u.pos.x < BoardSize && u.pos.y >= 0 && u.pos.y < BoardSize) {
 		board.occ[u.pos.y][u.pos.x] = cand.unitIndex;
 		int nsq = u.pos.y * BoardSize + u.pos.x;
@@ -990,59 +1027,23 @@ void ShidenAI::DoMove(FastBoard& board, const Candidate& cand, MoveInfo& info)
 			board.teamBB[teamIdx].set(nsq);
 		}
 	}
-	if (u.type == UnitType::King || u.type == UnitType::King1) {
-		for (const auto& ID : piecesID.goldID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] -= EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
-		for (const auto& ID : piecesID.silverID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] -= EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
-		for (const auto& ID : piecesID.knightID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] -= EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
-	}
 
-	// 4) 移動後の駒ハッシュを追加
+	// 4) 移動後の個別位置ボーナス加算
 	if (u.isOnBoard) XORPieceHash(board, cand.unitIndex);
 	board.materialScore[teamIdx] += EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-	// --- PST 差分の計算（移動後の PST を再計算し、差分を board.pstScore に反映） ---
+
+	// PST 差分の反映
 	int pstAfterMover = 0;
 	if (u.isOnBoard) pstAfterMover = ComputeUnitPST(board, u);
-
-	// 移動駒のチームに対する delta
 	int moverDelta = pstAfterMover - pstBeforeMover;
 	board.pstScore[teamIdx] += moverDelta;
-	// 捕獲があれば被捕獲駒の PST を相手チームから引く
 	if (victimIndex != -1) {
-		// 被捕獲駒は既に盤上から取り除かれているが pstBeforeVictim holds its previous PST
 		board.pstScore[oppTeamIdx] -= pstBeforeVictim;
-
 	}
 
-	// 5) 王位置キャッシュ更新    
+	// 5) 王位置キャッシュ更新
 	if (u.type == UnitType::King || u.type == UnitType::King1) {
 		board.kingPos[teamIdx] = u.pos;
-		for (const auto& ID : piecesID.goldID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] += EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
-		for (const auto& ID : piecesID.silverID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] += EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
-		for (const auto& ID : piecesID.knightID) {
-			if (ID < 0 || ID >= static_cast<int>(board.units.size())) continue;
-			const Unit& t = board.units[ID];
-			board.materialScore[teamIdx] += EvalUnitIndividual(u, board.currentTeam, myKing, enKing, board.units);
-		}
 	}
 
 	// 6) 手番を切替え
@@ -1108,6 +1109,10 @@ void ShidenAI::UndoMove(FastBoard& board, const MoveInfo& info)
 		}
 	}
 
+	if (info.promoted) {
+		u.type = ToDemoted(u.type);
+	}
+
 	// 4) 移動駒を元の位置に戻す（手駒に戻す or 元位置へ）
 	if (info.from.x == -1 && info.from.y == -1) {
 		// 元は打ち -> 盤上から取り除き、手駒へ戻す
@@ -1132,10 +1137,7 @@ void ShidenAI::UndoMove(FastBoard& board, const MoveInfo& info)
 		}
 	}
 
-	// 5) 成りを戻す（あれば）
-	if (info.promoted) {
-		u.type = ToDemoted(u.type);
-	}
+	
 
 	// 6) 王キャッシュ復元（もし王であれば）
 	if (u.type == UnitType::King || u.type == UnitType::King1) {
@@ -1379,10 +1381,6 @@ bool ShidenAI::IsSquareAttacked(FastBoard& board, Point p, Team enemyTeam) {
 				if (!(dx == 0 && dy == -forward)) return true;
 				break;
 			case UnitType::Pawn:
-			{
-				int fwd = (found.team == Team::Blue) ? -1 : 1;
-				if (dx == 0 && dy == fwd) return true;
-			}
 			break;
 			default:
 				break;
@@ -1390,18 +1388,33 @@ bool ShidenAI::IsSquareAttacked(FastBoard& board, Point p, Team enemyTeam) {
 		}
 	}
 
-	// 4) スライダー系（飛車・香・角・成駒の付加利き）をビットボードでチェック
 	// rook-like attackers (飛車, 龍, 香(直線のみ))
 	{
 		Bitboard rookAttackMask = g_slidingTable.rook_attacks_from(psq, occ);
-		Bitboard enemyRookPositions = (board.pieceBB[(int)UnitType::Rook] | board.pieceBB[(int)UnitType::Rook1] | board.pieceBB[(int)UnitType::Lance]) & board.teamBB[enemyIdx];
-		if ((rookAttackMask & enemyRookPositions).any()) return true;
-		// 龍の斜め1マス利き（p の近傍にいるか）: 斜め1マスに敵の Rook1 がいれば王手
+		Bitboard enemyRooks = (board.pieceBB[(int)UnitType::Rook] | board.pieceBB[(int)UnitType::Rook1]) & board.teamBB[enemyIdx];
+		if ((rookAttackMask & enemyRooks).any()) return true;
+
+		// 龍の斜め1マス
 		for (int dy : { -1, 1 }) for (int dx : { -1, 1 }) {
 			int nx = p.x + dx, ny = p.y + dy;
 			if (nx < 0 || nx >= BoardSize || ny < 0 || ny >= BoardSize) continue;
-			int nsq = SQ(nx, ny);
-			if (board.teamBB[enemyIdx].test(nsq) && board.pieceBB[(int)UnitType::Rook1].test(nsq)) return true;
+			if (board.teamBB[enemyIdx].test(SQ(nx, ny)) && board.pieceBB[(int)UnitType::Rook1].test(SQ(nx, ny))) return true;
+		}
+	}
+
+	{
+		// p から見て、敵陣側（y - forward）に向かってレイを伸ばす
+		for (int step = 1; step < BoardSize; ++step) {
+			int ly = p.y - forward * step;
+			if (ly < 0 || ly >= BoardSize) break;
+			int lsq = SQ(p.x, ly);
+			if (board.occBB.test(lsq)) {
+				// 最初に当たった駒が敵の香車なら王手！
+				if (board.teamBB[enemyIdx].test(lsq) && board.pieceBB[(int)UnitType::Lance].test(lsq)) {
+					return true;
+				}
+				break; // 途中に駒があれば遮断される
+			}
 		}
 	}
 
@@ -1428,21 +1441,9 @@ bool ShidenAI::IsSquareAttacked(FastBoard& board, Point p, Team enemyTeam) {
 // pinned 駒のインデックスリストを outPinnedIndices に格納
 int ShidenAI::GetUnitIndexAt(const FastBoard& board, int x, int y) {
 	if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize) return -1;
-	for (int i = 0; i < static_cast<int>(board.units.size()); ++i) {
-		const auto& u = board.units[i];
-		if (!u.isOnBoard) continue;
-		if (u.pos.x == x && u.pos.y == y) return i;
-	}
-	return -1;
+	return board.occ[y][x];
 }
-bool ShidenAI::IsSquareOccupied(const Array<Unit>& units, int x, int y) {
-	if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize) return false;
-	for (const auto& u : units) {
-		if (!u.isOnBoard) continue;
-		if (u.pos.x == x && u.pos.y == y) return true;
-	}
-	return false;
-}
+
 
 // --- ComputePinnedPieces をビットボード版に置換 ---
 void ShidenAI::ComputePinnedPieces(const FastBoard& board, Array<int>& outPinnedIndices, Array<Point>& outAttackerPos) {
@@ -1500,118 +1501,135 @@ void ShidenAI::ComputePinnedPieces(const FastBoard& board, Array<int>& outPinned
 
 int ShidenAI::StaticExchangeEvaluation(const FastBoard& board, int tx, int ty, int attackerIndex)
 {
-	// 範囲チェック / victim の存在チェック
 	if (tx < 0 || tx >= BoardSize || ty < 0 || ty >= BoardSize) return 0;
 	const int tsq = SQ(tx, ty);
 	const int n = static_cast<int>(board.units.size());
 	if (attackerIndex < 0 || attackerIndex >= n) return 0;
+	
 	int victimIndex = board.occ[ty][tx];
 	if (victimIndex < 0 || victimIndex >= n) return 0;
 
-	// ローカルなビットボードコピー（差分更新用）
+	// 1. ローカルのビットボード状態（差分用）
 	Bitboard localOcc = board.occBB;
 	std::array<Bitboard, UnitTypeArraySize> localPieceBB = board.pieceBB;
 	Bitboard localTeamBB[2] = { board.teamBB[0], board.teamBB[1] };
 
-	// victim を除去（ターゲットは一旦空にする）
+	// ターゲット（最初に取り除かれる駒）の情報を取得
 	UnitType victimType = board.units[victimIndex].type;
 	int victimTypeIdx = static_cast<int>(victimType);
 	int victimTeamIdx = (board.units[victimIndex].team == Team::Blue) ? 0 : 1;
-	if (tsq >= 0 && tsq < BoardSize * BoardSize) {
-		localOcc.reset(tsq);
-		if (victimTypeIdx >= 0 && victimTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[victimTypeIdx].reset(tsq);
-		localTeamBB[victimTeamIdx].reset(tsq);
-	}
 
-	// attacker の確認
+	// ターゲットを一時的に盤上から消す
+	localOcc.reset(tsq);
+	if (victimTypeIdx >= 0 && victimTypeIdx < static_cast<int>(localPieceBB.size())) {
+		localPieceBB[victimTypeIdx].reset(tsq);
+	}
+	localTeamBB[victimTeamIdx].reset(tsq);
+	
 	const Unit& attackerUnit = board.units[attackerIndex];
 	if (!attackerUnit.isOnBoard) return 0;
 	int asq = attackerUnit.pos.y * BoardSize + attackerUnit.pos.x;
-	if (asq < 0 || asq >= BoardSize * BoardSize) return 0;
 
-	// V: 固定長配列に変更（ヒープ確保を排除）
-	int V[KILLER_TABLE_PLY];
+	// 2. 価値の蓄積配列（スタック上に固定長で確保。ヒープ不使用で爆速）
+	int V[32] = {};
 	int vlen = 0;
-	auto pushV = [&](int x) {
-		if (vlen < static_cast<int>(std::size(V))) V[vlen++] = x;
-		};
 
-	// 初期: victim, attacker
-	pushV(PieceValue(victimType, ShidenAIConfig::PieceValue::TOTAL_VAL));
-	pushV(PieceValue(attackerUnit.type, ShidenAIConfig::PieceValue::TOTAL_VAL));
+	// 初手：取られる駒の価値、そして最初に攻撃する駒の価値
+	V[vlen++] = PieceValue(victimType, ShidenAIConfig::PieceValue::TOTAL_VAL);
+	V[vlen++] = PieceValue(attackerUnit.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
 
-	// attacker を到着地に「移動」(ローカル差分)
-	{
-		int atkTypeIdx = static_cast<int>(attackerUnit.type);
-		int atkTeamIdx = (attackerUnit.team == Team::Blue) ? 0 : 1;
-		localOcc.reset(asq);
-		if (atkTypeIdx >= 0 && atkTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[atkTypeIdx].reset(asq);
-		localTeamBB[atkTeamIdx].reset(asq);
+	// 最初の攻撃者を移動させる (asq -> tsq)
+	int atkTypeIdx = static_cast<int>(attackerUnit.type);
+	int atkTeamIdx = (attackerUnit.team == Team::Blue) ? 0 : 1;
+	
+	localOcc.reset(asq);
+	if (atkTypeIdx >= 0 && atkTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[atkTypeIdx].reset(asq);
+	localTeamBB[atkTeamIdx].reset(asq);
 
-		localOcc.set(tsq);
-		if (atkTypeIdx >= 0 && atkTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[atkTypeIdx].set(tsq);
-		localTeamBB[atkTeamIdx].set(tsq);
-	}
+	localOcc.set(tsq);
+	if (atkTypeIdx >= 0 && atkTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[atkTypeIdx].set(tsq);
+	localTeamBB[atkTeamIdx].set(tsq);
 
 	Team sideToMove = (attackerUnit.team == Team::Blue) ? Team::Red : Team::Blue;
 
-	// 駒種を価値順に一度だけ準備（static）
-	static std::vector<int> orderedTypes;
-	if (orderedTypes.empty()) {
-		orderedTypes.reserve(localPieceBB.size());
-		for (int t = 0; t < static_cast<int>(localPieceBB.size()); ++t) orderedTypes.push_back(t);
-		std::sort(orderedTypes.begin(), orderedTypes.end(), [](int a, int b) {
-			return PieceValue(static_cast<UnitType>(a), ShidenAIConfig::PieceValue::TOTAL_VAL) < PieceValue(static_cast<UnitType>(b), ShidenAIConfig::PieceValue::TOTAL_VAL);
-		});
-	}
+	// 3. 取り合いシミュレーションループ
+	int loopCount = 0;
+	constexpr int maxLoops = 16; // 将棋の1マスでの取り合いが16回を超えることはない
 
-	// 取り合いシミュレーション（固定配列 V を使って実施）
-	while (true)
+	while (loopCount++ < maxLoops)
 	{
+		// この瞬間にターゲットマスに利いている、次の手番側の駒をビットボードで取得
 		Bitboard attackersMask = Movement::BuildAttackersMask(sideToMove, tsq, localOcc, localPieceBB, localTeamBB, g_slidingTable) & localOcc;
+		Team sideTeam = sideToMove;
+		int sideIdx = (sideTeam == Team::Blue) ? 0 : 1;
+		attackersMask = attackersMask & localTeamBB[sideIdx];
 
-		// 最小価値の攻撃者を駒種ごとに探す（価値昇順）
+		if (!attackersMask.any()) break; // もう攻撃者なし
+
+		// ★【爆速化のキモ】一番価値の低い駒（LVA）を優先的に選ぶ
+		// 将棋の駒の価値の低い順（歩 ➔ 香 ➔ 桂 ➔ 銀 ➔ 金 ➔ 角 ➔ 飛 ➔ 王...）にマスクをチェックして最初に見つける
+		constexpr UnitType checkOrder[] = {
+			UnitType::Pawn, UnitType::Lance, UnitType::Knight, 
+			UnitType::Silver, UnitType::Gold, UnitType::Bishop, 
+			UnitType::Rook, UnitType::King, UnitType::Pawn1, 
+			UnitType::Lance1, UnitType::Knight1, UnitType::Silver1, 
+			UnitType::Bishop1, UnitType::Rook1, UnitType::King1
+		};
+
 		int foundSq = -1;
 		int foundTypeIdx = -1;
-		for (int typeIdx : orderedTypes) {
-			Bitboard cand = attackersMask & localPieceBB[typeIdx] & localTeamBB[(sideToMove == Team::Blue) ? 0 : 1];
-			if (!cand.any()) continue;
-			int sq = lsb_index(cand);
-			if (sq != -1) { foundSq = sq; foundTypeIdx = typeIdx; break; }
+
+		for (UnitType ut : checkOrder) {
+			int tidx = static_cast<int>(ut);
+			if (tidx < 0 || tidx >= static_cast<int>(localPieceBB.size())) continue;
+			Bitboard cand = attackersMask & localPieceBB[tidx];
+			if (cand.any()) {
+				foundSq = lsb_index(cand);
+				foundTypeIdx = tidx;
+				break;
+			}
 		}
 
-		if (foundSq == -1) break; // これ以上攻撃者なし
+		if (foundSq == -1) break;
 
-		// 現在のターゲット上の駒（もしあれば）を除去（捕獲）
+		// ターゲット上の駒をクリア
 		for (int t = 0; t < static_cast<int>(localPieceBB.size()); ++t) {
-			if (localPieceBB[t].test(tsq)) localPieceBB[t].reset(tsq);
+			localPieceBB[t].reset(tsq);
 		}
 		localTeamBB[0].reset(tsq);
 		localTeamBB[1].reset(tsq);
 		localOcc.reset(tsq);
 
-		// best attacker を移動（foundSq -> tsq）
+		// 攻撃者を移動 (foundSq -> tsq)
 		localOcc.reset(foundSq);
-		if (foundTypeIdx >= 0 && foundTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[foundTypeIdx].reset(foundSq);
-		localTeamBB[(sideToMove == Team::Blue) ? 0 : 1].reset(foundSq);
+		if (foundTypeIdx >= 0 && foundTypeIdx < static_cast<int>(localPieceBB.size())) {
+			localPieceBB[foundTypeIdx].reset(foundSq);
+		}
+		localTeamBB[sideIdx].reset(foundSq);
 
 		localOcc.set(tsq);
-		if (foundTypeIdx >= 0 && foundTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[foundTypeIdx].set(tsq);
-		localTeamBB[(sideToMove == Team::Blue) ? 0 : 1].set(tsq);
+		if (foundTypeIdx >= 0 && foundTypeIdx < static_cast<int>(localPieceBB.size())) {
+			localPieceBB[foundTypeIdx].set(tsq);
+		}
+		localTeamBB[sideIdx].set(tsq);
 
-		// 価値列に追加（この攻撃者が取られた対象として列に加わる）
-		pushV(PieceValue(static_cast<UnitType>(foundTypeIdx), ShidenAIConfig::PieceValue::TOTAL_VAL));
+		// 価値を配列に蓄積
+		if (vlen < 32) {
+			V[vlen++] = PieceValue(static_cast<UnitType>(foundTypeIdx), ShidenAIConfig::PieceValue::TOTAL_VAL);
+		}
 
-		// 手番交代
 		sideToMove = (sideToMove == Team::Blue) ? Team::Red : Team::Blue;
 	}
 
 	if (vlen == 0) return 0;
-	int m = vlen;
-	int gain[KILLER_TABLE_PLY];
-	gain[0] = V[0];
-	for (int i = 1; i < m; ++i) gain[i] = V[i] - gain[i - 1];
-	for (int i = m - 2; i >= 0; --i) gain[i] = std::max(gain[i], -gain[i + 1]);
+
+	// gain[d] = V[d] - max(0, gain[d + 1])
+	int gain[32] = {};
+	gain[vlen - 1] = V[vlen - 1];
+	for (int d = vlen - 2; d >= 0; --d) {
+		gain[d] = V[d] - std::max(0, gain[d + 1]);
+	}
+
 	return gain[0];
 }
 
@@ -1632,20 +1650,17 @@ bool ShidenAI::IsOnSameLine(const Point& a, const Point& b, const Point& p) cons
 void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board, bool capturesOnly) {
 	out.clear();
 
-	// 自分の王位置
-	Point kingPos = FindKing(board.units, board.currentTeam);
+	int currentMoveDirection = (board.currentTeam == Team::Blue) ? 1 : -1;
 
-	// 王がいない（例：既に取られている等）は安全に何も生成せず戻る
+	Point kingPos = FindKing(board.units, board.currentTeam);
 	if (kingPos.x < 0 || kingPos.y < 0) {
 		return;
 	}
 
-	// ピン検出
 	Array<int> pinnedIdx; pinnedIdx.clear();
 	Array<Point> pinnedAttackerPos; pinnedAttackerPos.clear();
 	ComputePinnedPieces(board, pinnedIdx, pinnedAttackerPos);
 
-	// チェッカー検出（王に利いている駒）
 	Array<Point> checkers; checkers.clear();
 	{
 		if (!g_slidingTableBuilt) { g_slidingTable.build_all(); g_slidingTableBuilt = true; }
@@ -1655,25 +1670,40 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 		Team enemy = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
 		const int enemyIdx = (enemy == Team::Blue) ? 0 : 1;
 
-		// 飛車系スライダー
 		{
 			Bitboard atk = g_slidingTable.rook_attacks_from(kingSq, occ);
-			Bitboard candidates = atk & (board.pieceBB[(int)UnitType::Rook] | board.pieceBB[(int)UnitType::Rook1] | board.pieceBB[(int)UnitType::Lance]) & board.teamBB[enemyIdx];
+			
+			Bitboard candidates = atk & (board.pieceBB[(int)UnitType::Rook] | board.pieceBB[(int)UnitType::Rook1]) & board.teamBB[enemyIdx];
 			for (int sq = 0; sq < BoardSize * BoardSize; ++sq) {
 				if (!candidates.test(sq)) continue;
 				int x = sq % BoardSize, y = sq / BoardSize;
 				int idx = board.occ[y][x];
 				if (idx >= 0 && idx < static_cast<int>(board.units.size())) checkers << board.units[idx].pos;
 			}
+			// 龍の斜め1マス
 			for (int dy = -1; dy <= 1; ++dy) for (int dx = -1; dx <= 1; ++dx) {
 				if (std::abs(dx) != 1 || std::abs(dy) != 1) continue;
 				int nx = selfKingX + dx, ny = selfKingY + dy;
 				if (nx < 0 || nx >= BoardSize || ny < 0 || ny >= BoardSize) continue;
 				int nsq = SQ(nx, ny);
 				if (board.teamBB[enemyIdx].test(nsq) && board.pieceBB[(int)UnitType::Rook1].test(nsq)) checkers << Point{ nx, ny };
+
 			}
 		}
-		// 角系スライダー
+		{
+			int forwardEnemy = (enemy == Team::Blue) ? -1 : 1;
+			for (int step = 1; step < BoardSize; ++step) {
+				int ly = selfKingY - forwardEnemy * step;
+				if (ly < 0 || ly >= BoardSize) break;
+				int lsq = SQ(selfKingX, ly);
+				if (board.occBB.test(lsq)) {
+					if (board.teamBB[enemyIdx].test(lsq) && board.pieceBB[(int)UnitType::Lance].test(lsq)) {
+						checkers << Point{ selfKingX, ly };
+					}
+					break;
+				}
+			}
+		}
 		{
 			Bitboard atk = g_slidingTable.bishop_attacks_from(kingSq, occ);
 			Bitboard candidates = atk & (board.pieceBB[(int)UnitType::Bishop] | board.pieceBB[(int)UnitType::Bishop1]) & board.teamBB[enemyIdx];
@@ -1690,7 +1720,6 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 				if (board.teamBB[enemyIdx].test(nsq) && board.pieceBB[(int)UnitType::Bishop1].test(nsq)) checkers << Point{ nx, ny };
 			}
 		}
-		// 桂馬チェック
 		{
 			int forwardEnemy = (enemy == Team::Blue) ? -1 : 1;
 			int ny = selfKingY + 2 * forwardEnemy;
@@ -1705,7 +1734,6 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 				}
 			}
 		}
-		// 隣接近接駒チェック
 		{
 			for (int dy = -1; dy <= 1; ++dy) for (int dx = -1; dx <= 1; ++dx) {
 				if (dx == 0 && dy == 0) continue;
@@ -1754,19 +1782,83 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 
 	int mr[BoardSize][BoardSize];
 	Movement::Context ctx;
-	ctx.moveRange = mr; ctx.map = board.mapRef; ctx.chipDB = board.chipDBRef; ctx.unitList = &board.units;
+	ctx.moveRange = mr;
+	ctx.map = board.mapRef;
+	ctx.chipDB = board.chipDBRef;
+	ctx.unitList = &board.units;
+	// ★コンテキストにも現在の正確な手番方向をセット
+	ctx.moveDirection = currentMoveDirection;
 
-	// 合法性チェック用: シミュレートして自玉が安全か確認するヘルパ
-	auto push_if_legal = [&](const Candidate& c) {
-		FastBoard tmp = board; // コピー
-		MoveInfo info;
-		DoMove(tmp, c, info); // tmp を進める
-		Point myKingAfter = FindKing(tmp.units, board.currentTeam); // board.currentTeam は指し手の側
-		Team opp = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
-
-		if (myKingAfter.x == -1) return; // 自玉が消えるのは違法
-		if (IsSquareAttacked(tmp, myKingAfter, opp)) return; // 王手放置なら除外
+	auto push_simple = [&](const Candidate& c) {
 		out.push_back(c);
+		};
+
+	auto push_if_legal = [&](const Candidate& c) {
+	int toX = c.target.x, toY = c.target.y;
+	int fromX = c.from.x, fromY = c.from.y;
+	int movingIdx = c.unitIndex;
+	int victimIdx = board.occ[toY][toX];
+
+	FastBoard& b = const_cast<FastBoard&>(board);
+	const Unit& movingUnit = b.units[movingIdx];
+	const int selfIdx = (board.currentTeam == Team::Blue ? 0 : 1);
+	const int oppIdx = 1 - selfIdx;
+	const int tsq = SQ(toX, toY);
+	const int fsq = c.isDrop ? -1 : SQ(fromX, fromY);
+	const int movingTypeIdx = static_cast<int>(c.promoteDecision ? ToPromoted(movingUnit.type) : movingUnit.type);
+
+	// 1. 仮移動（occ配列・ビットボードを完全に更新）
+	if (!c.isDrop) {
+		b.occ[fromY][fromX] = -1;
+		b.occBB.reset(fsq);
+		b.pieceBB[static_cast<int>(movingUnit.type)].reset(fsq);
+		b.teamBB[selfIdx].reset(fsq);
+	}
+
+	UnitType victimType = UnitType::Pawn;
+	if (victimIdx != -1) {
+		victimType = b.units[victimIdx].type;
+		b.pieceBB[static_cast<int>(victimType)].reset(tsq);
+		b.teamBB[oppIdx].reset(tsq);
+	}
+
+	b.occ[toY][toX] = movingIdx;
+	b.occBB.set(tsq);
+	b.pieceBB[movingTypeIdx].set(tsq);
+	b.teamBB[selfIdx].set(tsq);
+
+	Point oldKing = b.kingPos[selfIdx];
+	bool isKingMove = (movingUnit.type == UnitType::King || movingUnit.type == UnitType::King1);
+	if (isKingMove) b.kingPos[selfIdx] = { toX, toY };
+
+	// 2. 正しいビットボードの状態で自玉が安全かチェック
+	bool safe = !IsSquareAttacked(b, b.kingPos[selfIdx], enemyTeam);
+
+	// 3. 元の状態に完全に復元
+	if (isKingMove) b.kingPos[selfIdx] = oldKing;
+
+	b.teamBB[selfIdx].reset(tsq);
+	b.pieceBB[movingTypeIdx].reset(tsq);
+	b.occBB.reset(tsq);
+	b.occ[toY][toX] = victimIdx;
+
+	if (victimIdx != -1) {
+		b.pieceBB[static_cast<int>(victimType)].set(tsq);
+		b.teamBB[oppIdx].set(tsq);
+		b.occBB.set(tsq);
+	}
+
+	if (!c.isDrop) {
+		b.occ[fromY][fromX] = movingIdx;
+		b.occBB.set(fsq);
+		b.pieceBB[static_cast<int>(movingUnit.type)].set(fsq);
+		b.teamBB[selfIdx].set(fsq);
+	}
+
+	// 合駒・捕獲も含め、本当に安全な手だけを追加
+	if (safe) {
+		out.push_back(c);
+	}
 		};
 
 	for (int i = 0; i < static_cast<int>(board.units.size()); ++i) {
@@ -1774,10 +1866,10 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 		if (u.team != board.currentTeam) continue;
 		if (doubleCheck && u.type != UnitType::King && u.isOnBoard) continue;
 
-		// 持ち駒
+		// 持ち駒の処理
 		if (!u.isOnBoard) {
 			if (capturesOnly) continue;
-			int dr[BoardSize][BoardSize];
+			int dr[BoardSize][BoardSize] = {};
 			Drop::ComputeDropMoveRange(dr, board.units, u.type, board.currentTeam);
 			for (int y = 0; y < BoardSize; ++y) for (int x = 0; x < BoardSize; ++x) {
 				if (dr[y][x] < 0) continue;
@@ -1789,14 +1881,21 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 					if (!allowed) continue;
 				}
 				Candidate c = { i, {x,y}, {-1,-1}, true, false, 0 };
-				push_if_legal(c);
+				if (inCheck) {
+					push_if_legal(c);
+				}
+				else {
+					push_simple(c);
+				}
 			}
-			continue;
+			continue; 
 		}
 
-		// 盤上駒: move range
+		// 盤上の駒
 		ctx.selectedUnitPosition = u.pos;
-		ctx.moveDirection = (board.currentTeam == Team::Blue ? 1 : -1);
+		// 念のためここでも駒ごとの所属ではなく、手番側の移動方向を正しく渡す
+		ctx.moveDirection = (u.team == Team::Blue) ? 1 : -1;
+
 		for (auto& row : mr) for (auto& cell : row) cell = -1;
 
 		const auto& info = board.unitDBRef->at(u.type);
@@ -1838,7 +1937,7 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 					}
 				}
 
-				// 王の移動はさらに安全確認を行う（既存のコピーなし判定は残すが、最終は push_if_legal で確認）
+				// 王の移動時は安全性テストが必要
 				if (u.type == UnitType::King || u.type == UnitType::King1) {
 					int kingIdx = i;
 					Point oldPos = u.pos;
@@ -1860,21 +1959,33 @@ void ShidenAI::GenerateMoves(std::vector<Candidate>& out, const FastBoard& board
 				}
 
 				Candidate c = { i, target, u.pos, false, false, 0 };
-				// 成り候補
 				bool canProm = ToPromoted(u.type) != u.type;
+				// 成りゾーンの判定もチームごとに正しく分岐
 				bool inZone = (u.team == Team::Blue ? y <= kBluePromoteLine : y >= BoardSize - kRedPromoteLine);
-				if (u.type != UnitType::King && canProm && (inZone || (u.team == Team::Blue ? u.pos.y <= kBluePromoteLine : u.pos.y >= BoardSize - kRedPromoteLine))) {
-					Candidate cprom = c; cprom.promoteDecision = true; push_if_legal(cprom);
+
+				if (u.type == UnitType::King || u.type == UnitType::King1 || inCheck) {
+					if (canProm && (inZone || (u.team == Team::Blue ? u.pos.y <= kBluePromoteLine : u.pos.y >= BoardSize - kRedPromoteLine))) {
+						Candidate cprom = c; cprom.promoteDecision = true; push_if_legal(cprom);
+					}
+					if (!IsAutoPromotionRequired(u.type, u.team, y)) {
+						c.promoteDecision = false;
+						push_if_legal(c);
+					}
 				}
-				// 非成
-				if (!IsAutoPromotionRequired(u.type, u.team, y)) {
-					c.promoteDecision = false;
-					push_if_legal(c);
+				else {
+					if (canProm && (inZone || (u.team == Team::Blue ? u.pos.y <= kBluePromoteLine : u.pos.y >= BoardSize - kRedPromoteLine))) {
+						Candidate cprom = c; cprom.promoteDecision = true; push_simple(cprom);
+					}
+					if (!IsAutoPromotionRequired(u.type, u.team, y)) {
+						c.promoteDecision = false;
+						push_simple(c);
+					}
 				}
 			}
 		}
 	}
 }
+// --- GenerateTacticalMoves: 王手回避や駒取りの候補手を生成 ---
 void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoard& board, Point lastCapturedPos) {
 	out.clear();
 
@@ -1888,11 +1999,7 @@ void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoar
 		GenerateMoves(out, board, false); // 全合法手
 		return;
 	}
-
-	// --- 事前に敵の利きマップを構築（EvaluateDetailed と同様） ---
-	AttackMap enemyByAttack; enemyByAttack.Reset();
-	enemyByAttack.BuildFromBoard(board, enemyTeam);
-
+	
 	// 3. 王手されていない場合：盤上の駒取り／成りに加え、持ち駒の「王手になる打ち」を追加
 	for (int i = 0; i < (int)board.units.size(); ++i) {
 		const Unit& u = board.units[i];
@@ -1903,27 +2010,6 @@ void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoar
 			// 打ち範囲を列挙
 			int dr[BoardSize][BoardSize];
 			Drop::ComputeDropMoveRange(dr, board.units, u.type, board.currentTeam);
-
-			// --- 追加: 直前に駒を取られた位置への取り返し（recapture） ---
-			if (lastCapturedPos.x >= 0 && lastCapturedPos.y >= 0 &&
-				lastCapturedPos.x < BoardSize && lastCapturedPos.y < BoardSize) {
-				int lx = lastCapturedPos.x, ly = lastCapturedPos.y;
-				if (dr[ly][lx] >= 0) {
-					// 実際に置いて自玉が安全かを簡易チェック（DoMove + IsSquareAttacked）
-					Candidate rc = { i, { lx, ly }, { -1, -1 }, true, false, ShidenAIConfig::MoveOrdering::MOVE_ORDER_CAPTURE_SCORE - ShidenAIConfig::MoveOrdering::BECOMING_CAPTURE_BONUS };
-					// シミュレーションして自玉が安全か確認
-					FastBoard tmp = board;
-					MoveInfo info;
-					DoMove(tmp, rc, info);
-					Point myKingAfter = FindKing(tmp.units, board.currentTeam);
-					Team opp = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
-					if (myKingAfter.x != -1 && !IsSquareAttacked(tmp, myKingAfter, opp)) {
-						out.push_back(rc);
-					}
-					
-					// UndoMove は不要（tmp はコピー）
-				}
-			}
 
 			for (int y = 0; y < BoardSize; ++y) {
 				for (int x = 0; x < BoardSize; ++x) {
@@ -1939,14 +2025,12 @@ void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoar
 		}
 
 		// 盤上駒: まず「その駒が敵に利かれているか」チェックして、必要なら逃げ手を増やす
-		if (enemyByAttack.IsCovered(u.pos)) {
+		if (IsSquareAttacked(const_cast<FastBoard&>(board), u.pos, enemyTeam)) {
 			Team attackersTeam = enemyTeam;
 			int attackerIdx = FindLeastValuableAttacker(board, u.pos.x, u.pos.y, attackersTeam);
 			if (attackerIdx != -1) {
 				int see = StaticExchangeEvaluation(board, u.pos.x, u.pos.y, attackerIdx);
-				// SEE が負（駒損）なら「逃げる手」を優先候補として追加
 				if (see < 0) {
-					// 移動可能範囲を計算（軽量）して、敵の現在の利きが届かない場所を候補に追加
 					int mr[BoardSize][BoardSize];
 					Movement::Context ctx; ctx.moveRange = mr; ctx.map = board.mapRef; ctx.chipDB = board.chipDBRef; ctx.unitList = &board.units;
 					ctx.selectedUnitPosition = u.pos; ctx.moveDirection = (board.currentTeam == Team::Blue ? 1 : -1);
@@ -1959,24 +2043,23 @@ void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoar
 					const int escapeScore = ShidenAIConfig::MoveOrdering::MOVE_ORDER_CAPTURE_SCORE - ShidenAIConfig::MoveOrdering::POSSIBLE_HAND_BONUSES;
 					for (int y = 0; y < BoardSize; ++y) for (int x = 0; x < BoardSize; ++x) {
 						if (mr[y][x] < 0) continue;
-						// 味方がいるマスは除外（通常の移動制約と一致）
 						int occIdx = board.occ[y][x];
 						if (occIdx != -1 && board.units[occIdx].team == board.currentTeam) continue;
-						// 目標が現在の敵の利きマップで守られていない（より安全な場所）を優先
-						if (!enemyByAttack.IsCovered(Point{ x, y })) {
+
+						// ★ 修正：目的地マスのみピンポイントで安全チェック
+						if (!IsSquareAttacked(const_cast<FastBoard&>(board), Point{ x, y }, enemyTeam)) {
 							Candidate c = { i, {x, y}, u.pos, false, false, escapeScore };
 							out.push_back(c);
 						}
 					}
-					// 逃げ手を追加したら、盤上の通常タクティカル判定も続けて行う（重複候補は後でソートで整理）
 				}
 			}
 		}
-
+		
 		// --- 盤上駒: 駒取りと成りのみを抽出（既存ロジックを継承） ---
-		int mr[BoardSize][BoardSize];
+		int mr[BoardSize][BoardSize] ;
+		for (auto& row : mr) for (auto& cell : row) cell = -1;
 		Movement::Context ctx = { mr, board.mapRef, board.chipDBRef, &board.units, u.pos, (board.currentTeam == Team::Blue ? 1 : -1) };
-		Movement::ComputeMoveRange(mr);
 		const auto& info = board.unitDBRef->at(u.type);
 		const int cost = board.chipDBRef->at(board.mapRef->at(u.pos.y, u.pos.x)).cost;
 		Movement::ComputeMoveRangeImpl(ctx, u.pos.y, u.pos.x, info.speed + cost, u.type, 0);
@@ -1986,28 +2069,48 @@ void ShidenAI::GenerateTacticalMoves(std::vector<Candidate>& out, const FastBoar
 				if (mr[y][x] < 0) continue;
 
 				int targetIdx = board.occ[y][x];
+
+				if (targetIdx != -1 && board.units[targetIdx].team == board.currentTeam) continue;
+				
 				bool isCapture = (targetIdx != -1 && board.units[targetIdx].team != board.currentTeam);
 
-				// タクティカルな手として採用する条件：
-				bool isPromotionZone = (u.team == Team::Blue ? y <= kBluePromoteLine : y >= BoardSize - kRedPromoteLine);
+			
+				bool inDestZone = (u.team == Team::Blue ? y <= kBluePromoteLine : y >= BoardSize - kRedPromoteLine);
+				bool inFromZone = (u.team == Team::Blue ? u.pos.y <= kBluePromoteLine : u.pos.y >= BoardSize - kRedPromoteLine);
+				bool canPromoteZone = (inDestZone || inFromZone);
 				bool canPromote = (ToPromoted(u.type) != u.type);
-				bool isMajorPromotion = (u.type == UnitType::Pawn ||
-					u.type == UnitType::Rook ||
-					u.type == UnitType::Bishop ||
+
+			
+				bool isMajorPromotion = (
+					u.type == UnitType::Pawn ||
+					u.type == UnitType::Knight ||
+					u.type == UnitType::Lance ||
 					u.type == UnitType::Silver ||
-					u.type == UnitType::Lance);
+					u.type == UnitType::Bishop ||
+					u.type == UnitType::Rook);
 
-				if (isCapture || (isPromotionZone && canPromote && isMajorPromotion)) {
-					Candidate c = { i, {x, y}, u.pos, false, (isPromotionZone && canPromote), 0 };
+				if (isCapture || (canPromoteZone && canPromote && isMajorPromotion)) {
+					// 成れる場合は成る手を生成
+					if (canPromoteZone && canPromote) {
+						Candidate cProm = { i, {x, y}, u.pos, false, true, 0 };
+						if (isCapture) {
+							cProm.score = PieceValue(board.units[targetIdx].type, ShidenAIConfig::PieceValue::TOTAL_VAL)
+								- PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL)
+								+ ShidenAIConfig::Evaluation::PROMOTION_BONUS;
+						}
+						else {
+							cProm.score = ShidenAIConfig::Evaluation::PROMOTION_ONLY_BONUS;
+						}
+						out.push_back(cProm);
+					}
 
-					// スコア付け (MVV-LVA)
-					if (isCapture) {
-						c.score = PieceValue(board.units[targetIdx].type, ShidenAIConfig::PieceValue::TOTAL_VAL) - PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+					// 成りが強制されない場合は不成の手も生成（駒取り時）
+					if (isCapture && !IsAutoPromotionRequired(u.type, u.team, y)) {
+						Candidate cNoProm = { i, {x, y}, u.pos, false, false, 0 };
+						cNoProm.score = PieceValue(board.units[targetIdx].type, ShidenAIConfig::PieceValue::TOTAL_VAL)
+							- PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+						out.push_back(cNoProm);
 					}
-					else {
-						c.score = ShidenAIConfig::Evaluation::PROMOTION_ONLY_BONUS; // 成りのみの評価
-					}
-					out.push_back(c);
 				}
 			}
 		}
@@ -2033,7 +2136,7 @@ int ShidenAI::StaticExchangeEvaluationForDrop(const FastBoard& board, int tx, in
 		if (dropTypeIdx >= 0 && dropTypeIdx < static_cast<int>(localPieceBB.size())) localPieceBB[dropTypeIdx].set(tsq);
 		localTeamBB[dropTeamIdx].set(tsq);
 	}
-
+	
 	// V: 固定長配列
 	int V[KILLER_TABLE_PLY];
 	int vlen = 0;
@@ -2054,9 +2157,13 @@ int ShidenAI::StaticExchangeEvaluationForDrop(const FastBoard& board, int tx, in
 			return PieceValue(static_cast<UnitType>(a), ShidenAIConfig::PieceValue::TOTAL_VAL) < PieceValue(static_cast<UnitType>(b), ShidenAIConfig::PieceValue::TOTAL_VAL);
 		});
 	}
-	
+
+	// --- 【安全性向上】無限ループ防止のためのカウンター ---
+	int loopCount = 0;
+	constexpr int maxLoops = 32;
+
 	// 取り合いシミュレーション（固定配列）
-	while (true)
+	while (loopCount++ < maxLoops)
 	{
 		Bitboard attackersMask = Movement::BuildAttackersMask(sideToMove, tsq, localOcc, localPieceBB, localTeamBB, g_slidingTable) & localOcc;
 
@@ -2096,98 +2203,85 @@ int ShidenAI::StaticExchangeEvaluationForDrop(const FastBoard& board, int tx, in
 	}
 
 	if (vlen == 0) return 0;
-	int m = vlen;
-	int gain[KILLER_TABLE_PLY];
-	gain[0] = V[0];
-	for (int i = 1; i < m; ++i) gain[i] = V[i] - gain[i - 1];
-	for (int i = m - 2; i >= 0; --i) gain[i] = std::max(gain[i], -gain[i + 1]);
 
-	// gain[0] は「相手（取る側）」の利益 => 打ち側視点に反転
+	
+	int gain[KILLER_TABLE_PLY];
+	gain[vlen - 1] = V[vlen - 1];
+	for (int d = vlen - 2; d >= 0; --d) {
+		gain[d] = V[d] - std::max(0, gain[d + 1]);
+	}
+
+	// 相手の利益を自軍視点に反転
 	return -gain[0];
 }
 
 // SortMoves を SEE を用いるように改良
 void  ShidenAI::SortMoves(std::vector<Candidate>& moves, const FastBoard& board, int depth, int ttIdx, Point ttTarget) {
+	Team enemy = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
 	// まず王手状態とチェッカー（利いている敵駒）のリストを軽量に収集
 	Point kingPos = FindKing(board.units, board.currentTeam);
-	Team enemy = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
+	Point enemyKing = FindKing(board.units, enemy);
 	bool inCheck = false;
 	Array<Point> checkers; checkers.clear();
-	if (kingPos.x >= 0) {
-		for (const auto& u : board.units) {
-			if (!u.isOnBoard) continue;
-			if (u.team != enemy) continue;
-			Bitboard att = AttackMap().AttacksFromUnit(board, u);
-			if (att.test(SQ(kingPos.x, kingPos.y))) {
-				inCheck = true;
-				checkers << u.pos;
-			}
-		}
-	}
+
+	int liberties = CountSafeKingLiberties(board, enemyKing, enemy);
 
 	for (auto& m : moves) {
 		// Transposition table の最善手は高優先（ただし信頼できる場合のみ）
 		if (m.unitIndex == ttIdx && m.target == ttTarget) {
 			TTEntry* ttEntry = LookupTT(board.hash);
-			// 信頼条件: TT エントリが存在し、同一手で、保存深さが現在の探索深さに対して十分深い
 			const bool ttReliable = (ttEntry != nullptr) && (ttEntry->bestUnitIndex == ttIdx)
 				&& (ttEntry->bestTarget == ttTarget) && (ttEntry->depth >= depth - 1);
 			if (ttReliable) {
 				m.score = ShidenAIConfig::MoveOrdering::MOVE_ORDER_TT_SCORE;
 				continue;
 			}
-			// 信頼できない TT は小さなボーナスに留める（誤誘導を防ぐ）
 			m.score += ShidenAIConfig::MoveOrdering::PROXIMITY_BONUS_BASE;
 		}
 
-		// --- 追加: 打ち（isDrop）の優先付け ---
+		// --- 1. 持ち駒の打ち（isDrop）の優先付け ---
 		if (m.isDrop) {
-			// 王手フラグが立っていれば大きく加点
-			if (m.givesCheck) {
-				const int dropCheckBonus = ShidenAIConfig::MoveOrdering::BECOMING_CAPTURE_3POINTS_BONUS;
-				m.score += dropCheckBonus;
-			}
+			int dropScore = 0;                                                          
 
-			// 王との近接ボーナスは軽量計算（王位置取得のみ）
-			Point enemyKing = FindKing(board.units, enemy);
+			// 王との近接ボーナス
 			if (enemyKing.x >= 0) {
-				int dx = std::abs(m.target.x - enemyKing.x);
-				int dy = std::abs(m.target.y - enemyKing.y);
-				int cheb = std::max(dx, dy);
-				if (cheb <= 1) {
-					const int dropProximityUnit = ShidenAIConfig::MoveOrdering::PROXIMITY_BONUS_UNIT;
-					int proximityBonus = dropProximityUnit * (2 - cheb);
-					m.score += proximityBonus;
-				}
+				int cheb = std::max(std::abs(m.target.x - enemyKing.x), std::abs(m.target.y - enemyKing.y));
+				if (cheb <= 2) {                                       
+					dropScore += (3 - cheb) * ShidenAIConfig::Evaluation::KING_PROXIMITY_BONUS;
+				}                                                           
 			}
 
-			// --- 追加: 打ちに対する SEE 評価を適用 ---
-			// 敵がその到着マスに利きがある（合駒で取られる可能性がある）場合、SEE を計算して
-			// 「打った側」の純利益をスコアに反映する（負なら損、0 に近い負が好ましい）
+			bool isEnemyCamp = (board.currentTeam == Team::Blue ? (m.target.y <= 2) : (m.target.y >= 6));
+			if (isEnemyCamp) dropScore += ShidenAIConfig::Evaluation::ENEMY_ZONE_DROP_BONUS;// 敵陣への打ち駒ボーナス
+
+			// 無駄なポツン打ちのペナルティ
+			// 後述のダイナミック王手判定で王手になる場合はペナルティを回避する
+			bool isCheckDrop = GivesCheckAfterMove(*this, const_cast<FastBoard&>(board), m, board.currentTeam);
+
+			// --- 【新設】ダイナミック・チェック・ボーナス（打ち手による王手） ---
+			if (isCheckDrop) {
+
+				int dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_CHECK_BONUS[0];
+				if (liberties >= 6)      dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_CHECK_BONUS[1];
+				else if (liberties >= 3) dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_CHECK_BONUS[2];
+				else if (liberties == 2) dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_CHECK_BONUS[3];
+				else                     dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_CHECK_BONUS[4];
+
+				dropScore += dynamicCheckBonus;
+			}
+
+			// 打ち駒のSEE
 			if (IsSquareAttacked(const_cast<FastBoard&>(board), m.target, enemy)) {
-				UnitType handType = board.units[m.unitIndex].type; // 持ち駒は非成のはず
+				UnitType handType = board.units[m.unitIndex].type;
 				int seeDrop = StaticExchangeEvaluationForDrop(board, m.target.x, m.target.y, handType, board.currentTeam);
-				// スケールしてスコアへ反映（既存の捕獲での SEE スケールに合わせる）
-				m.score += seeDrop * ShidenAIConfig::System::SEE_SCALE;
+				dropScore += seeDrop * ShidenAIConfig::System::SEE_SCALE;
 			}
 
-			// --- 追加: 王手時に「安い駒優先」を適用（合駒候補をさらに強調） ---
-			if (inCheck && !checkers.empty()) {
-				for (const auto& chk : checkers) {
-					if (IsOnSameLine(kingPos, chk, m.target)) {
-						UnitType handType = board.units[m.unitIndex].type;
-						int handVal = PieceValue(handType, ShidenAIConfig::PieceValue::TOTAL_VAL);
-						int bonus = (ShidenAIConfig::PieceValue::VAL.KING - handVal) / 10;
-						if (bonus > 0) m.score += bonus;
-						break;
-					}
-				}
-			}
-
+			m.score = dropScore;
 			continue;
 		}
 
-		// 非打ち手（捕獲/履歴/キラー等）は従来通り
+		// --- 2. 盤上の駒の移動（非打ち手）の優先付け ---
 		if (!m.isDrop) {
 			bool isCapture = false;
 			UnitType victimType = UnitType::King;
@@ -2198,25 +2292,66 @@ void  ShidenAI::SortMoves(std::vector<Candidate>& moves, const FastBoard& board,
 					break;
 				}
 			}
+			
 			if (isCapture) {
-				int seeValue = StaticExchangeEvaluation(board, m.target.x, m.target.y, m.unitIndex);
+				int victimVal = PieceValue(victimType, ShidenAIConfig::PieceValue::TOTAL_VAL);
+				int attackerVal = PieceValue(board.units[m.unitIndex].type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+				int seeValue = 0;
+
+				if (victimVal >= attackerVal) {
+					seeValue = victimVal - attackerVal; // 最低保証得点
+				}
+				else {
+					// 負け交換の疑いがある手のみ実際にシミュレーション
+					seeValue = StaticExchangeEvaluation(board, m.target.x, m.target.y, m.unitIndex);
+				}
+
 				int base = ShidenAIConfig::System::BASE_CAPTURE_SCORE;
 				int seeBonus = seeValue * ShidenAIConfig::System::SEE_SCALE;
-				int captureBase = PieceValue(victimType, ShidenAIConfig::PieceValue::TOTAL_VAL) * ShidenAIConfig::Evaluation::CAPTURE_BASE_VALUE_FACTOR - PieceValue(board.units[m.unitIndex].type, ShidenAIConfig::PieceValue::TOTAL_VAL);
+				int captureBase = victimVal * ShidenAIConfig::Evaluation::CAPTURE_BASE_VALUE_FACTOR - attackerVal;
 				m.score = base + seeBonus + captureBase;
-				continue;
 			}
-		}
-
-		if (m.score < ShidenAIConfig::MoveOrdering::MOVE_ORDER_CAPTURE_SCORE) {
-			if (m.unitIndex == killerMoves[depth][0].unitIndex && m.target == killerMoves[depth][0].target) m.score = ShidenAIConfig::MoveOrdering::MOVE_ORDER_KILLER_SCORE;
 			else {
-				if (m.target.y >= 0 && m.target.y < BoardSize && m.target.x >= 0 && m.target.x < BoardSize) {
-					m.score = historyTable[board.currentTeam == Team::Blue ? 0 : 1][(int)board.units[m.unitIndex].type][m.target.y * BoardSize + m.target.x];
+				// B. 【ここを追加！】駒を取らない「通常の移動手」の場合の安全チェック
+				m.score = 0;
+
+				Team enemy = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
+
+				// 移動先のマスが「敵の攻撃範囲（利き）」に入っているか？
+				if (IsSquareAttacked(const_cast<FastBoard&>(board), m.target, enemy)) {
+					// SEE を用いて、移動先での駒損の可能性を評価
+					int seeValueForMove = StaticExchangeEvaluation(board, m.target.x, m.target.y, m.unitIndex);
+
+					Bitboard mySupportMask = Movement::BuildAttackersMask(board.currentTeam, SQ(m.target.x, m.target.y), board.occBB, board.pieceBB, board.teamBB, g_slidingTable);
+					// ★ 移動元の位置を除外して、味方のサポートが残っているか一発判定
+					mySupportMask.reset(SQ(m.from.x, m.from.y));
+					bool hasSupport = mySupportMask.any();
+
+					if (!hasSupport || seeValueForMove < 0) {
+						UnitType movingType = board.units[m.unitIndex].type;
+						int pieceVal = PieceValue(movingType, ShidenAIConfig::PieceValue::TOTAL_VAL);
+						m.score -= (pieceVal * 50);
+					}
 				}
+			}
+
+			//ダイナミック王手判定（移動手による王手）を評価に加える
+			bool isCheckMove = GivesCheckAfterMove(*this, const_cast<FastBoard&>(board), m, board.currentTeam);
+			if (isCheckMove) {
+				
+
+				int dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_MOVE_BONUS[0];
+				if (liberties >= 6)      dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_MOVE_BONUS[1];
+				else if (liberties >= 3) dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_MOVE_BONUS[2];
+				else if (liberties == 2) dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_MOVE_BONUS[3];
+				else                     dynamicCheckBonus = ShidenAIConfig::Evaluation::DYNAMIC_MOVE_BONUS[4];
+
+				m.score += dynamicCheckBonus;
 			}
 		}
 	}
+
+	// スコアが高い順にソート
 	std::sort(moves.begin(), moves.end(), [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
 }
 
@@ -2250,13 +2385,17 @@ void ShidenAI::GeneratePieceCandidates(std::vector<Candidate>& out, FastBoard& r
 			for (int x = 0; x < BoardSize; ++x)
 			{
 				if (moveRange[y][x] < 0) continue;
-				Candidate c;
+				Candidate c{};
 				c.unitIndex = i;
 				c.target = Point{ x, y };
 				c.isDrop = false;
 				c.from = Point{ u.pos.x, u.pos.y };
 
-				// 成り判定（簡易）
+			
+				bool inDestZone = (u.team == Team::Blue ? y <= kBluePromoteLine : y >= BoardSize - kRedPromoteLine);
+				bool inFromZone = (u.team == Team::Blue ? u.pos.y <= kBluePromoteLine : u.pos.y >= BoardSize - kRedPromoteLine);
+				bool canPromoteZone = (inDestZone || inFromZone);
+
 				if (IsAutoPromotionRequired(u.type, u.team, y))
 				{
 					c.promoteDecision = true;
@@ -2264,7 +2403,9 @@ void ShidenAI::GeneratePieceCandidates(std::vector<Candidate>& out, FastBoard& r
 				else
 				{
 					UnitType promoted = ToPromoted(u.type);
-					c.promoteDecision = (promoted != u.type) && (PieceValue(promoted, ShidenAIConfig::PieceValue::TOTAL_VAL) > PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL));
+					// 敵陣に関わる移動であり、かつ成った方が価値が高い場合のみ成る
+					c.promoteDecision = canPromoteZone && (promoted != u.type) &&
+						(PieceValue(promoted, ShidenAIConfig::PieceValue::TOTAL_VAL) > PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL));
 				}
 
 				out.push_back(c);
@@ -2276,14 +2417,8 @@ void ShidenAI::GeneratePieceCandidates(std::vector<Candidate>& out, FastBoard& r
 
 // 終盤判定：盤上駒数が閾値以下なら終盤とみなす
 bool ShidenAI::IsEndgame(const FastBoard& board) const {
-	int pieceCount = 0;
-	for (const auto& u : board.units) {
-		if (!u.isOnBoard) continue;
-		if (u.type == UnitType::King || u.type == UnitType::King1) continue;
-		++pieceCount;
-		if (pieceCount > ShidenAIConfig::Endgame::ENDGAME_PIECE_COUNT_THRESHOLD) return false;
-	}
-	return true;
+	return board.pieceCount <=
+		ShidenAIConfig::Endgame::ENDGAME_PIECE_COUNT_THRESHOLD;
 }
 
 
@@ -2317,7 +2452,7 @@ int ShidenAI::GetDynamicKingPST(const FastBoard& board, Team team, int y, int x,
 int ShidenAI::GetPSTValue(UnitType type, int y, int x, Team team) {
 	if (y < 0 || y >= BoardSize || x < 0 || x >= BoardSize) return 0;
 	int evalY = (team == Team::Blue) ? y : (BoardSize - 1 - y);
-	int evalX = x;
+	int evalX = (team == Team::Blue) ? x : (BoardSize - 1 - x);
 
 	switch (type) {
 	case UnitType::Pawn:   return ShidenAIConfig::PST::PAWN[evalY][evalX];
@@ -2344,21 +2479,23 @@ int ShidenAI::GetPSTValue(UnitType type, int y, int x, Team team) {
 	}
 }
 
-
+// 盤上駒の駒構造評価（歩の連結・底歩・丸頭駒など）
 inline int ShidenAI::PawnStructure(const Unit& u, Team rootAI, const Array<Unit>& units) {
 	if (u.type != UnitType::Pawn) return 0;
 
 	int val = 0;
 	int forward = (rootAI == Team::Blue) ? -1 : 1;
 	if ((rootAI == Team::Blue && u.pos.y <= kBluePromoteLine) || (rootAI == Team::Red && u.pos.y >= BoardSize - kRedPromoteLine)) val += ShidenAIConfig::Evaluation::DROOPING_STEP_BONUS;
+
 	for (const auto& ID : piecesID.goldID) {
 		if (ID < 0 || ID >= static_cast<int>(units.size())) continue;
 		const Unit& t = units[ID];
+		if (!t.isOnBoard || t.team != u.team) continue;
 		if (u.team != rootAI) continue;
 		if (t.pos.x == u.pos.x &&
 			t.pos.y == u.pos.y - forward) val += ShidenAIConfig::Evaluation::BOTTOM_STEP_BONUS;
 	}
-	for (const auto& ID : piecesID.bishopID) {
+	/*for (const auto& ID : piecesID.bishopID) {
 		if (ID < 0 || ID >= static_cast<int>(units.size())) continue;
 		const Unit& t = units[ID];
 		if (t.type == UnitType::Bishop
@@ -2371,12 +2508,12 @@ inline int ShidenAI::PawnStructure(const Unit& u, Team rootAI, const Array<Unit>
 		if (u.type != UnitType::Knight)continue;
 		if (t.pos.x == u.pos.x
 			&& t.pos.y == u.pos.y + forward) val += ShidenAIConfig::Evaluation::ROUND_HEADED_PIECE_BONUS;
-	}
+	}*/
 
 	return val;
 }
 
-
+// 盤上駒の個別評価（PST + 駒構造 + 王との距離など）
 inline int ShidenAI::EvalUnitIndividual(const Unit& u, Team rootAI, Point myKing, Point enKing, const Array<Unit>& units)
 {
 	int score = 0;
@@ -2385,16 +2522,16 @@ inline int ShidenAI::EvalUnitIndividual(const Unit& u, Team rootAI, Point myKing
 		score += PawnStructure(u, rootAI, units);
 		return score;
 	}
-	if (u.type == UnitType::Gold
-		&& u.type == UnitType::Silver
-		&& u.type == UnitType::Knight) {
+	/*if (u.type == UnitType::Gold
+		|| u.type == UnitType::Silver
+		|| u.type == UnitType::Knight) {
 		Point King(u.team == rootAI ? myKing : enKing);
 		if (King.x >= 0) {
 			int dist = std::abs(u.pos.x - King.x) + std::abs(u.pos.y - King.y);
 			if (dist <= ShidenAIConfig::MoveOrdering::PROXIMITY_BONUS_MAX_DISTANCE) score += (ShidenAIConfig::MoveOrdering::PROXIMITY_BONUS_MAX - dist) * ShidenAIConfig::Evaluation::CASTLE_NEAR_KING_BONUS;
 		}
 		return score;
-	}
+	}*/
 	return score;
 }
 
@@ -2423,7 +2560,7 @@ int ShidenAI::DistanceScore(const Point& a, const Point& b)
 }
 
 // 浮き駒ペナルティ
-int ShidenAI::FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap attacBkyMyself, AttackMap enemyByAttack) {
+int ShidenAI::FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap& attacBkyMyself, AttackMap& enemyByAttack) {
 	if (!u.isOnBoard) return 0;
 	if (u.team != aiTeam) return 0;
 	if (u.type == UnitType::King ||
@@ -2432,6 +2569,7 @@ int ShidenAI::FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap attacBk
 	if (attacBkyMyself.IsCovered(u.pos))return -ShidenAIConfig::Evaluation::SUPPORT_BONUS;
 	return PieceValue(u.type, ShidenAIConfig::PieceRisk::TOTAL_UNDER_ATTACK_PENALTY);
 }
+
 
 int ShidenAI::FindLeastValuableAttacker(const FastBoard& board, int tx, int ty, Team attackerTeam)
 {
@@ -2492,7 +2630,30 @@ int ShidenAI::EvalTacticalStability(const FastBoard& board, const Unit& u, Team 
 	}
 	return score;
 }
+int ShidenAI::CountSafeKingLiberties(const FastBoard& board, Point kingPos, Team kingTeam) {
+	if (kingPos.x < 0 || kingPos.y < 0) return 0;
 
+	const Team enemyTeam = (kingTeam == Team::Blue ? Team::Red : Team::Blue);
+	int safeLiberties = 0;
+
+	for (int dy = -1; dy <= 1; ++dy) {
+		for (int dx = -1; dx <= 1; ++dx) {
+			if (dx == 0 && dy == 0) continue;
+			int nx = kingPos.x + dx, ny = kingPos.y + dy;
+			if (nx < 0 || nx >= BoardSize || ny < 0 || ny >= BoardSize) continue;
+
+			// 味方の駒があるマスは逃げられない
+			int occIdx = board.occ[ny][nx];
+			if (occIdx != -1 && board.units[occIdx].team == kingTeam) continue;
+
+			// 敵の利きがないマスのみカウント（ビットボード判定なので爆速）
+			if (!IsSquareAttacked(const_cast<FastBoard&>(board), Point{ nx, ny }, enemyTeam)) {
+				safeLiberties++;
+			}
+		}
+	}
+	return safeLiberties;
+}
 
 int ShidenAI::EvaluateDetailed(FastBoard& board, Team rootAI, bool heavy) {
 	int score = 0;
@@ -2502,69 +2663,117 @@ int ShidenAI::EvaluateDetailed(FastBoard& board, Team rootAI, bool heavy) {
 	int oppIdx = (enemyTeam == Team::Blue ? 1 : 0);
 	Point myKing = board.kingPos[selfIdx];
 	Point enKing = board.kingPos[oppIdx];
-	if (myKing.x == -1) return -ShidenAIConfig::Evaluation::KING_TRAPPED_PENALTY;
-	if (enKing.x == -1) return ShidenAIConfig::Evaluation::KING_TRAPPED_PENALTY;
+
+	// （末尾の手番視点変換を確実に通すため）
+	if (myKing.x == -1) {
+		score = -ShidenAIConfig::Evaluation::KING_TRAPPED_PENALTY;
+		return (board.currentTeam == rootAI) ? score : -score;
+	}
+	if (enKing.x == -1) {
+		score = ShidenAIConfig::Evaluation::KING_TRAPPED_PENALTY;
+		return (board.currentTeam == rootAI) ? score : -score;
+	}
+
+	// 1. 基本マテリアル・PST・持ち駒の評価（rootAI 視点で計算）
 	score = EvalBasicMaterial(board, rootAI);
-	// --- フェーズ計算（盤上の非玉駒数で序中盤・終盤を正規化） ---
-	
+
+	// 2. フェーズ計算
 	double phase = CalculatePhase(board);
 
-	// --- 事前にチーム別の AttackMap を構築（重複計算削減） ---
-	AttackMap attacBkyMyself; attacBkyMyself.Reset();
-	AttackMap enemyByAttack; enemyByAttack.Reset();
-	attacBkyMyself.BuildFromBoard(board, rootAI);
-	enemyByAttack.BuildFromBoard(board, enemyTeam);
+	// 3. 王の動的PST評価および戦術評価
+	if (heavy) {
+		AttackMap attacBkyMyself;
+		AttackMap enemyByAttack;
 
-	// 盤上駒の評価
-	for (const auto& u : board.units) {
-		int val = 0;
-		if (!u.isOnBoard) continue;
-	
-			if (u.type == UnitType::King || u.type == UnitType::King1) {
-				// 敵の利きマップ（王の相手チーム）を選ぶ
-				AttackMap& enemyAttackMapForKing = (u.team == rootAI) ? enemyByAttack : attacBkyMyself;
-				val += GetDynamicKingPST(board, u.team, u.pos.y, u.pos.x, enemyAttackMapForKing);
-			}
-			else {
-				val += DistanceScore(u.pos, (u.team == rootAI) ? enKing : myKing);
-			}
+		attacBkyMyself.BuildFromBoard(board, rootAI);
+		enemyByAttack.BuildFromBoard(board, enemyTeam);
 
-			int rank = (u.team == Team::Blue ? BoardSize - 1 - u.pos.y : u.pos.y);
-			val += rank * ShidenAIConfig::Evaluation::ADVANCE_BONUS;
+		// 自玉の動的PST
+		score += GetDynamicKingPST(board, rootAI, myKing.y, myKing.x, enemyByAttack);
+		// 敵玉の動的PST
+		score -= GetDynamicKingPST(board, enemyTeam, enKing.y, enKing.x, attacBkyMyself);
 
-			// --- 歩の序盤前進ボーナス ---
-			if (u.type == UnitType::Pawn) {
-				int pawnAdvanceBonus = static_cast<int>(ShidenAIConfig::Evaluation::PAWN_ADVANCE_BONUS * rank * phase);
-				val += pawnAdvanceBonus;
-			}
-			// 王の前駒ボーナス（king shield）
-			int kingShieldBonus = 0;
-			int forward = (u.team == Team::Blue ? -1 : 1);
-			if (myKing.x >= 0 && myKing.y >= 0) {
-				Point shieldPos = { myKing.x, myKing.y + forward };
-				if (shieldPos.x >= 0 && shieldPos.x < BoardSize && shieldPos.y >= 0 && shieldPos.y < BoardSize) {
-					int protectorIdx = board.occ[shieldPos.y][shieldPos.x];
-					if (protectorIdx >= 0 && protectorIdx < static_cast<int>(board.units.size())) {
-						if (board.units[protectorIdx].team == rootAI) {
-							kingShieldBonus += ShidenAIConfig::Evaluation::KING_SHIELD_BONUS;
+		Point enemyKing = enKing;
+		if (enemyKing.x >= 0) {
+			int blockedEscapeCount = 0;
+			int totalAdjacent = 0;
+
+			for (int dy = -1; dy <= 1; ++dy) {
+				for (int dx = -1; dx <= 1; ++dx) {
+					if (dx == 0 && dy == 0) continue;
+					Point p = { enemyKing.x + dx, enemyKing.y + dy };
+					if (p.x >= 0 && p.x < BoardSize && p.y >= 0 && p.y < BoardSize) {
+						totalAdjacent++;
+						bool occBySelf = false;
+						int occIdx = board.occ[p.y][p.x];
+						if (occIdx != -1 && board.units[occIdx].team == rootAI) occBySelf = true;
+
+						if (occBySelf || enemyByAttack.IsCovered(p)) {
+							blockedEscapeCount++;
 						}
 					}
 				}
 			}
-		score += EvalTacticalStability(board, u, rootAI, attacBkyMyself, enemyByAttack);// 浮き駒ペナルティと SEE に基づく安定性評価
-		score += (u.team == rootAI ? val : -val);
+
+			if (totalAdjacent > 0) {
+				int encircleRatio = (blockedEscapeCount * 100) / totalAdjacent;
+				score += encircleRatio * 40;
+			}
+		}
+
+		if (enemyByAttack.IsCovered(myKing))  score -= ShidenAIConfig::Evaluation::CHECKMATE_TO_ENEMY_KING;
+		if (attacBkyMyself.IsCovered(enKing)) score += ShidenAIConfig::Evaluation::CHECKMATE_TO_ENEMY_KING;
+
+		// 4. 盤上駒の個別評価ループ
+		for (const auto& u : board.units) {
+			if (!u.isOnBoard) continue;
+			if (u.type == UnitType::King || u.type == UnitType::King1) continue;
+
+			int val = 0;
+			val += DistanceScore(u.pos, (u.team == rootAI) ? enKing : myKing);
+
+			int rank = (u.team == Team::Blue ? BoardSize - 1 - u.pos.y : u.pos.y);
+			val += rank * ShidenAIConfig::Evaluation::ADVANCE_BONUS;
+
+			if (u.type == UnitType::Pawn) {
+				val += static_cast<int>(ShidenAIConfig::Evaluation::PAWN_ADVANCE_BONUS * rank * phase);
+			}
+
+			val += EvalTacticalStability(board, u, rootAI, attacBkyMyself, enemyByAttack);
+
+			score += (u.team == rootAI ? val : -val);
+		}
 	}
-	if (heavy) {
-		if (enemyByAttack.IsCovered(myKing))  score -= ShidenAIConfig::Evaluation::CHECKMATE_TO_ENEMY_KING; // 王手ペナルティ
-		if (attacBkyMyself.IsCovered(enKing)) score += ShidenAIConfig::Evaluation::CHECKMATE_TO_ENEMY_KING; // 王手ボーナス
+	else {
+		// heavy が false の場合の超高速ループ
+		for (const auto& u : board.units) {
+			if (!u.isOnBoard) continue;
+			if (u.type == UnitType::King || u.type == UnitType::King1) continue;
+
+			int val = 0;
+			val += DistanceScore(u.pos, (u.team == rootAI) ? enKing : myKing);
+			int rank = (u.team == Team::Blue ? BoardSize - 1 - u.pos.y : u.pos.y);
+			val += rank * ShidenAIConfig::Evaluation::ADVANCE_BONUS;
+
+			if (u.type == UnitType::Pawn) {
+				val += static_cast<int>(ShidenAIConfig::Evaluation::PAWN_ADVANCE_BONUS * rank * phase);
+			}
+
+			score += (u.team == rootAI ? val : -val);
+		}
 	}
-	return score;
+
+	const int finalScore = (board.currentTeam == rootAI) ? score : -score;
+	return finalScore;
 }
+
 void ShidenAI::TickNode() {
-	static unsigned int nodeCount = 0;
-	// 4096 ノードごとに一度だけ時刻を確認
-	if (((++nodeCount) & ShidenAIConfig::System::NODES_PER_TIME_CHECK) == 0u) {
-		if ((std::chrono::steady_clock::now() - startTime) > std::chrono::milliseconds(ShidenAIConfig::SearchConfig::TIME_LIMIT_MS)) {
+	// 毎ノード、あるいは高頻度で実時間をチェックする（重すぎない程度に）
+	static int checkCounter = 0;
+	if ((++checkCounter & 255) == 0) { // 255ノードごとにチェック
+		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+			std::chrono::steady_clock::now() - startTime).count();
+		if (elapsed > ShidenAIConfig::SearchConfig::TIME_LIMIT_MS) {
 			timeUp = true;
 		}
 	}
@@ -2574,19 +2783,44 @@ int ShidenAI::Quiescence(FastBoard& board, Team rootAI, int alpha, int beta, int
 	TickNode();
 	if (timeUp) return 0;
 
+	// ★ 1. 静止探索では原則 heavy = false で軽量評価を行う
 	int stand_pat = EvaluateDetailed(board, rootAI, heavy);
 	if (stand_pat >= beta) return beta;
 	if (alpha < stand_pat) alpha = stand_pat;
 	if (q_depth >= ShidenAIConfig::SearchConfig::MAX_QUIESCENCE_DEPTH) return alpha;
-	// プールを使う
+
+	// ★ デルタ枝刈り: 最大得点（飛車成り捕獲＝約2500点）を取っても α に届かないなら即終了
+	// ※自玉が王手されていない（安全な）時のみ適用
+	constexpr int BIGGEST_POSSIBLE_GAIN = 2500;
+	if (stand_pat + BIGGEST_POSSIBLE_GAIN < alpha && !IsSquareAttacked(board, board.kingPos[(board.currentTeam == Team::Blue ? 0 : 1)], (board.currentTeam == Team::Blue ? Team::Red : Team::Blue))) {
+		return alpha;
+	}
+
+	// プールから候補手バッファを取得
 	auto& moves = GetMoveListForDepth(q_depth, true);
-	moves.clear();
+	moves.clear(); 
+
+	// タクティカル手（捕獲・成り・王手回避）のみ生成
 	GenerateTacticalMoves(moves, board);
 	SortMoves(moves, board, 0, -1, { -1, -1 });
+
 	for (const auto& mv : moves) {
 		MoveInfo info;
 		DoMove(board, mv, info);
-		int val = -Quiescence(board, rootAI, -beta, -alpha, q_depth + 1, true);
+
+		// 自玉の自殺手チェック（王手放置の除外）
+		Team moverTeam = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
+		Team oppTeam = board.currentTeam;
+		int moverTeamIdx = (moverTeam == Team::Blue ? 0 : 1);
+		Point moverKingPos = board.kingPos[moverTeamIdx];
+
+		if (moverKingPos.x == -1 || IsSquareAttacked(board, moverKingPos, oppTeam)) {
+			UndoMove(board, info);
+			continue;
+		}
+
+		// ★ 2. 再帰呼び出しも必ず heavy = false を維持する
+		int val = -Quiescence(board, rootAI, -beta, -alpha, q_depth + 1, false);
 		UndoMove(board, info);
 
 		if (val >= beta) return beta;
@@ -2606,8 +2840,16 @@ int ShidenAI::AlphaBeta(FastBoard& board, Team rootAI, int depth, int alpha, int
 	bool inCheck = IsSquareAttacked(board, myKing, enemyTeam);
 
 	// 千日手判定
-	for (uint64 h : searchStack) if (h == board.hash) return ShidenAIConfig::System::REPETITION_DRAW_SCORE;
-
+	int repCount = 0;
+	for (uint64 h : searchStack) {
+		if (h == board.hash) {
+			repCount++;
+			if (repCount >= 2) {
+				return -ShidenAIConfig::System::REPETITION_DRAW_SCORE + dist;
+			}
+		}
+	}
+	
 	// 置換表アクセス
 	TTEntry* tt = LookupTT(board.hash);
 	if (tt && tt->depth >= depth) {
@@ -2616,7 +2858,7 @@ int ShidenAI::AlphaBeta(FastBoard& board, Team rootAI, int depth, int alpha, int
 		if (tt->flag == HashFlag::Beta && tt->score >= beta) return beta;
 	}
 
-	if (depth <= 0) return Quiescence(board, rootAI, alpha, beta, 0, true);
+	if (depth <= 0) return Quiescence(board, rootAI, alpha, beta, 0, false);
 
 	// Null Move Pruning（既存のロジックを維持）
 	if (depth >= 3 && dist > 0 && !inCheck) {
@@ -2647,13 +2889,19 @@ int ShidenAI::AlphaBeta(FastBoard& board, Team rootAI, int depth, int alpha, int
 		MoveInfo info;
 		DoMove(board, mv, info);
 
-		// 合法手チェックを軽量化
-		int movedSideIdx2 = (board.currentTeam == Team::Blue ? 1 : 0);
-		Point currentKing = board.kingPos[movedSideIdx2];
-		if (currentKing.x == -1 || IsSquareAttacked(board, currentKing, board.currentTeam)) {
+		Team moverTeam = (board.currentTeam == Team::Blue ? Team::Red : Team::Blue);
+		Team oppTeam = board.currentTeam;
+		
+		int moverTeamIdx = (moverTeam == Team::Blue ? 0 : 1);
+		Point moverKingPos = board.kingPos[moverTeamIdx];
+
+		// 1. 動かした側の王がボード上から消えている（取られている）場合、または
+		// 2. 動かした直後の自玉が、相手（oppTeam）の利きにさらされている場合（王手放置・自殺手）
+		if (moverKingPos.x == -1 || IsSquareAttacked(board, moverKingPos, oppTeam)) {
 			UndoMove(board, info);
-			continue;
+			continue; // この非合法な手は完全に除外する！
 		}
+
 
 		int val = 0;
 		bool isTactical = info.captured || mv.promoteDecision || mv.isDrop;
@@ -2719,20 +2967,137 @@ int ShidenAI::AlphaBeta(FastBoard& board, Team rootAI, int depth, int alpha, int
 
 
 
-bool ShidenAI::GivesCheckAfterMove(ShidenAI& ai, ShidenAI::FastBoard board, const Candidate& cand, Team mover) {
-	MoveInfo info;
-	ai.DoMove(board, cand, info);
-	Team enemy = (mover == Team::Blue) ? Team::Red : Team::Blue;
-	Point enemyKing = ai.FindKing(board.units, enemy);
-	bool gives = (enemyKing.x != -1) && ai.IsSquareAttacked(board, enemyKing, mover);
-	ai.UndoMove(board, info);
-	return gives;
+bool ShidenAI::GivesCheckAfterMove(ShidenAI& ai, FastBoard& board, const Candidate& cand, Team mover) {
+	const Team enemy = (mover == Team::Blue ? Team::Red : Team::Blue);
+	const int enemyIdx = (enemy == Team::Blue ? 0 : 1);
+	const Point ek = board.kingPos[enemyIdx];
+	if (ek.x < 0) return false;
+
+	const int ksq = SQ(ek.x, ek.y);
+	const int tsq = SQ(cand.target.x, cand.target.y);
+	const int fsq = cand.isDrop ? -1 : SQ(cand.from.x, cand.from.y);
+
+	const Unit& moverUnit = board.units[cand.unitIndex];
+	const UnitType movedType = cand.promoteDecision ? ToPromoted(moverUnit.type) : moverUnit.type;
+	const int forward = (mover == Team::Blue ? -1 : 1);
+
+	// 移動先から相手玉への相対ベクトル
+	const int dx = ek.x - cand.target.x;
+	const int dy = ek.y - cand.target.y;
+
+	// 仮想の占有ビットボード（移動元を空け、移動先を塞ぐ）
+	Bitboard occ = board.occBB;
+	if (fsq != -1) occ.reset(fsq);
+	occ.set(tsq);
+
+	switch (movedType) {
+	case UnitType::Pawn:
+		if (dx == 0 && dy == forward) return true;
+		break;
+
+	case UnitType::Knight:
+		if ((dx == -1 || dx == 1) && dy == 2 * forward) return true;
+		break;
+
+	case UnitType::Silver:
+		if ((std::abs(dx) == 1 && std::abs(dy) == 1) || (dx == 0 && dy == forward)) return true;
+		break;
+
+	case UnitType::Gold:
+	case UnitType::Pawn1:
+	case UnitType::Lance1:
+	case UnitType::Knight1:
+	case UnitType::Silver1:
+		// 周囲1マス（真後ろ以外）
+		if (std::abs(dx) <= 1 && std::abs(dy) <= 1 && !(dx == 0 && dy == -forward) && (dx != 0 || dy != 0)) return true;
+		break;
+
+	case UnitType::Lance:
+		// 真前方の直線上で、かつ間に遮蔽物がないか
+		if (dx == 0 && (dy * forward > 0)) {
+			if (g_slidingTable.rook_attacks_from(tsq, occ).test(ksq)) return true;
+		}
+		break;
+
+	case UnitType::Rook:
+		if (dx == 0 || dy == 0) {
+			if (g_slidingTable.rook_attacks_from(tsq, occ).test(ksq)) return true;
+		}
+		break;
+
+	case UnitType::Rook1: // 龍
+		if (std::abs(dx) == 1 && std::abs(dy) == 1) return true; // 斜め1マス
+		if (dx == 0 || dy == 0) {
+			if (g_slidingTable.rook_attacks_from(tsq, occ).test(ksq)) return true;
+		}
+		break;
+
+	case UnitType::Bishop:
+		if (std::abs(dx) == std::abs(dy) && dx != 0) {
+			if (g_slidingTable.bishop_attacks_from(tsq, occ).test(ksq)) return true;
+		}
+		break;
+
+	case UnitType::Bishop1: // 馬
+		if ((std::abs(dx) == 1 && dy == 0) || (dx == 0 && std::abs(dy) == 1)) return true; // 縦横1マス
+		if (std::abs(dx) == std::abs(dy) && dx != 0) {
+			if (g_slidingTable.bishop_attacks_from(tsq, occ).test(ksq)) return true;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	if (fsq != -1) {
+		const int fdx = cand.from.x - ek.x;
+		const int fdy = cand.from.y - ek.y;
+
+		// A. 元位置が玉と縦横の射線上にあった場合（自軍の飛車・龍・香車の射線開通チェック）
+		if (fdx == 0 || fdy == 0) {
+			Bitboard rookAttacksFromKing = g_slidingTable.rook_attacks_from(ksq, occ);
+			const int moverIdx = (mover == Team::Blue ? 0 : 1);
+
+			// 飛車・龍の開き王手
+			Bitboard friendlyRooks = (board.pieceBB[(int)UnitType::Rook] | board.pieceBB[(int)UnitType::Rook1]) & board.teamBB[moverIdx];
+			if ((rookAttacksFromKing & friendlyRooks).any()) return true;
+
+			// 香車の開き王手（玉から見て mover の前進方向の逆に香車がいるか）
+			Bitboard friendlyLances = board.pieceBB[(int)UnitType::Lance] & board.teamBB[moverIdx];
+			if (fdx == 0 && friendlyLances.any()) {
+				for (int step = 1; step < BoardSize; ++step) {
+					int ly = ek.y - forward * step;
+					if (ly < 0 || ly >= BoardSize) break;
+					int lsq = SQ(ek.x, ly);
+					if (occ.test(lsq)) {
+						if (friendlyLances.test(lsq)) return true;
+						break;
+					}
+				}
+			}
+		}
+		// B. 元位置が玉と斜めの射線上にあった場合（自軍の角・馬の射線開通チェック）
+		else if (std::abs(fdx) == std::abs(fdy)) {
+			Bitboard bishopAttacksFromKing = g_slidingTable.bishop_attacks_from(ksq, occ);
+			const int moverIdx = (mover == Team::Blue ? 0 : 1);
+			Bitboard friendlyBishops = (board.pieceBB[(int)UnitType::Bishop] | board.pieceBB[(int)UnitType::Bishop1]) & board.teamBB[moverIdx];
+			if ((bishopAttacksFromKing & friendlyBishops).any()) return true;
+		}
+	}
+
+	return false;
 }
 
 
 bool ShidenAI::MateDFS(ShidenAI& ai, ShidenAI::FastBoard& board, Team sideToMove, Team attacker, int depth) {
-	if (timeUp || (std::chrono::steady_clock::now() - ai.startTime) > std::chrono::milliseconds(ShidenAIConfig::SearchConfig::TIME_LIMIT_MS)) {
-		timeUp = true;
+	const auto elapsed =
+		std::chrono::duration_cast<std::chrono::milliseconds>(
+			std::chrono::steady_clock::now() - ai.mateStartTime
+		).count();
+
+	if (elapsed >=
+		ShidenAIConfig::SearchConfig::MATE_TIME_LIMIT_MS)
+	{
 		return false;
 	}
 
@@ -2750,46 +3115,73 @@ bool ShidenAI::MateDFS(ShidenAI& ai, ShidenAI::FastBoard& board, Team sideToMove
 		// 手がない＝詰んでいるなら成立（ただし王手限定探索なので通常ここは false）
 		return (ai.FindKing(board.units, sideToMove).x == -1);
 	}
-
-	// checkMoves は別スロットを使う（深さ+1 を使用）
-	auto& checkMoves = ai.GetMoveListForDepth(depth + 1, false);
-	checkMoves.clear();
-	for (const auto& mv : moves) {
-		if (GivesCheckAfterMove(ai, board, mv, sideToMove)) checkMoves.push_back(mv);
-	}
-
-	if (checkMoves.empty()) {
-		return false;
-	}
-
+	
+	
 	if (sideToMove == attacker) {
+		// 攻め手：王手になる手のみを抽出
+		auto& checkMoves = ai.GetMoveListForDepth(depth + 1, false);
+		checkMoves.clear();
+		for (const auto& mv : moves) {
+			if (GivesCheckAfterMove(ai, board, mv, sideToMove)) checkMoves.push_back(mv);
+		}
+
+		// 攻め手なのに王手手がないなら不詰み
+		if (checkMoves.empty()) {
+			return false;
+		}
+
 		for (const auto& mv : checkMoves) {
-			TickNode();
-			if (timeUp) return false;
+			if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - ai.mateStartTime).count() >= ShidenAIConfig::SearchConfig::MATE_TIME_LIMIT_MS) return false;
 			MoveInfo info;
 			ai.DoMove(board, mv, info);
 			bool res = MateDFS(ai, board, (sideToMove == Team::Blue ? Team::Red : Team::Blue), attacker, depth - 1);
 			ai.UndoMove(board, info);
-			if (res) return true;
-			if (timeUp) return false;
+			if (res) return true; // 1つでも詰む手があれば成功
 		}
 		return false;
 	}
 	else {
-		for (const auto& mv : checkMoves) {
-			TickNode();
-			if (timeUp) return false;
+		// 受け手：王手を防ぐ手を優先的に探索する
+		for (auto& mv : moves) {
+			if (!mv.isDrop && board.occ[mv.target.y][mv.target.x] != -1) {
+				mv.score = ShidenAIConfig::Evaluation::DYNAMIC_DEFENSE_BONUS[0]; // 1位: 攻め駒を取る手（最優先で王手解除）
+			}
+			else if (board.units[mv.unitIndex].type == UnitType::King || board.units[mv.unitIndex].type == UnitType::King1) {
+				mv.score = ShidenAIConfig::Evaluation::DYNAMIC_DEFENSE_BONUS[1]; // 2位: 玉が逃げる手
+			}
+			else if (!mv.isDrop) {
+				mv.score = ShidenAIConfig::Evaluation::DYNAMIC_DEFENSE_BONUS[2]; // 3位: 盤上の駒を動かす手
+			}
+			else {
+				mv.score = ShidenAIConfig::Evaluation::DYNAMIC_DEFENSE_BONUS[3];   // 4位: 持ち駒を打つ手（合駒は取られて詰むことが多いため最後）
+			}
+		}
+		std::sort(moves.begin(), moves.end(), [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
+
+		// ソートされた順に受け手を試す
+		for (const auto& mv : moves) {
+			if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - ai.mateStartTime).count() >= ShidenAIConfig::SearchConfig::MATE_TIME_LIMIT_MS) return false;
 			MoveInfo info;
 			ai.DoMove(board, mv, info);
+			
+			// 自玉の王手が防げているかチェック
+			Point myKing = ai.FindKing(board.units, sideToMove);
+			if (myKing.x == -1 || ai.IsSquareAttacked(board, myKing, attacker)) {
+				ai.UndoMove(board, info);
+				continue; // 王手が防げていない手は非合法手なので除外
+			}
+
 			bool res = MateDFS(ai, board, (sideToMove == Team::Blue ? Team::Red : Team::Blue), attacker, depth - 1);
 			ai.UndoMove(board, info);
+
+			// 受け手が1手でも逃げ切れる手（詰まない手）があれば不詰み確定で即終了！
 			if (!res) return false;
-			if (timeUp) return false;
 		}
-		return true;
+		return true; // すべての合法手で詰むなら詰み成立！
 	}
 }
 
+// ルート局面での詰み探索
 bool ShidenAI::FindMateAtRoot(ShidenAI& ai, FastBoard& root, Team aiTeam, int maxDepth, Candidate& outMove) {
 	// ルートは depth 指定がないため root 用インデックス 0 を使う
 	auto& moves = ai.GetMoveListForDepth(0, false);
@@ -2800,8 +3192,17 @@ bool ShidenAI::FindMateAtRoot(ShidenAI& ai, FastBoard& root, Team aiTeam, int ma
 	ai.SortMoves(moves, root, 0, -1, Point{ -1, -1 });
 
 	for (int depth = 1; depth <= maxDepth; ++depth) {
-		TickNode();
-		if (timeUp) { break; }
+		const auto elapsed =
+			std::chrono::duration_cast<std::chrono::milliseconds>(
+				std::chrono::steady_clock::now()
+				- ai.mateStartTime
+			).count();
+
+		if (elapsed >=
+			ShidenAIConfig::SearchConfig::MATE_TIME_LIMIT_MS)
+		{
+			break;
+		}
 		for (const auto& mv : moves) {
 			if (!GivesCheckAfterMove(ai, root, mv, aiTeam)) continue;
 			MoveInfo info;
@@ -2813,7 +3214,6 @@ bool ShidenAI::FindMateAtRoot(ShidenAI& ai, FastBoard& root, Team aiTeam, int ma
 				outMove = mv;
 				return true;
 			}
-			if (timeUp) return false;
 		}
 	}
 	return false;
@@ -2822,20 +3222,28 @@ bool ShidenAI::FindMateAtRoot(ShidenAI& ai, FastBoard& root, Team aiTeam, int ma
 
 Candidate ShidenAI::IterativeDeepening(Game& game, Team aiTeam, AIState& state) {
 	searchStack = state.gameHistory; // 実際の対局履歴をスタックの底に積む
-	startTime = std::chrono::steady_clock::now(); timeUp = false;
-	ClearHeuristics(); currentAge++;
+
+	ClearHeuristics();
+	currentAge++;
 	InitZobrist();
 
 	// pool をここで確実に初期化しておく
 	GetMoveListForDepth(0, false);
 
-	FastBoard root(game, *this); Candidate best;
+	FastBoard root(game, *this);
+	Candidate best;
 	best.score = -ShidenAIConfig::System::SCORE_INF;
+
+	mateStartTime = std::chrono::steady_clock::now();
 	Candidate mateMove;
+	// 詰み探索（短時間で終わるためそのまま実行）
 	if (FindMateAtRoot(*this, root, aiTeam, ShidenAIConfig::SearchConfig::MATE_TRY_DEPTH, mateMove)) {
 		return mateMove;
 	}
 	piecesID.PiecesIDSearch(root.units);
+
+	startTime = std::chrono::steady_clock::now();
+	timeUp = false;
 
 	// ルート用 moves をプールから取得
 	auto& movesRoot = GetMoveListForDepth(0, false);
@@ -2843,113 +3251,90 @@ Candidate ShidenAI::IterativeDeepening(Game& game, Team aiTeam, AIState& state) 
 	GenerateMoves(movesRoot, root, false);
 	if (movesRoot.empty()) {
 		GeneratePieceCandidates(movesRoot, root, aiTeam);
-		return movesRoot[0]; // 空の候補を返す
+		if (movesRoot.empty()) return Candidate{};
+		return movesRoot[0];
 	}
 
-	best = movesRoot[0]; // これで moves[0] が安全になる
+	best = movesRoot[0]; // 先頭をデフォルトの最善手として保持
 
 	Team enemyTeam = (aiTeam == Team::Blue ? Team::Red : Team::Blue);
 	Point enemyKingPos = FindKing(root.units, enemyTeam);
 
+	// 1手で敵玉を取れるなら即座にそれを返す
 	for (const auto& mv : movesRoot) {
-		if (timeUp || (std::chrono::steady_clock::now() - startTime) > std::chrono::milliseconds(ShidenAIConfig::SearchConfig::TIME_LIMIT_MS)) { timeUp = true; break; }
 		if (!mv.isDrop && mv.target == enemyKingPos) {
 			return mv;
 		}
 	}
 
+	// --- 【動的時間管理のパラメータ設定】 ---
+	const int hardTimeLimitMs = ShidenAIConfig::SearchConfig::TIME_LIMIT_MS; // 例: 6000ms (6秒)
+	const int minGuaranteedDepth = 3; // スペックに関わらず「最低でもこの深さまでは絶対に読む」保証深度
+	// ----------------------------------------
+
+	auto depthStart = std::chrono::steady_clock::now();
+
+	// 反復深化ループ
 	for (int d = 1; d <= ShidenAIConfig::SearchConfig::MAX_DEPTH; ++d) {
+
+		// 1深さごとの探索を実行
 		AlphaBeta(root, aiTeam, d, -ShidenAIConfig::System::SCORE_INF, ShidenAIConfig::System::SCORE_INF, 0);
-		if (timeUp) break;
+
+		auto depthDuration = std::chrono::duration_cast<std::chrono::milliseconds>(
+			std::chrono::steady_clock::now() - startTime
+		).count();
+
+		auto thisDepthTime = std::chrono::duration_cast<std::chrono::milliseconds>(
+			std::chrono::steady_clock::now() - depthStart
+		).count();
+
+		forDebugging.push_back(U"Depth " + Format(d) + U" / Score " + Format(best.score) + U" / Time " + Format(thisDepthTime) + U"ms / timeUp=" + Format(timeUp));
+
+		// --- 【動的タイムコントロール判定】 ---
+		// まだ「最低保証深度（minGuaranteedDepth）」に達していない場合は、
+		// 時間切れ（timeUp）になっていても無視して次の深さへ進む！
+		if (d < minGuaranteedDepth) {
+			timeUp = false;
+		}
+		else {
+			// 最低保証深度を超えたあとの判定
+			// 1. すでにハードタイムリミット（例: 6秒）を超えていたら即終了
+			if (depthDuration >= hardTimeLimitMs) {
+				timeUp = true;
+			}
+			// 2. 「次の深さ（d + 1）」に進んだとき、前の深さにかかった時間から推測して
+			// 制限時間を大幅にオーバーしそうなら、無理に次の深さに手を出さずここでスパッと切り上げる（高スペPCの無駄骨防止）
+			else if (d >= 4) {
+				// 例: 過去の深さの計算にかかる時間は急激（約3〜5倍）に増えるため、
+				// 残り時間が「前回の深さに要した時間 × 2.5」より少ない場合は次の深さに挑まない
+				long long estimatedNextDepthTime = thisDepthTime * 3;
+				if (depthDuration + estimatedNextDepthTime > hardTimeLimitMs) {
+					// 時間切れ扱いにして反復深化を綺麗にブレイク
+					timeUp = true;
+				}
+			}
+		}
+
+		// 有効な最善手結果をTT（置換表）から取得して更新
 		TTEntry* tt = LookupTT(root.hash);
 		if (tt && tt->bestUnitIndex >= 0 && tt->bestUnitIndex < static_cast<int>(root.units.size())) {
-			best = { tt->bestUnitIndex, tt->bestTarget, root.units[tt->bestUnitIndex].pos, false, tt->bestPromote, tt->score };
+			best = { tt->bestUnitIndex, tt->bestTarget, Point{-1,-1}, false, tt->bestPromote, tt->score };
 		}
+
+		if (timeUp) break;
+		depthStart = std::chrono::steady_clock::now();
 	}
 
 	if (best.unitIndex >= 0) {
 		return best;
 	}
 
-	// fallback
+	// --- Fallback (安全フォールバック) ---
 	auto& fallbackMoves = GetMoveListForDepth(0, false);
 	fallbackMoves.clear();
 	GenerateMoves(fallbackMoves, root, false);
 	if (!fallbackMoves.empty()) {
-		SortMoves(fallbackMoves, root, 0, -1, Point{ -1, -1 });
-
-		struct Scored { Candidate cand; int score; };
-		std::vector<Scored> safeCandidates;
-		Team enemy = (aiTeam == Team::Blue) ? Team::Red : Team::Blue;
-
-		for (const auto& cand : fallbackMoves) {
-			if (timeUp || (std::chrono::steady_clock::now() - startTime) > std::chrono::milliseconds(ShidenAIConfig::SearchConfig::TIME_LIMIT_MS)) {
-				timeUp = true;
-				break;
-			}
-
-			FastBoard tmp = root;
-			MoveInfo info;
-			DoMove(tmp, cand, info); // tmp を一手進める（内部で side 反転）
-
-			Point myKingPos = FindKing(tmp.units, aiTeam);
-			bool illegal = (myKingPos.x == -1) || IsSquareAttacked(tmp, myKingPos, enemy);
-
-			if (!illegal) {
-				int s = EvaluateDetailed(tmp, aiTeam, true);
-
-				if (!cand.isDrop) {
-					int occIdx = -1;
-					if (cand.target.y >= 0 && cand.target.y < BoardSize && cand.target.x >= 0 && cand.target.x < BoardSize) {
-						occIdx = root.occ[cand.target.y][cand.target.x];
-						if (occIdx >= 0 && occIdx < static_cast<int>(root.units.size()) && root.units[occIdx].team != aiTeam) {
-							s += PieceValue(root.units[occIdx].type, ShidenAIConfig::PieceValue::TOTAL_VAL) * ShidenAIConfig::Evaluation::CAPTURE_BONUS_MULTIPLIER;
-						}
-					}
-					if (cand.promoteDecision) s += ShidenAIConfig::Evaluation::PROMOTION_BONUS;
-				}
-				else {
-					s += ShidenAIConfig::MoveOrdering::DROP_BONUS;// ドロップは多少評価を上げる（安全な手がない場合の選択肢として優先されるように）
-				}
-
-				safeCandidates.push_back({ cand, s });
-			}
-
-			UndoMove(tmp, info);
-		}
-
-		if (!safeCandidates.empty() && !timeUp) {
-			const int n = std::min((int)safeCandidates.size(), ShidenAIConfig::SearchConfig::FALLBACK_TOP_N);
-			Candidate bestChosen = safeCandidates.front().cand;
-			int bestVal = std::numeric_limits<int>::min();
-			int bestShallow = safeCandidates.front().score;
-
-			for (int i = 0; i < n; ++i) {
-				if (timeUp || (std::chrono::steady_clock::now() - startTime) > std::chrono::milliseconds(ShidenAIConfig::SearchConfig::TIME_LIMIT_MS)) {
-					timeUp = true;
-					break;
-				}
-
-				const Candidate& cand = safeCandidates[i].cand;
-				MoveInfo info;
-				DoMove(root, cand, info);
-
-				int val = -AlphaBeta(root, aiTeam, ShidenAIConfig::SearchConfig::FALLBACK_DEEP_DEPTH, -ShidenAIConfig::System::SCORE_INF, ShidenAIConfig::System::SCORE_INF, 0);
-
-				UndoMove(root, info);
-
-				if (val > bestVal || (val == bestVal && safeCandidates[i].score > bestShallow)) {
-					bestVal = val;
-					bestChosen = cand;
-					bestShallow = safeCandidates[i].score;
-				}
-			}
-
-			return bestChosen;
-		}
-
-		const Candidate& fallback = fallbackMoves.front();
-		return fallback;
+		return fallbackMoves.front();
 	}
 
 	game.SetGameActive(false);
@@ -2968,18 +3353,23 @@ void ShidenAI::StartThinking(Game& game, Team aiTeam, AIState& state) {
 
 void ShidenAI::MakeMove(Game& game, Team aiTeam) {
 	if (!game.IsGameActive()) return;
+
 	if (aiTask.isReady()) {
 		Candidate best = aiTask.get();
-		
+
 		if (best.unitIndex >= 0) {
 			ExecuteCandidate(game, best);
 		}
+		else {
+			
+			// 有効な手がもう無い（詰み・手詰まり）場合はゲーム終了にする
+			game.SetGameActive(false);
+		}
 	}
-	else
+	else if (!IsThinking()) // 思考中でなければ新しくタスクを走らせる
 	{
 		StartThinking(game, aiTeam, aiState);
 	}
-
 }
 
 void ShidenAI::ExecuteCandidate(Game& game, const Candidate& cand) {
@@ -2991,7 +3381,11 @@ void ShidenAI::ExecuteCandidate(Game& game, const Candidate& cand) {
 		else game.CancelPromotionByIndex(cand.unitIndex);
 	}
 	game.TurnEndDetermination();
-	
+	ClearPrint();
+	for (const auto& msg : forDebugging) {
+		Print << msg;
+	}
+	forDebugging.clear();
 }
 
 // デバッグ用：盤面上の攻撃範囲を赤く表示

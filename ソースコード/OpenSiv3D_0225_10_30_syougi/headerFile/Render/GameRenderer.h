@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
-#include "Game/Game.h"
-#include "Types/types.h"
 class Game;
 
 class GameRenderer
@@ -26,12 +24,20 @@ public:
 	void HomeScreenDraw() const;
 	// 設定画面描画
 	void SettingsScreenDraw() const;
+	//クレジット画面描画
+	void CreditScreenDraw() const;
+
 	Point GridToScreen(Point boardPos)const;
 	void ButtonToSwitch(RectF button, String player);
 
 	//先手・後手 名前の設定
 	void SetSenteName(const String& name) { senteName = U"先手:" + name; }
 	void SetGoteName(const String& name) { goteName = U"後手:" + name; }
+
+	//フェードイン時の描画処理
+	void DrawFadeIn(double alpha) const;
+	void DrawFadeOut(double alpha) const;
+
 private:
 	const Game& m_game;
 	//先手・後手 名前
