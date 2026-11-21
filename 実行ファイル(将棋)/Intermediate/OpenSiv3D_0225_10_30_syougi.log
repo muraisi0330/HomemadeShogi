@@ -7,6 +7,16 @@
    C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe:      Version 14.44.35229.0
    C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\mspdb140.dll:  Version 14.44.35229.0
    C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\1041\clui.dll: Version 19.44.35229.0
+  stdafx.cpp
+  コンパイラ パス:
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe:        Version 19.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\c1.dll:        Version 19.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\c1xx.dll:      Version 19.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\c2.dll:        Version 19.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\c1xx.dll:      Version 19.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe:      Version 14.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\mspdb140.dll:  Version 14.44.35229.0
+   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\1041\clui.dll: Version 19.44.35229.0
   BasicTestAI.cpp
   ShidenAI.cpp
   SolidDefenseAI.cpp
@@ -26,43 +36,64 @@
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Controller\GUIController.cpp(104,14): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
   (ソース ファイル '/sourceFile/Controller/GUIController.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Controller\GUIController.cpp(105,22): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  (ソース ファイル '/sourceFile/Controller/GUIController.cpp' をコンパイルしています)
-  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(90,63): warning C4244: '=': 'double' から 's3d::Point::value_type' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(91,63): warning C4244: '=': 'double' から 's3d::Point::value_type' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
   
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Controller\GUIController.cpp(105,22): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  (ソース ファイル '/sourceFile/Controller/GUIController.cpp' をコンパイルしています)
+  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(374,39): warning C4100: 'sel': 参照されないパラメーター
+  (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(423,21): warning C4244: '=': 'const unsigned __int64' から 's3d::int32' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Logic\MoveStrategy.h(21,67): warning C4100: 'n': 参照されないパラメーター
   (ソース ファイル '/sourceFile/Game/Movement.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Render\GameRenderer.cpp(256,12): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
-  (ソース ファイル '/sourceFile/Render/GameRenderer.cpp' をコンパイルしています)
-  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Logic\MoveStrategy.h(41,68): warning C4100: 'n': 参照されないパラメーター
   (ソース ファイル '/sourceFile/Game/Movement.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(423,21): warning C4244: '=': 'const unsigned __int64' から 's3d::int32' への変換です。データが失われる可能性があります。
-  (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Render\GameRenderer.cpp(256,12): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/Render/GameRenderer.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Game.cpp(506,10): warning C4244: 'return': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/Game/Game.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(641,47): warning C4100: 'board': 参照されないパラメーター
-  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
-  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\Game\Movement.cpp(296,10): warning C4189: 'lx': ローカル変数が初期化されましたが、参照されていません
   (ソース ファイル '/sourceFile/Game/Movement.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(509,32): warning C4100: 'ID': 参照されないパラメーター
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(641,50): warning C4100: 'board': 参照されないパラメーター
   (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(539,72): warning C4100: 'ID': 参照されないパラメーター
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(641,47): warning C4100: 'board': 参照されないパラメーター
+  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(754,14): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(758,16): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(762,15): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(764,45): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(767,14): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(771,16): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(775,14): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(779,16): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(754,14): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
@@ -89,12 +120,6 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(779,16): warning C4244: '引数': 'const unsigned __int64' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
   
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1459,7): warning C4189: 'attackerSqX': ローカル変数が初期化されましたが、参照されていません
-  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
-  
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1459,25): warning C4189: 'attackerSqY': ローカル変数が初期化されましたが、参照されていません
-  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
-  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/Resource/Sound.cpp' をコンパイルしています)
   
@@ -104,16 +129,42 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(115,38): warning C4505: 'CreateDefaultUnitDB': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/Resource/Sound.cpp' をコンパイルしています)
   
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(1459,7): warning C4189: 'attackerSqX': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(1459,25): warning C4189: 'attackerSqY': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1459,7): warning C4189: 'attackerSqX': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1459,25): warning C4189: 'attackerSqY': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(1944,10): warning C4189: 'enemyIdxLocal': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1944,10): warning C4189: 'enemyIdxLocal': ローカル変数が初期化されましたが、参照されていません
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
   
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(1989,100): warning C4100: 'lastCapturedPos': 参照されないパラメーター
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(1989,97): warning C4100: 'lastCapturedPos': 参照されないパラメーター
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(2318,10): warning C4456: 'enemy' を宣言すると、以前のローカル宣言が隠蔽されます
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+      C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(2220,7):
+      'enemy' の宣言を確認してください
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(2318,10): warning C4456: 'enemy' を宣言すると、以前のローカル宣言が隠蔽されます
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
       C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(2220,7):
       'enemy' の宣言を確認してください
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(2224,7): warning C4189: 'inCheck': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(2224,7): warning C4189: 'inCheck': ローカル変数が初期化されましたが、参照されていません
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
@@ -123,6 +174,9 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(2517,75): warning C4100: 'myKing': 参照されないパラメーター
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\BasicTestAI.cpp(2970,52): warning C4100: 'ai': 参照されないパラメーター
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\sourceFile\AI\ShidenAI.cpp(2970,46): warning C4100: 'ai': 参照されないパラメーター
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
@@ -173,16 +227,7 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
   (ソース ファイル '/sourceFile/Game/Movement.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
-  
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(106,35): warning C4505: 'CreateDefaultChipDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
-  
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/AI/SolidDefenseAI.cpp' をコンパイルしています)
-  
-C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(115,38): warning C4505: 'CreateDefaultUnitDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(106,35): warning C4505: 'CreateDefaultChipDB': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/AI/SolidDefenseAI.cpp' をコンパイルしています)
@@ -191,13 +236,13 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
   (ソース ファイル '/sourceFile/AI/SolidDefenseAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(106,35): warning C4505: 'CreateDefaultChipDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(115,38): warning C4505: 'CreateDefaultUnitDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/Application/StartScene.cpp' をコンパイルしています)
@@ -218,13 +263,22 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
   (ソース ファイル '/sourceFile/Application/GameScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(106,35): warning C4505: 'CreateDefaultChipDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(115,38): warning C4505: 'CreateDefaultUnitDB': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル '/sourceFile/Application/SettingsScene.cpp' をコンパイルしています)
+  (ソース ファイル '/sourceFile/Application/CreditScene.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(106,35): warning C4505: 'CreateDefaultChipDB': 内部リンケージ含む参照されていない関数が削除されました
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
+  
+C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(115,38): warning C4505: 'CreateDefaultUnitDB': 内部リンケージ含む参照されていない関数が削除されました
+  (ソース ファイル '/sourceFile/AI/BasicTestAI.cpp' をコンパイルしています)
   
 C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\OpenSiv3D_0225_10_30_syougi\headerFile\Types\types.h(58,20): warning C4505: 'CreateInitialUnitList': 内部リンケージ含む参照されていない関数が削除されました
   (ソース ファイル '/sourceFile/AI/ShidenAI.cpp' をコンパイルしています)
@@ -246,9 +300,8 @@ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\O
   
      ライブラリ C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\Intermediate\OpenSiv3D_0225_10_30_syougi\Release\OpenSiv3D_0225_10_30_syougi.lib とオブジェクト C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\Intermediate\OpenSiv3D_0225_10_30_syougi\Release\OpenSiv3D_0225_10_30_syougi.exp を作成中
   コード生成しています。
-  33 of 5453 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    48 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 5505 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
   OpenSiv3D_0225_10_30_syougi.vcxproj -> C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\Intermediate\OpenSiv3D_0225_10_30_syougi\Release\OpenSiv3D_0225_10_30_syougi.exe
   C:\Users\裕音\OneDrive\ドキュメント\GitHub\OpenSiv3D_0225_10_30_syougi\Intermediate\OpenSiv3D_0225_10_30_syougi\Release\OpenSiv3D_0225_10_30_syougi.exe

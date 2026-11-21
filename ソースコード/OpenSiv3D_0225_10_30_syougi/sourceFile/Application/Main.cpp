@@ -9,6 +9,9 @@ void Main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
+
+	Window::SetTitle(U"将棋");
+
 	App manager;
 	// シーン登録
 	manager.add<StartScene>(SceneState::Start);

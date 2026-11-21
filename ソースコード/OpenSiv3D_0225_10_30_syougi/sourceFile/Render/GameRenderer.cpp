@@ -208,7 +208,7 @@ void GameRenderer::HomeScreenDraw() const
 	DrawButton(SettingsSceneButtonRect, U"設定");
 	DrawButton(ExitButtonRect, U"終了");
 	//ライセンス
-	DrawButton(LicenseButtonRect, U"ライセンス");
+	DrawButton(LicenseButtonRect, U"クレジット");
 }
 void GameRenderer::SettingsScreenDraw() const
 {

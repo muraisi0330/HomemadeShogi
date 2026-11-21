@@ -26,6 +26,9 @@ public:
 	// 必要に応じて、名前を取得するなどの共通メソッド
 	virtual String getName() const = 0;
 	AIState aiState;
+
+	//タイマー
+	Timer timer{ 0.5s, StartImmediately::Yes };
 private:
 
 };

@@ -30,8 +30,8 @@ void GameScene::update() {
 	IShogiAI* currentAI = (currentTeam == Team::Blue) ? getData().blueAI.get() : getData().redAI.get();
 
 	if (currentAI) {
-		// AIのターン：AIに任せる
-		currentAI->MakeMove(getData().game, currentTeam);
+			// AIのターン：AIに任せる
+			currentAI->MakeMove(getData().game, currentTeam);
 	}
 	else {
 		// 人間のターン：コントローラー経由の入力を受け付ける

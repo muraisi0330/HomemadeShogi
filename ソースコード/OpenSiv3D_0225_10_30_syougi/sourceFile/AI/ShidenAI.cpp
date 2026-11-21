@@ -2565,7 +2565,7 @@ int ShidenAI::FloatingPiecePenalty(const Unit& u, Team aiTeam, AttackMap& attacB
 	if (u.team != aiTeam) return 0;
 	if (u.type == UnitType::King ||
 		u.type == UnitType::King1) return 0;
-	if (!enemyByAttack.IsCovered(u.pos))return PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL) -ShidenAIConfig::Evaluation::NO_ENEMY_ATTACK_BONUS;
+	if (!enemyByAttack.IsCovered(u.pos))return PieceValue(u.type, ShidenAIConfig::PieceValue::TOTAL_VAL) - ShidenAIConfig::Evaluation::NO_ENEMY_ATTACK_BONUS;
 	if (attacBkyMyself.IsCovered(u.pos))return -ShidenAIConfig::Evaluation::SUPPORT_BONUS;
 	return PieceValue(u.type, ShidenAIConfig::PieceRisk::TOTAL_UNDER_ATTACK_PENALTY);
 }
@@ -3352,6 +3352,7 @@ void ShidenAI::StartThinking(Game& game, Team aiTeam, AIState& state) {
 }
 
 void ShidenAI::MakeMove(Game& game, Team aiTeam) {
+	if (!timer.reachedZero()) return;
 	if (!game.IsGameActive()) return;
 
 	if (aiTask.isReady()) {
@@ -3376,15 +3377,30 @@ void ShidenAI::ExecuteCandidate(Game& game, const Candidate& cand) {
 	if (cand.unitIndex < 0) return;
 	game.SelectUnitByIndex(cand.unitIndex);
 	game.ExecuteMoveOrCaptureSelected(cand.target.x, cand.target.y);
-	if (game.GetUnitList()[cand.unitIndex].promoteFlag) {
-		if (cand.promoteDecision) game.ApplyPromotionByIndex(cand.unitIndex);
-		else game.CancelPromotionByIndex(cand.unitIndex);
+
+	const auto& unit = game.GetUnitList()[cand.unitIndex];
+	int toY = cand.target.y;
+	int fromY = cand.from.y;
+
+	bool toInEnemyZone = (unit.team == Team::Blue) ? (toY >= 0 && toY <= 2) : (toY >= 6 && toY <= 8);
+	bool fromInEnemyZone = (fromY >= 0 && fromY < BoardSize) && ((unit.team == Team::Blue) ? (fromY <= 2) : (fromY >= 6));
+	bool trulyEligible = (toInEnemyZone || fromInEnemyZone) && (ToPromoted(unit.type) != unit.type);
+
+	// ゲーム本体のフラグが立っており、かつ本当に敵陣に関わる移動の場合のみ成りを適用
+	if (unit.promoteFlag && trulyEligible && cand.promoteDecision) {
+		game.ApplyPromotionByIndex(cand.unitIndex);
 	}
+	else {
+		// 敵陣でない場所での移動、または不成の場合は必ず成りを拒否（キャンセル）
+		game.CancelPromotionByIndex(cand.unitIndex);
+	}
+
 	game.TurnEndDetermination();
 	ClearPrint();
-	for (const auto& msg : forDebugging) {
-		Print << msg;
-	}
+
+	//for (const auto& msg : forDebugging) {
+	//	Print << msg;
+	//}
 	forDebugging.clear();
 }
 

@@ -427,6 +427,7 @@
 		game.ExecuteMoveOrCaptureSelected(cand.target.x, cand.target.y);
 		CarryOutPromotionIfNeeded(game, cand);
 		game.TurnEndDetermination();
+		timer.restart();
 	}
 
 	// 与えた局面で自手を適用した後、相手の最良応手を評価して返す
@@ -439,6 +440,7 @@
 		if (myMove.score < 0)return myMove.score;
 		int Score = 0;
 		// gameCopy に自手を適用（ローカルコピーで安全にシミュレーション）
+		gameCopy.SetOnGameEvent(nullptr);
 		ExecuteCandidate(gameCopy, myMove);
 		Team enemy = (aiTeam == Team::Blue ? Team::Red : Team::Blue);// 敵チーム
 		std::vector<Candidate> Moves;
@@ -548,6 +550,7 @@
 // Public API
 void SolidDefenseAI::MakeMove(Game& game, Team aiTeam)
 {
+	if (!timer.reachedZero()) return;
 	if (!game.IsGameActive()) return;
 	if (aiTask.isReady()) {
 		Candidate best = aiTask.get();

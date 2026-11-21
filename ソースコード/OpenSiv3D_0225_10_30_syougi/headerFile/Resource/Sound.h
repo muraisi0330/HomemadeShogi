@@ -2,7 +2,7 @@
 #include "Types/types.h"
 
 //音量バランス調整
-namespace ShidenAIConfig {
+namespace SoundConfig {
 	namespace Sound {
 		//駒打ち音音量バランス調整
 		inline  double PIECE_DROP_VOLUME_ADJUST = 2;

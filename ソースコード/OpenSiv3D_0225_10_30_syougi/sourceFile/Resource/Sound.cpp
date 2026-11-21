@@ -5,29 +5,29 @@
 Sound::Sound() {
 	const TOMLReader toml{ U"example/ExternalConfigurationFile/Sound.toml" };
 	if (not toml) {
-		ShidenAIConfig::Sound::PIECE_DROP_VOLUME_ADJUST =2;
-		ShidenAIConfig::Sound::PROMOTION_VOLUME_ADJUST =1;
-		ShidenAIConfig::Sound::WIN_VOLUME_ADJUST = 2;
-		ShidenAIConfig::Sound::STARTUP_VOLUME_ADJUST = 0.4;
+		SoundConfig::Sound::PIECE_DROP_VOLUME_ADJUST =2;
+		SoundConfig::Sound::PROMOTION_VOLUME_ADJUST =1;
+		SoundConfig::Sound::WIN_VOLUME_ADJUST = 2;
+		SoundConfig::Sound::STARTUP_VOLUME_ADJUST = 0.4;
 		return;
 	}
-	ShidenAIConfig::Sound::PIECE_DROP_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.PieceDrop"].get<double>();
-	ShidenAIConfig::Sound::PROMOTION_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Promotion"].get<double>();
-	ShidenAIConfig::Sound::WIN_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Win"].get<double>();
-	ShidenAIConfig::Sound::STARTUP_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Startup"].get<double>();
+	SoundConfig::Sound::PIECE_DROP_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.PieceDrop"].get<double>();
+	SoundConfig::Sound::PROMOTION_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Promotion"].get<double>();
+	SoundConfig::Sound::WIN_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Win"].get<double>();
+	SoundConfig::Sound::STARTUP_VOLUME_ADJUST = toml[U"Sound.VolumeAdjust.Startup"].get<double>();
 }
 
 	void Sound::PlayPieceDropSound()noexcept {
-		AudioAsset(U"駒打ち").setVolume(ShidenAIConfig::Sound::PIECE_DROP_VOLUME_ADJUST* effectVolume).play();// 駒打ち音を再生
+		AudioAsset(U"駒打ち").setVolume(SoundConfig::Sound::PIECE_DROP_VOLUME_ADJUST* effectVolume).play();// 駒打ち音を再生
 	}
 	void Sound::PlayWinSound()noexcept {
-		AudioAsset(U"勝利音").setVolume(ShidenAIConfig::Sound::WIN_VOLUME_ADJUST * effectVolume).play();
+		AudioAsset(U"勝利音").setVolume(SoundConfig::Sound::WIN_VOLUME_ADJUST * effectVolume).play();
 	}
 	void Sound::PlayPromotionSound()noexcept {
-		AudioAsset(U"成り音").setVolume(ShidenAIConfig::Sound::PROMOTION_VOLUME_ADJUST * effectVolume).play();
+		AudioAsset(U"成り音").setVolume(SoundConfig::Sound::PROMOTION_VOLUME_ADJUST * effectVolume).play();
 	}
 	void Sound::PlayStartupSound()noexcept {
-		AudioAsset(U"起動音").setVolume(ShidenAIConfig::Sound::STARTUP_VOLUME_ADJUST * effectVolume).play();
+		AudioAsset(U"起動音").setVolume(SoundConfig::Sound::STARTUP_VOLUME_ADJUST * effectVolume).play();
 	}
 	void Sound::HandleGameEvent(GameEvent e)
 	{

@@ -23,6 +23,7 @@ public:
 		getData().renderer.DrawFadeOut(t);
 	}
 };
+//設定シーン
 class SettingsScene : public App::Scene {
 public:
 	SettingsScene(const InitData& init);
@@ -45,6 +46,7 @@ public:
 		getData().renderer.DrawFadeOut(t);
 	}
 };
+//ゲームシーン
 class GameScene : public App::Scene {
 public:
 	GameScene(const InitData& init);
